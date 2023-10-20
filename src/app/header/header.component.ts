@@ -22,4 +22,7 @@ export class HeaderComponent implements OnInit {
     return this.router.isActive(routeUrl, this.matchOptions);
   }
 
+  onLogout(){
+    this.router.navigate(["/"]);
+  }
 }

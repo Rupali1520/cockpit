@@ -11,8 +11,8 @@
                 </li>
             </ul>
         </div>
-        <div class="logout-item">
-            <div class="dropdown-item" id="logout-button" style="cursor: pointer">
+        <div class="logout-item" (click)="onLogout">
+            <div class="dropdown-item" id="logout-button" style="cursor: pointer" (click)="onLogout()">
                 Log out
             </div>
         </div>
