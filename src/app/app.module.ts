@@ -9,6 +9,9 @@ import { FooterComponent } from './footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AzureCredentialComponent } from './azure-credential/azure-credential.component';
+import { GcpCredentialComponent } from './gcp-credential/gcp-credential.component';
+import { AwsCredentialComponent } from './aws-credential/aws-credential.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HeaderComponent,
     DashboardComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    AzureCredentialComponent,
+    GcpCredentialComponent,
+    AwsCredentialComponent
   ],
   imports: [
     BrowserModule,
