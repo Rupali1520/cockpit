@@ -6,6 +6,8 @@
 .header-blue {
   padding-bottom: 0px;
   font-family: 'Source Sans Pro', sans-serif;
+  z-index: 1;
+  position: relative;
 }
 
 .header-blue .navbar {
