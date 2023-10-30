@@ -12,6 +12,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AzureCredentialComponent } from './azure-credential/azure-credential.component';
 import { GcpCredentialComponent } from './gcp-credential/gcp-credential.component';
 import { AwsCredentialComponent } from './aws-credential/aws-credential.component';
+import { HomeComponent } from './home/home.component';
+import { CloudSelectionComponent } from './cloud-selection/cloud-selection.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AwsCredentialComponent } from './aws-credential/aws-credential.componen
     LoginComponent,
     AzureCredentialComponent,
     GcpCredentialComponent,
-    AwsCredentialComponent
+    AwsCredentialComponent,
+    HomeComponent,
+    CloudSelectionComponent
   ],
   imports: [
     BrowserModule,
