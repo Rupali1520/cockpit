@@ -204,6 +204,7 @@
     border-radius: 15px;
     margin: 30px;
     transition: 0.5s;
+    cursor: pointer;
   }
   
     .card .box {
@@ -294,3 +295,19 @@
 .box:hover + .card-label {
     opacity : 1;
 }
+
+@keyframes slideInFromBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .device {
+    animation-name: slideInFromBottom;
+    animation-duration: 1s;
+  }

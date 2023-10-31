@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cloud-selection',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CloudSelectionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
+  onClickAws(){
+    this.router.navigate(["/aws"]);
+  }
 
+  onClickAzure(){
+    this.router.navigate(["/azure"]);
+  }
+
+  onClickGcp(){
+    this.router.navigate(["/gcp"]);
+  }
 }
