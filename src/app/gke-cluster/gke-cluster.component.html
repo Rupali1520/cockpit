@@ -14,8 +14,13 @@
                 <option value="Public">Public</option>
                 <option value="Private">Private</option>
             </select>
-            <label for="name">Need Cost Analysis & Optimization</label>
-            <input class="form__inset" type="checkbox" name="cost_analysis">
+            <div class="toggle-switch-container">
+                <label for="name" class="toggle-label">Need Cost Analysis & Optimization</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggle" name="cost_analysis" class="toggle-switch-checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
         </form>
         <div class="btns">
             <button class="btn btn-cancel">Cancel</button>
