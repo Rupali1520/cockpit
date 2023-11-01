@@ -1,0 +1,25 @@
+<div id="wrap" class="input">
+    <header class="input-header">
+        <h1>Create GKE Cluster</h1>
+    </header>
+    <section class="input-content">
+        <h2>Create GKE Cluster<span>GKE</span></h2>
+        <form class="form" action="submit">
+            <label for="name">GKE Version</label>
+            <input class="form__inset" type="text" placeholder="GKE Version" name="GKE Version">
+            <label for="name">Node Count</label>
+            <input class="form__inset" type="text" placeholder="Node Count" name="Node Count">
+            <label for="name">Cluster Type</label>
+            <select class="form__inset" name="cluster_type">
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+            <label for="name">Need Cost Analysis & Optimization</label>
+            <input class="form__inset" type="checkbox" name="cost_analysis">
+        </form>
+        <div class="btns">
+            <button class="btn btn-cancel">Cancel</button>
+            <button class="btn btn-confirm">Submit</button>
+        </div>
+    </section>
+</div>

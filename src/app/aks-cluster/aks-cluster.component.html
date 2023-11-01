@@ -1,0 +1,39 @@
+<div id="wrap" class="input">
+    <header class="input-header">
+        <h1>Create AKS Cluster</h1>
+    </header>
+    <section class="input-content">
+        <h2>Create AKS Cluster<span>AKS</span></h2>
+        <form class="form" action="submit">
+            <label for="name">Resource Group Name</label>
+            <input class="form__inset" type="text" placeholder="Resource Group Name" name="Resource Group Name">
+            <label for="name">Region</label>
+            <select class="form__inset" name="Region" placeholder="Region">
+                <option selected value="us east">US East</option>
+                <option value="us west">US West</option>
+            </select>
+            <label for="name">Availability</label>
+            <select class="form__inset" name="cluster_type">
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+            <label for="name">AKS Name</label>
+            <input class="form__inset" type="text" placeholder="AKS Name" name="AKS Name">
+            <label for="name">AKS Version</label>
+            <input class="form__inset" type="text" placeholder="AKS Version" name="AKS Version">
+            <label for="name">Node Count</label>
+            <input class="form__inset" type="text" placeholder="Node Count" name="Node Count">
+            <label for="name">Cluster Type</label>
+            <select class="form__inset" name="cluster_type">
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+            <label for="name">Need Cost Analysis & Optimization</label>
+            <input class="form__inset" type="checkbox" name="cost_analysis">
+        </form>
+        <div class="btns">
+            <button class="btn btn-cancel">Cancel</button>
+            <button class="btn btn-confirm">Submit</button>
+        </div>
+    </section>
+</div>

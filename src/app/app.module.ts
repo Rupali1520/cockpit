@@ -14,6 +14,9 @@ import { GcpCredentialComponent } from './gcp-credential/gcp-credential.componen
 import { AwsCredentialComponent } from './aws-credential/aws-credential.component';
 import { HomeComponent } from './home/home.component';
 import { CloudSelectionComponent } from './cloud-selection/cloud-selection.component';
+import { AksClusterComponent } from './aks-cluster/aks-cluster.component';
+import { EksClusterComponent } from './eks-cluster/eks-cluster.component';
+import { GkeClusterComponent } from './gke-cluster/gke-cluster.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { CloudSelectionComponent } from './cloud-selection/cloud-selection.compo
     GcpCredentialComponent,
     AwsCredentialComponent,
     HomeComponent,
-    CloudSelectionComponent
+    CloudSelectionComponent,
+    AksClusterComponent,
+    EksClusterComponent,
+    GkeClusterComponent
   ],
   imports: [
     BrowserModule,

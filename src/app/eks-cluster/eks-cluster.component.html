@@ -1,0 +1,44 @@
+<div id="wrap" class="input">
+    <header class="input-header">
+        <h1>Create EKS Cluster</h1>
+    </header>
+    <section class="input-content">
+        <h2>Create EKS Cluster<span>EKS</span></h2>
+        <form class="form" action="submit">
+            <label for="name">EKS Name</label>
+            <input class="form__inset" type="text" placeholder="EKS Name" name="EKS Name">
+            <label for="name">Region</label>
+            <select class="form__inset" name="Region" placeholder="Region">
+                <option selected value="us east">US East</option>
+                <option value="us west">US West</option>
+            </select>
+            <label for="name">Instance Type</label>
+            <select class="form__inset" name="Instance Type" placeholder="Instance Type">
+                <option selected value="t2.micro">t2.micro</option>
+                <option value="t3.micro">t3.micro</option>
+            </select>
+            <label for="name">EKS Version</label>
+            <select class="form__inset" name="EKS Version" placeholder="EKS Version">
+                <option selected value="1.23">1.23</option>
+                <option value="1.24">1.24</option>
+            </select>
+            <label for="name">Desired Size</label>
+            <input class="form__inset" type="text" placeholder="Desired Size" name="Desired Size">
+            <label for="name">Max Size</label>
+            <input class="form__inset" type="text" placeholder="Max Size" name="Max Size">
+            <label for="name">Min Size</label>
+            <input class="form__inset" type="text" placeholder="Min Size" name="Min Size">
+            <label for="name">Cluster Type</label>
+            <select class="form__inset" name="cluster_type">
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+            <label for="name">Need Cost Analysis & Optimization</label>
+            <input class="form__inset" type="checkbox" name="cost_analysis">
+        </form>
+        <div class="btns">
+            <button class="btn btn-cancel">Cancel</button>
+            <button class="btn btn-confirm">Submit</button>
+        </div>
+    </section>
+</div>
