@@ -11,6 +11,12 @@
     }
   }
   
+  .cloud-card{
+    display: flex; 
+    justify-content: space-evenly; 
+    margin-top: 69px; 
+    flex-wrap: wrap;
+  }
   .header-blue .navbar {
     background: transparent;
     padding-top: .75rem;
@@ -77,22 +83,15 @@
     }
   }
   
-  .header-blue .hero h1 {
-    color: #fff;
-    font-size: 40px;
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-weight: 300;
-    line-height: 1.4;
-  }
-  
-  @media (min-width:992px) {
     .header-blue .hero h1 {
+      color: #fff;
+      font-size: 40px;
       margin-top: 114px;
       margin-bottom: 24px;
       line-height: 1.2;
+      font-weight: 300;
     }
-  }
+  
   
   .header-blue .hero p {
     color: rgba(255,255,255,0.8);

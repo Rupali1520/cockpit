@@ -1,28 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { IsActiveMatchOptions, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
-  matchOptions: IsActiveMatchOptions = {
-    paths: 'exact',
-    matrixParams: 'exact',
-    queryParams: 'subset',
-    fragment: 'ignored'
-  };
-  constructor(private router: Router,) { }
+export class HeaderComponent {
+  isLoggedIn = false;
 
-  ngOnInit(): void {
+  constructor(private router: Router) {
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isLoggedIn = !event.url.includes('dashboard');
+      }
+    });
   }
 
-  isActiveRoute(routeUrl: string): boolean {
-    return this.router.isActive(routeUrl, this.matchOptions);
-  }
 
-  onLogin(){
-    this.router.navigate(["/login"]);
+  onLogin() {
+    if (this.isLoggedIn) {
+      // Your logout functionality here
+      this.router.navigate(["/dashboard"]);
+    } else {
+      // Your login functionality here
+      this.router.navigate(["/login"]);
+    }
   }
 }
