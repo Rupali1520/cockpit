@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-azure-credential',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AzureCredentialComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  onNextAks(){
+    this.router.navigate(["/azure2"]);
   }
 
 }

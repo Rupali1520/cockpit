@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gcp-credential',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GcpCredentialComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  onNextGke(){
+    this.router.navigate(["/gcp2"]);
   }
 
 }
