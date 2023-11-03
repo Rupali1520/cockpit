@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api:{
+    baseUrl:"http://50.17.59.150:4000/",
+    
+    routes:{
+      registerUser:{endpoint:'jsonRegister', method:'POST'}
+    }
+  }
 };
 
 /*

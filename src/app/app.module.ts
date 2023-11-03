@@ -17,6 +17,7 @@ import { CloudSelectionComponent } from './cloud-selection/cloud-selection.compo
 import { AksClusterComponent } from './aks-cluster/aks-cluster.component';
 import { EksClusterComponent } from './eks-cluster/eks-cluster.component';
 import { GkeClusterComponent } from './gke-cluster/gke-cluster.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { GkeClusterComponent } from './gke-cluster/gke-cluster.component';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

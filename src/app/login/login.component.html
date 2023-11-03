@@ -1,11 +1,11 @@
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form action="#">
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
             <h1>Create Account</h1>
-            <input type="text" placeholder="Username" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <input type="password" placeholder="Confirm Password" />
+            <input type="text" formControlName="username" placeholder="Username" />
+            <input type="email" formControlName="email" placeholder="Email" />
+            <input type="password" formControlName="password" placeholder="Password" />
+            <input type="password" formControlName="confirm_password" placeholder="Confirm Password" />
             <button>Sign Up</button>
         </form>
     </div>

@@ -1,5 +1,8 @@
 import { Component, OnInit, ElementRef, Renderer2  } from '@angular/core';
 import { faAt, faUser, faLock,faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { RegisterService } from '../services/register.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +13,16 @@ export class LoginComponent implements OnInit {
   passwordIcon = faLock
   userIcon = faUser
   arrowIcon = faArrowUp
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  signUpForm: FormGroup;
+
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, private formBuilder: FormBuilder, private service: RegisterService) {
+    this.signUpForm = this.formBuilder.group({
+      username: '',
+      email: '',
+      password: '',
+      confirm_password: ''
+    });
+  }
 
   ngAfterViewInit(): void {
     const signUpButton = this.elementRef.nativeElement.querySelector('#signUp');
@@ -29,4 +41,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSubmit() {
+    this.service.postRegister(this.signUpForm.value).subscribe((res)=>{
+    this.signUpForm.reset();
+    })
+  }
 }
