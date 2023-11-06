@@ -33,7 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CloudSelectionComponent,
     AksClusterComponent,
     EksClusterComponent,
-    GkeClusterComponent
+    GkeClusterComponent,
   ],
   imports: [
     BrowserModule,

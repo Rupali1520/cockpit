@@ -10,6 +10,7 @@ import { CloudSelectionComponent } from './cloud-selection/cloud-selection.compo
 import { EksClusterComponent } from './eks-cluster/eks-cluster.component';
 import { AksClusterComponent } from './aks-cluster/aks-cluster.component';
 import { GkeClusterComponent } from './gke-cluster/gke-cluster.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -18,41 +19,68 @@ const routes: Routes = [
     component:LoginComponent
   },
   {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
     path: 'dashboard',
     component: DashboardComponent
   },
   {
-    path: 'cloud-selection',
-    component: CloudSelectionComponent
+    path: 'home',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path:'',
+        component: HomeComponent
+      },
+      {
+        path: 'cloud-selection',
+        children: [
+          {
+            path:'',
+            component: CloudSelectionComponent
+          },
+          {
+            path: 'azure',
+            children: [
+              {
+                path: '',
+                component: AzureCredentialComponent
+              },
+              {
+                path: 'azure2',
+                component: AksClusterComponent
+              },
+            ]
+          },
+          {
+            path: 'gcp',
+            children: [
+              {
+                path: '',
+                component: GcpCredentialComponent
+              },
+              {
+                path: 'gcp2',
+                component: GkeClusterComponent
+              }
+            ]
+          },
+          {
+            path: 'aws',
+            children: [
+              {
+                path: '',
+                component: AwsCredentialComponent
+              },
+              {
+                path: 'aws2',
+                component: EksClusterComponent
+              },
+            ]
+          },
+        ]
+      },
+    ]
   },
-  {
-    path: 'azure',
-    component: AzureCredentialComponent
-  },
-  {
-    path: 'gcp',
-    component: GcpCredentialComponent
-  },
-  {
-    path: 'aws',
-    component: AwsCredentialComponent
-  },
-  {
-    path: 'aws2',
-    component: EksClusterComponent
-  },
-  {
-    path: 'azure2',
-    component: AksClusterComponent
-  },
-  {
-    path: 'gcp2',
-    component: GkeClusterComponent
-  },
+  { path:'**', redirectTo: '/login',pathMatch:'full'},
 ]
 
 @NgModule({

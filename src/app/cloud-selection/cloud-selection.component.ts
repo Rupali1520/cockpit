@@ -13,14 +13,14 @@ export class CloudSelectionComponent implements OnInit {
   ngOnInit(): void {
   }
   onClickAws(){
-    this.router.navigate(["/aws"]);
+    this.router.navigate(["/home/cloud-selection/aws"]);
   }
 
   onClickAzure(){
-    this.router.navigate(["/azure"]);
+    this.router.navigate(["/home/cloud-selection/azure"]);
   }
 
   onClickGcp(){
-    this.router.navigate(["/gcp"]);
+    this.router.navigate(["/home/cloud-selection/gcp"]);
   }
 }

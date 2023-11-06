@@ -14,7 +14,7 @@ export class AzureCredentialComponent implements OnInit {
   }
 
   onNextAks(){
-    this.router.navigate(["/azure2"]);
+    this.router.navigate(["/home/cloud-selection/azure/azure2"]);
   }
 
 }

@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private elementRef: ElementRef, 
     private renderer: Renderer2, 
-    private formBuilder: FormBuilder, 
     private service: RegisterService) {
   }
 
@@ -48,6 +47,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if(this.Password.value === this.ConfirmPassword.value){
     this.service.postRegister(this.createForm.value).subscribe((res)=>{
+    localStorage.setItem('loggedIn','true')
     this.createForm.reset();
     this.repeatPassword='none';
     })

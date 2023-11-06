@@ -20,6 +20,7 @@ export class HeaderComponent {
 
   onLogin() {
     if (this.isLoggedIn) {
+      localStorage.removeItem('loggedIn');
       // Your logout functionality here
       this.router.navigate(["/dashboard"]);
     } else {

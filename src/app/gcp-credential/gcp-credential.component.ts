@@ -14,7 +14,7 @@ export class GcpCredentialComponent implements OnInit {
   }
 
   onNextGke(){
-    this.router.navigate(["/gcp2"]);
+    this.router.navigate(["/home/cloud-selection/gcp/gcp2"]);
   }
 
 }

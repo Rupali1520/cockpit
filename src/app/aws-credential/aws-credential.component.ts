@@ -14,6 +14,6 @@ export class AwsCredentialComponent implements OnInit {
   }
 
   onNextEks(){
-    this.router.navigate(["/aws2"]);
+    this.router.navigate(["/home/cloud-selection/aws/aws2"]);
   }
 }
