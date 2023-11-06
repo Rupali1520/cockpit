@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, Renderer2  } from '@angular/core';
 import { faAt, faUser, faLock,faArrowUp } from '@fortawesome/free-solid-svg-icons'
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 
 @Component({
@@ -13,15 +13,19 @@ export class LoginComponent implements OnInit {
   passwordIcon = faLock
   userIcon = faUser
   arrowIcon = faArrowUp
-  signUpForm: FormGroup;
+  repeatPassword: string= 'none';
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2, private formBuilder: FormBuilder, private service: RegisterService) {
-    this.signUpForm = this.formBuilder.group({
-      username: '',
-      email: '',
-      password: '',
-      confirm_password: ''
-    });
+  createForm= new FormGroup({
+    username: new FormControl('',[Validators.required, Validators.minLength(2)]),
+    email: new FormControl('',[Validators.required, Validators.email]),
+    password: new FormControl('',[Validators.required, Validators.minLength(2)]),
+    confirm_password: new FormControl('',[Validators.required])
+  });
+
+  constructor(private elementRef: ElementRef, 
+    private renderer: Renderer2, 
+    private formBuilder: FormBuilder, 
+    private service: RegisterService) {
   }
 
   ngAfterViewInit(): void {
@@ -42,8 +46,31 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.postRegister(this.signUpForm.value).subscribe((res)=>{
-    this.signUpForm.reset();
+    if(this.Password.value === this.ConfirmPassword.value){
+    this.service.postRegister(this.createForm.value).subscribe((res)=>{
+    this.createForm.reset();
+    this.repeatPassword='none';
     })
   }
+  else{
+    this.repeatPassword = 'inline'
+  }
+  }
+
+  get Username():FormControl{
+    return this.createForm.get("username") as FormControl;
+  }
+
+  get Email():FormControl{
+    return this.createForm.get("email") as FormControl;
+  }
+
+  get Password():FormControl{
+    return this.createForm.get("password") as FormControl;
+  }
+
+  get ConfirmPassword():FormControl{
+    return this.createForm.get("confirm_password") as FormControl;
+  }
+
 }

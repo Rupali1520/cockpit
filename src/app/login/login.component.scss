@@ -77,6 +77,12 @@ a {
   width: 100%;
 }
 
+.validation-message{
+  width: 100%;
+    margin-bottom: 1rem;
+    text-align: start;
+}
+
 button {
   border-radius: 20px;
   border: 1px solid #ff4b2b;
@@ -91,17 +97,23 @@ button {
   margin-top: 1rem;
 }
 
-button:hover{
-  background:#ff4b2b;
+button:hover {
+  background: #ff4b2b;
   color: #fff;
   transform: translateY(-5px);
 }
+
 button:active {
-  transform: scale(.95);
+  transform: scale(0.95);
 }
 
 button:focus {
   outline: none;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 button.ghost {
@@ -111,10 +123,17 @@ button.ghost {
   transition: transform 0.3s;
 }
 
-button.ghost:hover{
+button.ghost:hover {
   background: #fff;
   color: #ff4b2b;
   transform: translateY(-5px);
+}
+
+button.ghost:disabled {
+  border-color: #fff;
+  color: #fff;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .form-container {

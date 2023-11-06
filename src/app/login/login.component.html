@@ -1,12 +1,37 @@
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
             <h1>Create Account</h1>
             <input type="text" formControlName="username" placeholder="Username" />
+            <div class="form-text validation-message text-danger" *ngIf=" Username.errors?.['required'] && (Username.touched || Username.dirty)">
+                Please enter Username
+            </div>
+            <div class="form-text validation-message text-danger" *ngIf=" Username.errors?.['minlength'] && (Username.touched || Username.dirty)">
+                Username is too short
+            </div>
+
             <input type="email" formControlName="email" placeholder="Email" />
+            <div class="form-text validation-message text-danger" *ngIf=" Email.errors?.['required'] && (Email.touched || Email.dirty)">
+                Please enter email
+            </div>
+
+            <div class="form-text validation-message text-danger" *ngIf=" Email.errors?.['email'] && (Email.touched || Email.dirty)">
+                Email is incorrect
+            </div>
+
             <input type="password" formControlName="password" placeholder="Password" />
+            <div class="form-text validation-message text-danger" *ngIf=" Password.errors?.['required'] && (Password.touched || Password.dirty)">
+                Please enter Password
+            </div>
+            <div class="form-text validation-message text-danger" *ngIf=" Password.errors?.['minlength'] && (Password.touched || Password.dirty)">
+                Password is too short
+            </div>
+
             <input type="password" formControlName="confirm_password" placeholder="Confirm Password" />
-            <button>Sign Up</button>
+            <div class="form-text validation-message text-danger" [ngStyle]="{'display':repeatPassword}">
+                Confirm Password is Invalid
+            </div>
+            <button [disabled]="createForm.invalid">Sign Up</button>
         </form>
     </div>
     <div class="form-container sign-in-container">
