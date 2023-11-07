@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -6,26 +6,31 @@ import { Router, NavigationEnd } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
-  isLoggedIn = false;
+export class HeaderComponent implements OnInit{
+  isLoggedIn:boolean = false;
 
   constructor(private router: Router) {
-    router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.isLoggedIn = !event.url.includes('dashboard');
-      }
-    });
+  }
+
+  ngOnInit(): void {
+    this.isLoggedIn=Boolean(localStorage.getItem('loggedIn'))
+  }
+
+  @HostListener('window:storage', ['$event'])
+  onStorageChange(event: StorageEvent) {
+    if (event.key === 'loggedIn') {
+      this.isLoggedIn = Boolean(event.newValue);
+    }
   }
 
 
   onLogin() {
     if (this.isLoggedIn) {
       localStorage.removeItem('loggedIn');
-      // Your logout functionality here
-      this.router.navigate(["/dashboard"]);
+      this.isLoggedIn = false;
+      this.router.navigate(['/dashboard']);
     } else {
-      // Your login functionality here
-      this.router.navigate(["/login"]);
+      this.router.navigate(['/login']);
     }
   }
 }

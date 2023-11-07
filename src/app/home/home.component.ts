@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,9 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 export class HomeComponent implements OnInit {
   successMessage:string='';
 
-  constructor(private toast: ToastrService,) { }
+  constructor() { }
 
   ngOnInit() {
-    this.toast.success("hellooo")
   }
 }

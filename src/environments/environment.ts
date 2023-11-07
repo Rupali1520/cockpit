@@ -8,7 +8,8 @@ export const environment = {
     baseUrl:"http://50.17.59.150:4000/",
     
     routes:{
-      registerUser:{endpoint:'jsonRegister', method:'POST'}
+      registerUser:{endpoint:'jsonRegister', method:'POST'},
+      loginUser: {endpoint:'JsonLogin', method:'POST'}
     }
   }
 };

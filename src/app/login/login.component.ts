@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef, Renderer2  } from '@angular/core';
 import { faAt, faUser, faLock,faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -22,9 +24,16 @@ export class LoginComponent implements OnInit {
     confirm_password: new FormControl('',[Validators.required])
   });
 
+  loginForm = new FormGroup({
+    email: new FormControl('',[Validators.required,Validators.email]),
+    password: new FormControl('',[Validators.required]),
+  })
+
   constructor(private elementRef: ElementRef, 
     private renderer: Renderer2, 
-    private service: RegisterService) {
+    private service: RegisterService,
+    private router: Router,
+    private toast: ToastrService) {
   }
 
   ngAfterViewInit(): void {
@@ -47,14 +56,23 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if(this.Password.value === this.ConfirmPassword.value){
     this.service.postRegister(this.createForm.value).subscribe((res)=>{
-    localStorage.setItem('loggedIn','true')
-    this.createForm.reset();
-    this.repeatPassword='none';
+      this.router.navigate(['/login']);
+      this.createForm.reset();
+      this.repeatPassword='none';
     })
   }
   else{
     this.repeatPassword = 'inline'
   }
+  }
+
+  onLoginSubmit(){
+    this.service.login(this.loginForm.value).subscribe((res)=>{
+      localStorage.setItem('loggedIn','true');
+      this.toast.success(res.message)
+      this.router.navigate(['/home']);
+    })
+
   }
 
   get Username():FormControl{
@@ -73,4 +91,11 @@ export class LoginComponent implements OnInit {
     return this.createForm.get("confirm_password") as FormControl;
   }
 
+  get LoginEmail():FormControl{
+    return this.loginForm.get("email") as FormControl;
+  }
+
+  get LoginPassword():FormControl{
+    return this.loginForm.get("password") as FormControl;
+  }
 }
