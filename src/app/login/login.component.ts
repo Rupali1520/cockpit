@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, Renderer2  } from '@angular/core';
 import { faAt, faUser, faLock,faArrowUp } from '@fortawesome/free-solid-svg-icons'
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';

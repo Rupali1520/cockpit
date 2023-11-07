@@ -4,30 +4,58 @@
     </header>
     <section class="input-content">
         <h2>Create AKS Cluster<span>AKS</span></h2>
-        <form class="form" action="submit">
+        <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
             <label for="name">Resource Group Name</label>
-            <input class="form__inset" type="text" placeholder="Resource Group Name" name="Resource Group Name">
+            <input class="form__inset" type="text" formControlName="resource_name" placeholder="Resource Group Name" name="Resource Group Name">
+            <div class="form-text validation-message text-danger" *ngIf=" ResourceName.errors?.['required'] && (ResourceName.touched || ResourceName.dirty)">
+                Please enter Resource group name
+            </div>
+
             <label for="name">Region</label>
-            <select class="form__inset" name="Region" placeholder="Region">
+            <select class="form__inset" name="Region" formControlName="region" placeholder="Region">
                 <option selected value="us east">US East</option>
                 <option value="us west">US West</option>
             </select>
+            <div class="form-text validation-message text-danger" *ngIf=" Region.errors?.['required'] && (Region.touched || Region.dirty)">
+                Please enter region
+            </div>
+
             <label for="name">Availability</label>
-            <select class="form__inset" name="cluster_type">
+            <select class="form__inset" formControlName="availability" name="cluster_type">
                 <option value="Public">Public</option>
                 <option value="Private">Private</option>
             </select>
+            <div class="form-text validation-message text-danger" *ngIf=" Availability.errors?.['required'] && (Availability.touched || Availability.dirty)">
+                Please enter Availability
+            </div>
+
             <label for="name">AKS Name</label>
-            <input class="form__inset" type="text" placeholder="AKS Name" name="AKS Name">
+            <input class="form__inset" type="text" formControlName="aks_name" placeholder="AKS Name" name="AKS Name">
+            <div class="form-text validation-message text-danger" *ngIf=" AksName.errors?.['required'] && (AksName.touched || AksName.dirty)">
+                Please enter AKS name
+            </div>
+
             <label for="name">AKS Version</label>
-            <input class="form__inset" type="text" placeholder="AKS Version" name="AKS Version">
+            <input class="form__inset" type="text" formControlName="aks_version" placeholder="AKS Version" name="AKS Version">
+            <div class="form-text validation-message text-danger" *ngIf=" AksVersion.errors?.['required'] && (AksVersion.touched || AksVersion.dirty)">
+                Please enter AKS version
+            </div>
+
             <label for="name">Node Count</label>
-            <input class="form__inset" type="text" placeholder="Node Count" name="Node Count">
+            <input class="form__inset" type="text" formControlName="node_count" placeholder="Node Count" name="Node Count">
+            <div class="form-text validation-message text-danger" *ngIf=" NodeCount.errors?.['required'] && (NodeCount.touched || NodeCount.dirty)">
+                Please enter Node count
+            </div>
+
             <label for="name">Cluster Type</label>
-            <select class="form__inset" name="cluster_type">
+            <select class="form__inset" formControlName="cluster_type" name="cluster_type">
                 <option value="Public">Public</option>
                 <option value="Private">Private</option>
             </select>
+            <div class="form-text validation-message text-danger" *ngIf=" ClusterType.errors?.['required'] && (ClusterType.touched || ClusterType.dirty)">
+                Please enter Cluster type
+            </div>
+
             <div class="toggle-switch-container">
                 <label for="name" class="toggle-label">Need Cost Analysis & Optimization</label>
                 <label class="toggle-switch">
@@ -38,7 +66,7 @@
         </form>
         <div class="btns">
             <button class="btn btn-cancel">Cancel</button>
-            <button class="btn btn-confirm">Submit</button>
+            <button class="btn btn-confirm" [disabled]="createForm.invalid">Submit</button>
         </div>
     </section>
 </div>
