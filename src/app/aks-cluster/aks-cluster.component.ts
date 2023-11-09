@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { RegisterService } from '../services/register.service';
 
 @Component({
   selector: 'app-aks-cluster',
@@ -9,30 +12,38 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class AksClusterComponent implements OnInit {
   createForm= new FormGroup({
     resource_group: new FormControl('',[Validators.required]),
-    region: new FormControl('',[Validators.required]),
-    availability: new FormControl('',[Validators.required]),
+    Region: new FormControl('',[Validators.required]),
+    availability_zones: new FormControl('',[Validators.required]),
     aks_name: new FormControl('',[Validators.required]),
     aks_version: new FormControl('',[Validators.required]),
     node_count: new FormControl('',[Validators.required]),
     cluster_type: new FormControl('',[Validators.required]),
   });
-  constructor() { }
+  constructor(private router: Router,
+    private service: RegisterService,
+    private toast: ToastrService) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(){}
+  onSubmit(){
+    this.service.postAksCluster(this.createForm.value).subscribe((res)=>{
+      this.toast.success(res.message);
+      this.createForm.reset();
+      this.router.navigate(["/home/cloud-selection"]);
+    })
+  }
 
   get ResourceName():FormControl{
     return this.createForm.get("resource_group") as FormControl;
   }
 
   get Region():FormControl{
-    return this.createForm.get("region") as FormControl;
+    return this.createForm.get("Region") as FormControl;
   }
 
   get Availability():FormControl{
-    return this.createForm.get("availability") as FormControl;
+    return this.createForm.get("availability_zones") as FormControl;
   }
 
   get AksName():FormControl{

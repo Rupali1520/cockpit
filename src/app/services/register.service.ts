@@ -10,6 +10,7 @@ export class RegisterService {
 private postUserRegister = `${environment.api.baseUrl}${environment.api.routes.registerUser.endpoint}`;
 private loginUser = `${environment.api.baseUrl}${environment.api.routes.loginUser.endpoint}`;
 private postAzureClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postAzureCluster.endpoint}`;
+private postAksClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postAksCluster.endpoint}`;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -23,5 +24,9 @@ private postAzureClusterUrl = `${environment.api.baseUrl}${environment.api.route
 
     postAzureCluster(body:any): Observable<any>{
       return this.httpClient.post(this.postAzureClusterUrl,body);
+    }
+
+    postAksCluster(body:any): Observable<any>{
+      return this.httpClient.post(this.postAksClusterUrl,body);
     }
   }
