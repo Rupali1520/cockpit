@@ -31,6 +31,8 @@ export class AksClusterComponent implements OnInit {
       this.toast.success(res.message);
       this.createForm.reset();
       this.router.navigate(["/home/cloud-selection"]);
+    }, (error)=>{
+      this.toast.error(error.error.message)
     })
   }
 

@@ -17,6 +17,8 @@ export class AzureCredentialComponent implements OnInit {
     client_secret: new FormControl('',[Validators.required]),
     tenant_id: new FormControl('',[Validators.required]),
   });
+  showProgressBar: boolean = false;
+
   constructor(private router: Router,
     private service: RegisterService,
     private toast: ToastrService) { }
@@ -25,10 +27,15 @@ export class AzureCredentialComponent implements OnInit {
   }
 
   onNextAks(){
+    this.showProgressBar = true;
     this.service.postAzureCluster(this.createForm.value).subscribe((res)=>{
+      this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
       this.router.navigate(["/home/cloud-selection/azure/azure2"]);
+    }, (error)=>{
+      this.showProgressBar = false;
+      this.toast.error(error.error.message)
     })
   }
 

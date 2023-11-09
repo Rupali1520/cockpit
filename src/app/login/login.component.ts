@@ -59,6 +59,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/login']);
       this.createForm.reset();
       this.repeatPassword='none';
+    }, (error)=>{
+      this.toast.error(error.error.message)
     })
   }
   else{
@@ -71,6 +73,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('loggedIn','true');
       this.toast.success(res.message)
       this.router.navigate(['/home']);
+    }, (error)=>{
+      this.toast.error(error.error.message)
     })
 
   }
