@@ -8,7 +8,8 @@ import { environment } from 'src/environments/environment';
 })
 export class RegisterService {
 private postUserRegister = `${environment.api.baseUrl}${environment.api.routes.registerUser.endpoint}`;
-private loginUser = `${environment.api.baseUrl}${environment.api.routes.loginUser.endpoint}`
+private loginUser = `${environment.api.baseUrl}${environment.api.routes.loginUser.endpoint}`;
+private postAzureClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postAzureCluster.endpoint}`;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -18,5 +19,9 @@ private loginUser = `${environment.api.baseUrl}${environment.api.routes.loginUse
 
     login(body:any): Observable<any>{
       return this.httpClient.post(this.loginUser,body);
+    }
+
+    postAzureCluster(body:any): Observable<any>{
+      return this.httpClient.post(this.postAzureClusterUrl,body);
     }
   }

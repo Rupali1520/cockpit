@@ -8,7 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class AksClusterComponent implements OnInit {
   createForm= new FormGroup({
-    resource_name: new FormControl('',[Validators.required]),
+    resource_group: new FormControl('',[Validators.required]),
     region: new FormControl('',[Validators.required]),
     availability: new FormControl('',[Validators.required]),
     aks_name: new FormControl('',[Validators.required]),
@@ -24,7 +24,7 @@ export class AksClusterComponent implements OnInit {
   onSubmit(){}
 
   get ResourceName():FormControl{
-    return this.createForm.get("resource_name") as FormControl;
+    return this.createForm.get("resource_group") as FormControl;
   }
 
   get Region():FormControl{

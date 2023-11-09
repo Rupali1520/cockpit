@@ -9,7 +9,8 @@ export const environment = {
     
     routes:{
       registerUser:{endpoint:'jsonRegister', method:'POST'},
-      loginUser: {endpoint:'JsonLogin', method:'POST'}
+      loginUser: {endpoint:'JsonLogin', method:'POST'},
+      postAzureCluster: {endpoint:'json_submit_form_azure', method:'POST'}
     }
   }
 };
