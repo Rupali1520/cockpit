@@ -18,7 +18,8 @@ export class GcpCredentialComponent implements OnInit {
   }
 
   onNextGke(){
-    this.router.navigate(["/home/cloud-selection/gcp/gcp2"]);
+    console.log(this.createForm.value)
+    // this.router.navigate(["/home/cloud-selection/gcp/gcp2"]);
   }
 
   get Username():FormControl{

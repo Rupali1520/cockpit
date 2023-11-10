@@ -11,7 +11,9 @@ export const environment = {
       registerUser:{endpoint:'jsonRegister', method:'POST'},
       loginUser: {endpoint:'JsonLogin', method:'POST'},
       postAzureCluster: {endpoint:'json_submit_form_azure', method:'POST'},
-      postAksCluster: {endpoint:'json_create_aks', method:'POST'}
+      postAksCluster: {endpoint:'json_create_aks', method:'POST'},
+      postAwsCluster: {endpoint:'json_submit_form_aws', method:'POST'},
+      postEksCluster: {endpoint:'json_create_aws', method:'POST'}
     }
   }
 };

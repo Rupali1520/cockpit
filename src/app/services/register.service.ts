@@ -11,6 +11,8 @@ private postUserRegister = `${environment.api.baseUrl}${environment.api.routes.r
 private loginUser = `${environment.api.baseUrl}${environment.api.routes.loginUser.endpoint}`;
 private postAzureClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postAzureCluster.endpoint}`;
 private postAksClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postAksCluster.endpoint}`;
+private postAwsClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postAwsCluster.endpoint}`;
+private postEksClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postEksCluster.endpoint}`;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -28,5 +30,13 @@ private postAksClusterUrl = `${environment.api.baseUrl}${environment.api.routes.
 
     postAksCluster(body:any): Observable<any>{
       return this.httpClient.post(this.postAksClusterUrl,body);
+    }
+
+    postAwsCluster(body:any): Observable<any>{
+      return this.httpClient.post(this.postAwsClusterUrl,body);
+    }
+
+    postEksCluster(body:any): Observable<any>{
+      return this.httpClient.post(this.postEksClusterUrl,body);
     }
   }
