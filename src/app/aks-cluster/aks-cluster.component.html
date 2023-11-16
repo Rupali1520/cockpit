@@ -42,11 +42,11 @@
 
             <label for="name">AKS Version</label>
             <select class="form__inset" formControlName="aks_version" name="aks_version">
-                <option value="1.17">1.17</option>
-                <option value="1.17">1.17</option>
-                <option value="1.16">1.16</option>
-                <option value="1.16">1.16</option>
-                <option value="1.15">1.15</option>
+                <option value=1.25.6>1.25.6</option>
+                <option value=1.25.11>1.25.11</option>
+                <option value=1.26.3>1.26.3</option>
+                <option value=1.27.1>1.27.1</option>
+                <option value=1.27.3>1.27.3</option>
             </select>
             <div class="form-text validation-message text-danger" *ngIf=" AksVersion.errors?.['required'] && (AksVersion.touched || AksVersion.dirty)">
                 Please enter AKS version

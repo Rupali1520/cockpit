@@ -26,14 +26,27 @@ export class AksClusterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(){
-    this.service.postAksCluster(this.createForm.value).subscribe((res)=>{
-      this.toast.success(res.message);
-      this.createForm.reset();
-      this.router.navigate(["/home/cloud-selection"]);
-    }, (error)=>{
-      this.toast.error(error.error.message)
-    })
+  onSubmit() {
+    let aksVersion: number | null = null;
+    const aksVersionControl = this.createForm.get('aks_version');
+    if (aksVersionControl && aksVersionControl.value !== null && aksVersionControl.value !== undefined) {
+      aksVersion = parseFloat(aksVersionControl.value);
+    }
+  
+    const formData = {
+      ...this.createForm.value,
+      aks_version: aksVersion,
+    };  
+    this.service.postAksCluster(formData).subscribe(
+      (res) => {
+        this.toast.success(res.message);
+        this.createForm.reset();
+        this.router.navigate(['/home/cloud-selection']);
+      },
+      (error) => {
+        this.toast.error(error.error.message);
+      }
+    );
   }
 
   get ResourceName():FormControl{
