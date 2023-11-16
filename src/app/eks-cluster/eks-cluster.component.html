@@ -81,6 +81,11 @@
                   <span class="slider"></span>
                 </label>
               </div>
+
+              <div *ngIf="showProgressBar" class="loading-overlay">
+                <div class="loader"></div>
+                <p class="loading-text">Just a moment! Creating Cluster...</p>
+              </div>
         </form>
         <div class="btns">
             <button class="btn btn-cancel">Cancel</button>

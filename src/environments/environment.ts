@@ -13,7 +13,9 @@ export const environment = {
       postAzureCluster: {endpoint:'json_submit_form_azure', method:'POST'},
       postAksCluster: {endpoint:'json_create_aks', method:'POST'},
       postAwsCluster: {endpoint:'json_submit_form_aws', method:'POST'},
-      postEksCluster: {endpoint:'json_create_aws', method:'POST'}
+      postEksCluster: {endpoint:'json_create_aws', method:'POST'},
+      postGcpCluster: {endpoint:'json_submit_form_gke', method:'POST'},
+      postGkeCluster: {endpoint:'json_create_gke', method:'POST'},
     }
   }
 };

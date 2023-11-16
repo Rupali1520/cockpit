@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { RegisterService } from '../services/register.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-gcp-credential',
@@ -9,24 +11,84 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class GcpCredentialComponent implements OnInit {
   createForm= new FormGroup({
-    username: new FormControl('',[Validators.required]),
-    json_file: new FormControl('',[Validators.required]),
+    User_name: new FormControl('',[Validators.required]),
+    jsonFile: new FormControl('',[Validators.required]),
   });
-  constructor(private router: Router) { }
+  showProgressBar: boolean = false;
+
+  constructor(private router: Router,
+    private service: RegisterService,
+    private toast: ToastrService) { }
+
+    selectedFile: File | null = null;
 
   ngOnInit(): void {
   }
+  
+  upload(event: any): void {
+    const inputElement = event.target as HTMLInputElement;
+    const files = inputElement.files;
 
-  onNextGke(){
-    console.log(this.createForm.value)
-    // this.router.navigate(["/home/cloud-selection/gcp/gcp2"]);
+    if (files && files.length > 0) {
+      this.readAndAppendFile(files[0]);
+    }
   }
 
+  private arrayBufferToBase64(buffer: ArrayBuffer): string {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    const len = bytes.byteLength;
+
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    return btoa(binary);
+  }
+
+  readAndAppendFile(file: File): void {
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const binaryData = this.arrayBufferToBase64(event.target?.result as ArrayBuffer);
+      this.createForm.get('jsonFile')?.setValue(binaryData);
+    };
+
+    reader.readAsArrayBuffer(file);
+  }
+  onNextGke(): void {
+    this.showProgressBar = true;
+    const jsonFile = this.createForm.get('jsonFile')?.value;
+
+    if (jsonFile) {
+      const jsonContent = atob(jsonFile);
+      const textEncoder = new TextEncoder();
+      const jsonDataUint8Array = textEncoder.encode(jsonContent);
+      const formData = new FormData();
+      formData.append('jsonFile', new Blob([jsonDataUint8Array], { type: 'application/octet-stream' }), 'data.bin');
+      formData.append('User_name', this.Username.value);
+
+      this.service.postGcpCluster(formData).subscribe(
+        (res) => {
+          this.showProgressBar = false;
+          this.toast.success(res.message);
+          this.createForm.reset();
+          this.router.navigate(['/home/cloud-selection/gcp/gcp2']);
+        },
+        (error) => {
+          this.showProgressBar = false;
+          this.toast.error(error.error.message);
+        }
+      );
+    }
+  }
+
+
   get Username():FormControl{
-    return this.createForm.get("username") as FormControl;
+    return this.createForm.get("User_name") as FormControl;
   }
 
   get JsonFile():FormControl{
-    return this.createForm.get("json_file") as FormControl;
+    return this.createForm.get("jsonFile") as FormControl;
   }
 }
