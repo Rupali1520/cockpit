@@ -35,7 +35,8 @@ const routes: Routes = [
         children: [
           {
             path:'',
-            component: CloudSelectionComponent
+            component: CloudSelectionComponent,
+            data:{title:'deploy'}
           },
           {
             path: 'azure',
@@ -75,6 +76,28 @@ const routes: Routes = [
                 component: EksClusterComponent
               },
             ]
+          },
+        ]
+      },
+      {
+        path: 'delete-cloud-selection',
+        children: [
+          {
+            path:'',
+            component: CloudSelectionComponent,
+            data:{title:'delete'}
+          },
+          {
+            path: 'delete-aks',
+            component: AzureCredentialComponent
+          },
+          {
+            path: 'delete-gke',
+            component: GcpCredentialComponent
+          },
+          {
+            path: 'delete-eks',
+            component: AwsCredentialComponent
           },
         ]
       },

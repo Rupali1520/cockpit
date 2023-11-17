@@ -13,11 +13,10 @@
 
             <label for="name">Region</label>
             <select class="form__inset" name="Region" formControlName="region" placeholder="Region">
-                <option value="US East (N. Virginia)">US East (N. Virginia)</option>
-                <option value=" Asia Pacific (Mumbai)"> Asia Pacific (Mumbai)</option>
-                <option value="US East (Ohio)">US East (Ohio)</option>
-                <option value="US West (N. California)">US West (N. California)</option>
-                <option value="Middle East (Bahrain)">Middle East (Bahrain)</option>
+                <option value="us-east-1">US East-1</option>
+                <option value=" us-east-2"> US East-2</option>
+                <option value="us-west-1">US West-1</option>
+                <option value="us-west-2">US West-2</option>
             </select>
             <div class="form-text validation-message text-danger" *ngIf=" Region.errors?.['required'] && (Region.touched || Region.dirty)">
                 Please enter Region

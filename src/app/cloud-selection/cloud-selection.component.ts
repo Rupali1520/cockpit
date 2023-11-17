@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cloud-selection',
@@ -7,20 +7,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./cloud-selection.component.scss']
 })
 export class CloudSelectionComponent implements OnInit {
+  title='';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.title = this.route.snapshot.data['title'];
   }
   onClickAws(){
-    this.router.navigate(["/home/cloud-selection/aws"]);
-  }
+    if(this.title === 'delete'){
+    this.router.navigate(["/home/delete-cloud-selection/delete-eks"]);}
+    else{
+      this.router.navigate(["/home/cloud-selection/aws"]);}
+    }
 
   onClickAzure(){
-    this.router.navigate(["/home/cloud-selection/azure"]);
-  }
+    if(this.title === 'delete'){
+      this.router.navigate(["/home/delete-cloud-selection/delete-aks"]);}
+      else{
+        this.router.navigate(["/home/cloud-selection/azure"]);}  }
 
   onClickGcp(){
-    this.router.navigate(["/home/cloud-selection/gcp"]);
-  }
+    if(this.title === 'delete'){
+      this.router.navigate(["/home/delete-cloud-selection/delete-gke"]);}
+      else{
+        this.router.navigate(["/home/cloud-selection/gcp"]);}  }
 }
