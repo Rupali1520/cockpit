@@ -20,6 +20,8 @@ import { AksClusterComponent } from './aks-cluster/aks-cluster.component';
 import { EksClusterComponent } from './eks-cluster/eks-cluster.component';
 import { GkeClusterComponent } from './gke-cluster/gke-cluster.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteEksComponent } from './delete-eks/delete-eks.component';
+import { DeleteAksComponent } from './delete-aks/delete-aks.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AksClusterComponent,
     EksClusterComponent,
     GkeClusterComponent,
+    DeleteEksComponent,
+    DeleteAksComponent,
   ],
   imports: [
     BrowserModule,

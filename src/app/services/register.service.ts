@@ -13,6 +13,7 @@ private postAzureClusterUrl = `${environment.api.baseUrl}${environment.api.route
 private postAksClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postAksCluster.endpoint}`;
 private postAwsClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postAwsCluster.endpoint}`;
 private postEksClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postEksCluster.endpoint}`;
+private postDeleteEksClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postDeleteEksCluster.endpoint}`
 private postGcpClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postGcpCluster.endpoint}`;
 private postGkeClusterUrl = `${environment.api.baseUrl}${environment.api.routes.postGkeCluster.endpoint}`;
 
@@ -42,6 +43,10 @@ private postGkeClusterUrl = `${environment.api.baseUrl}${environment.api.routes.
       return this.httpClient.post(this.postEksClusterUrl,body);
     }
 
+    postDeleteEksCluster(body:any): Observable<any>{
+      return this.httpClient.post(this.postDeleteEksClusterUrl,body);
+    }
+
     postGcpCluster(body:any): Observable<any>{
       return this.httpClient.post(this.postGcpClusterUrl,body);
     }
@@ -49,4 +54,5 @@ private postGkeClusterUrl = `${environment.api.baseUrl}${environment.api.routes.
     postGkeCluster(body:any): Observable<any>{
       return this.httpClient.post(this.postGkeClusterUrl,body);
     }
+
   }

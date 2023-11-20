@@ -11,6 +11,8 @@ import { EksClusterComponent } from './eks-cluster/eks-cluster.component';
 import { AksClusterComponent } from './aks-cluster/aks-cluster.component';
 import { GkeClusterComponent } from './gke-cluster/gke-cluster.component';
 import { AuthGuard } from './services/auth.guard';
+import { DeleteEksComponent } from './delete-eks/delete-eks.component';
+import { DeleteAksComponent } from './delete-aks/delete-aks.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -89,7 +91,7 @@ const routes: Routes = [
           },
           {
             path: 'delete-aks',
-            component: AzureCredentialComponent
+            component: DeleteAksComponent
           },
           {
             path: 'delete-gke',
@@ -97,7 +99,7 @@ const routes: Routes = [
           },
           {
             path: 'delete-eks',
-            component: AwsCredentialComponent
+            component: DeleteEksComponent
           },
         ]
       },
