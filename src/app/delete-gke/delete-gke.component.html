@@ -1,0 +1,42 @@
+<div id="wrap" class="input">
+    <header class="input-header">
+        <h1>Delete GKE Cluster</h1>
+    </header>
+    <section class="input-content">
+        <h2>Delete GKE Cluster<span>GKE</span></h2>
+        <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
+            <label for="name">GKE Name</label>
+            <input class="form__inset" type="text" formControlName="gke_name" placeholder="GKE Name" name="GKE Name">
+            <div class="form-text validation-message text-danger" *ngIf=" GkeName.errors?.['required'] && (GkeName.touched || GkeName.dirty)">
+                Please enter GKE Name
+            </div>
+
+            <label for="name">Region</label>
+            <select class="form__inset" name="Region" formControlName="Region" placeholder="Region">
+                <option value="us-central1">US Central</option>
+                <option value="us-east1">US East</option>
+                <option value="us-west1">US West</option>
+                <option value="asia-east1">Asia East</option>
+                <option value="asia-south1">Asia South</option>
+            </select>
+            <div class="form-text validation-message text-danger" *ngIf=" Region.errors?.['required'] && (Region.touched || Region.dirty)">
+                Please enter Region
+            </div>
+
+            <label for="name">Project Id</label>
+            <input class="form__inset" type="text" formControlName="project_id" placeholder="Project Id" name="Project Id">
+            <div class="form-text validation-message text-danger" *ngIf=" ProjectId.errors?.['required'] && (ProjectId.touched || ProjectId.dirty)">
+                Please enter Project Id
+            </div>
+
+              <div *ngIf="showProgressBar" class="loading-overlay">
+                <div class="loader"></div>
+                <p class="loading-text">Just a moment! Deleting Cluster...</p>
+              </div>
+        </form>
+        <div class="btns">
+            <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+            <button class="btn btn-confirm" [disabled]="createForm.invalid" (click)="onSubmit()">Delete</button>
+        </div>
+    </section>
+</div>

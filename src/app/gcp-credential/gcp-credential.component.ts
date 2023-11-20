@@ -56,6 +56,11 @@ export class GcpCredentialComponent implements OnInit {
 
     reader.readAsArrayBuffer(file);
   }
+
+  onCancel(){
+    this.router.navigate(["/home/cloud-selection"]);
+  }
+
   onNextGke(): void {
     this.showProgressBar = true;
     const jsonFile = this.createForm.get('jsonFile')?.value;

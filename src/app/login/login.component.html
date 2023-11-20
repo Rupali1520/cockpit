@@ -51,6 +51,7 @@
                 Please enter Password
             </div>
 
+            
             <button [disabled]="loginForm.invalid">Sign In</button>
         </form>
     </div>
@@ -67,5 +68,10 @@
                 <button class="ghost" id="signUp">Sign Up</button>
             </div>
         </div>
+        <div *ngIf="showProgressBar" class="loading-overlay">
+            <div class="loader"></div>
+            <p class="loading-text">Logging In...</p>
+          </div>
+
     </div>
 </div>

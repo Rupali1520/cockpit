@@ -13,6 +13,7 @@ import { GkeClusterComponent } from './gke-cluster/gke-cluster.component';
 import { AuthGuard } from './services/auth.guard';
 import { DeleteEksComponent } from './delete-eks/delete-eks.component';
 import { DeleteAksComponent } from './delete-aks/delete-aks.component';
+import { DeleteGkeComponent } from './delete-gke/delete-gke.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -95,7 +96,7 @@ const routes: Routes = [
           },
           {
             path: 'delete-gke',
-            component: GcpCredentialComponent
+            component: DeleteGkeComponent
           },
           {
             path: 'delete-eks',

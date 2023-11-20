@@ -26,6 +26,10 @@ export class AzureCredentialComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onCancel(){
+    this.router.navigate(["/home/cloud-selection"]);
+  }
+
   onNextAks(){
     this.showProgressBar = true;
     this.service.postAzureCluster(this.createForm.value).subscribe((res)=>{

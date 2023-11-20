@@ -21,6 +21,10 @@ export class DeleteAksComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onCancel(){
+    this.router.navigate(["/home/delete-cloud-selection"]);
+  }
+
   onSubmit() { 
     this.service.postAksCluster(this.createForm.value).subscribe(
       (res) => {

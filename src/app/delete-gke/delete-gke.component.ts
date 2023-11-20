@@ -5,18 +5,15 @@ import { RegisterService } from '../services/register.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-gke-cluster',
-  templateUrl: './gke-cluster.component.html',
-  styleUrls: ['./gke-cluster.component.scss']
+  selector: 'app-delete-gke',
+  templateUrl: './delete-gke.component.html',
+  styleUrls: ['./delete-gke.component.scss']
 })
-export class GkeClusterComponent implements OnInit {
+export class DeleteGkeComponent implements OnInit {
   createForm= new FormGroup({
-    project: new FormControl('',[Validators.required]),
+    project_id: new FormControl('',[Validators.required]),
     Region: new FormControl('',[Validators.required]),
     gke_name: new FormControl('',[Validators.required]),
-    gke_version: new FormControl('',[Validators.required]),
-    node_count: new FormControl('',[Validators.required]),
-    cluster_type: new FormControl('',[Validators.required]),
   });
   showProgressBar: boolean = false;
 
@@ -28,7 +25,7 @@ export class GkeClusterComponent implements OnInit {
   }
 
   onCancel(){
-    this.router.navigate(["/home/cloud-selection/gcp"]);
+    this.router.navigate(["/home/delete-cloud-selection"]);
   }
 
   onSubmit(){
@@ -37,15 +34,15 @@ export class GkeClusterComponent implements OnInit {
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/home/cloud-selection"]);
+      this.router.navigate(["/home/delete-cloud-selection"]);
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)
     })
   }
 
-  get Project():FormControl{
-    return this.createForm.get("project") as FormControl;
+  get ProjectId():FormControl{
+    return this.createForm.get("project_id") as FormControl;
   }
 
   get Region():FormControl{
@@ -54,17 +51,5 @@ export class GkeClusterComponent implements OnInit {
 
   get GkeName():FormControl{
     return this.createForm.get("gke_name") as FormControl;
-  }
-
-  get GkeVersion():FormControl{
-    return this.createForm.get("gke_version") as FormControl;
-  }
-
-  get NodeCount():FormControl{
-    return this.createForm.get("node_count") as FormControl;
-  }
-
-  get ClusterType():FormControl{
-    return this.createForm.get("cluster_type") as FormControl;
   }
 }

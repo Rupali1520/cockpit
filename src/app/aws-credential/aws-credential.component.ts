@@ -29,6 +29,10 @@ export class AwsCredentialComponent implements OnInit {
     const isValid = /^AKIA[A-Za-z0-9]*$/.test(value);
     return isValid ? null : { 'invalidAccessKey': true };
   }
+
+  onCancel(){
+    this.router.navigate(["/home/cloud-selection"]);
+  }
   
   onNextEks(){
     this.showProgressBar = true;

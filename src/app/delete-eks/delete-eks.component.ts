@@ -25,6 +25,10 @@ export class DeleteEksComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onCancel(){
+    this.router.navigate(["/home/delete-cloud-selection"]);
+  }
+
   onNextEks(){
     this.showProgressBar = true;
     this.service.postDeleteEksCluster(this.createForm.value).subscribe((res)=>{

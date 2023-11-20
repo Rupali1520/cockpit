@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   userIcon = faUser
   arrowIcon = faArrowUp
   repeatPassword: string= 'none';
+  showProgressBar: boolean = false;
 
   createForm= new FormGroup({
     username: new FormControl('',[Validators.required, Validators.minLength(2)]),
@@ -59,6 +60,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/login']);
       this.createForm.reset();
       this.repeatPassword='none';
+      location.reload();
     }, (error)=>{
       this.toast.error(error.error.message)
     })
@@ -69,11 +71,14 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSubmit(){
+    this.showProgressBar = true;
     this.service.login(this.loginForm.value).subscribe((res)=>{
+      this.showProgressBar = false;
       localStorage.setItem('loggedIn','true');
       this.toast.success(res.message)
       this.router.navigate(['/home']);
     }, (error)=>{
+      this.showProgressBar = false;
       this.toast.error(error.error.message)
     })
 

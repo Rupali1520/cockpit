@@ -28,6 +28,10 @@ export class EksClusterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onCancel(){
+    this.router.navigate(["/home/cloud-selection/aws"]);
+  }
+
   onNextEks(){
     this.showProgressBar = true;
     this.service.postEksCluster(this.createForm.value).subscribe((res)=>{

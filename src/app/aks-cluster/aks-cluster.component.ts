@@ -26,6 +26,10 @@ export class AksClusterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onCancel(){
+    this.router.navigate(["/home/cloud-selection/azure"]);
+  }
+
   onSubmit() {
     let aksVersion: number | null = null;
     const aksVersionControl = this.createForm.get('aks_version');
