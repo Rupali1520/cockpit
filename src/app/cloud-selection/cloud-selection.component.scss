@@ -1,20 +1,19 @@
 .header-blue {
     background: linear-gradient(135deg, #fe2929, #ffb3c5);
     background-color: #184e8e;
-    padding-bottom: 80px;
     font-family: 'Source Sans Pro', sans-serif;
   }
   
   @media (min-width:768px) {
     .header-blue {
-      padding-bottom: 120px;
+      position: static;
     }
   }
   
   .cloud-card{
     display: flex; 
     justify-content: space-evenly; 
-    margin-top: 69px; 
+    margin-top: 21px; 
     flex-wrap: wrap;
   }
   .header-blue .navbar {
@@ -86,8 +85,6 @@
     .header-blue .hero h1 {
       color: #fff;
       font-size: 40px;
-      margin-top: 114px;
-      margin-bottom: 24px;
       line-height: 1.2;
       font-weight: 300;
     }
@@ -195,8 +192,8 @@
 
   .card {
     position: relative;
-    min-width: 320px;
-    height: 440px;
+    min-width: 249px;
+    height: 217px;
     box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
       inset -5px -5px 15px rgba(255, 255, 255, 0.1),
       5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
@@ -219,6 +216,7 @@
     align-items: center;
     overflow: hidden;
     transition: 0.5s;
+    background-size: cover;
   }
   
     .card .box:hover {

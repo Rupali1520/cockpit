@@ -4,8 +4,17 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
+
 export class HomeComponent implements OnInit {
   successMessage:string='';
+  selectedTabIndex = 0;
+
+  tabs = ['Create Cluster', 'My Cluster', 'Crediantials Details', 'Cluster Creation Status', 'Cost Optimisation' ];
+
+  onTabClick(index: number): void {
+    this.selectedTabIndex = index;
+  }
 
   constructor() { }
 

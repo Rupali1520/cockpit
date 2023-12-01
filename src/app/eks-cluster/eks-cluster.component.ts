@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EksClusterComponent implements OnInit {
   createForm= new FormGroup({
-    eks_name: new FormControl('',[Validators.required]),
+    cluster_name: new FormControl('',[Validators.required]),
     region: new FormControl('',[Validators.required]),
     instance_type: new FormControl('',[Validators.required]),
     eks_version: new FormControl('',[Validators.required]),
@@ -45,8 +45,8 @@ export class EksClusterComponent implements OnInit {
     })
   }
 
-  get EksName():FormControl{
-    return this.createForm.get("eks_name") as FormControl;
+  get ClusterName():FormControl{
+    return this.createForm.get("cluster_name") as FormControl;
   }
 
   get Region():FormControl{

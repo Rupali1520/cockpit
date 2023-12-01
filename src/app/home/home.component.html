@@ -1,15 +1,36 @@
 <div class="header-blue">
-    <div class="container hero">
-        <div class="row device">
-                <h1>Welcome to Cockpit Pro</h1>
-                <p>Cockpit Pro revolutionizes the way you create and manage cloud hosted 
-                    Kubernetes clusters. With just a single click, you can launch a fully 
-                    functional multi-cloud Kubernetes cluster tailored to your needs. 
-                    Say goodbye to the complexities of manual setup and configuration – Cockpit Pro 
-                    simplifies cluster deployment while providing you with advanced insights into 
-                    resource utilization through the application of Goldilocks and FinOps principles.<br></p>
-            </div>
-                <div class="home-card">
+  <div class="container hero">
+    <div class="row device">
+      <h1>Welcome to Cockpit Pro</h1>
+      <p>Cockpit Pro revolutionizes the way you create and manage cloud hosted
+        Kubernetes clusters. With just a single click, you can launch a fully
+        functional multi-cloud Kubernetes cluster tailored to your needs.
+        Say goodbye to the complexities of manual setup and configuration – Cockpit Pro
+        simplifies cluster deployment while providing you with advanced insights into
+        resource utilization through the application of Goldilocks and FinOps principles.<br></p>
+    </div>
+    <div class="home-card device">
+
+      <div class="tabs">
+        <div *ngFor="let tab of tabs; let i = index" (click)="onTabClick(i)" [class.active]="selectedTabIndex === i">
+          {{ tab }}
+        </div>
+      </div>
+
+      <div class="table">
+        <table>
+          <ng-container *ngIf="selectedTabIndex !== null">
+            <ng-container [ngSwitch]="selectedTabIndex">
+              <app-cloud-selection *ngSwitchCase="0"></app-cloud-selection>
+              <app-tab2-content *ngSwitchCase="1"></app-tab2-content>
+              <app-tab3-content *ngSwitchCase="2"></app-tab3-content>
+            </ng-container>
+          </ng-container>
+
+        </table>
+      </div>
+    </div>
+    <!-- <div class="home-card">
 
                 <div class="card-grid-space device">
                   <a class="card" href="/home/cloud-selection" style="--bg-img: url(https://i0.wp.com/networknuts.net/wp-content/uploads/2020/01/kubernetes-training-delhi.jpg)">
@@ -35,8 +56,8 @@
                     </div>
                   </a>
                 </div>
-                </div>
-            </div>
-        </div>
+                </div> -->
+  </div>
+</div>
 
 <router-outlet></router-outlet>
