@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api:{
-    baseUrl:"http://50.17.59.150:4000/",
+    baseUrl:"http://3.19.185.178:4000/",
     
     routes:{
       registerUser:{endpoint:'jsonRegister', method:'POST'},
