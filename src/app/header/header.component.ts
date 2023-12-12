@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit{
 
   onLogin() {
     if (this.isLoggedIn) {
-      localStorage.removeItem('loggedIn');
       this.isLoggedIn = false;
       this.router.navigate(['/dashboard']);
     } else {

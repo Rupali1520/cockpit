@@ -1,0 +1,68 @@
+<div *ngIf="!enterRegion" class="header-blue">
+    <div class="container hero">
+        <div>
+            <div class="row device">
+                <h1>Select a cloud in which you want to see your K8s cluster</h1>
+
+            </div>
+            <div class="cloud-card">
+                <div class="card device">
+                    <div class="box" style="background-image: url(../../assets/aws.png);" (click)="onClickAws()">
+                    </div>
+                    <div class="card-label">
+                        <h3 style="color: black; text-align: center;">AWS</h3>
+                    </div>
+                </div>
+
+                <div class="card device">
+                    <div class="box" style="background-image: url(./../assets/Azure.png);" (click)="onClickAzure()">
+                    </div>
+                    <div class="card-label">
+                        <h3 style="color: black; text-align: center;">Azure</h3>
+                    </div>
+                </div>
+
+                <div class="card device">
+                    <div class="box" style="background-image: url(./../assets/gcp.jpg);" (click)="onClickGcp()">
+                    </div>
+                    <div class="card-label">
+                        <h3 style="color: black; text-align: center;">GCP</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div *ngIf="enterRegion" class="header-blue" style="width: 160%;">
+    <div class="container hero">
+        <div>
+            <header class="input-header">
+                <h1>Select Region</h1>
+            </header>
+            <section class="input-content">
+                <h2>Select Region</h2>
+                <form class="form" [formGroup]="createForm" (ngSubmit)="onNextEks()">
+
+                    <label for="name">Region</label>
+                    <select class="form__inset" name="Region" formControlName="region" placeholder="Region">
+                        <option value="us-east-1">US East-1</option>
+                        <option value=" us-east-2"> US East-2</option>
+                        <option value="us-west-1">US West-1</option>
+                        <option value="us-west-2">US West-2</option>
+                    </select>
+                    <div class="form-text validation-message text-danger"
+                        *ngIf=" Region.errors?.['required'] && (Region.touched || Region.dirty)">
+                        Please enter Region
+                    </div>
+
+                </form>
+                <div class="btns">
+                    <button class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+                    <button class="btn btn-confirm" [disabled]="createForm.invalid"
+                        (click)="onNextEks()">Submit</button>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

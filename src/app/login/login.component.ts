@@ -75,6 +75,7 @@ export class LoginComponent implements OnInit {
     this.service.login(this.loginForm.value).subscribe((res)=>{
       this.showProgressBar = false;
       localStorage.setItem('loggedIn','true');
+      localStorage.setItem('username',res.username);
       this.toast.success(res.message)
       this.router.navigate(['/home']);
     }, (error)=>{

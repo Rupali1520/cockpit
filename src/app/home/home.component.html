@@ -22,8 +22,9 @@
           <ng-container *ngIf="selectedTabIndex !== null">
             <ng-container [ngSwitch]="selectedTabIndex">
               <app-cloud-selection *ngSwitchCase="0"></app-cloud-selection>
-              <app-tab2-content *ngSwitchCase="1"></app-tab2-content>
-              <app-tab3-content *ngSwitchCase="2"></app-tab3-content>
+              <app-my-cluster *ngSwitchCase="1"></app-my-cluster>
+              <app-crediantials-detail *ngSwitchCase="2"></app-crediantials-detail>
+              <app-delete-cloud-selection *ngSwitchCase="5"></app-delete-cloud-selection>
             </ng-container>
           </ng-container>
 

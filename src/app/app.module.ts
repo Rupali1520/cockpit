@@ -23,6 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DeleteEksComponent } from './delete-eks/delete-eks.component';
 import { DeleteAksComponent } from './delete-aks/delete-aks.component';
 import { DeleteGkeComponent } from './delete-gke/delete-gke.component';
+import { DeleteCloudSelectionComponent } from './delete-cloud-selection/delete-cloud-selection.component';
+import { MyClusterComponent } from './my-cluster/my-cluster.component';
+import { CrediantialsDetailComponent } from './crediantials-detail/crediantials-detail.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { DeleteGkeComponent } from './delete-gke/delete-gke.component';
     DeleteEksComponent,
     DeleteAksComponent,
     DeleteGkeComponent,
+    DeleteCloudSelectionComponent,
+    MyClusterComponent,
+    CrediantialsDetailComponent,
   ],
   imports: [
     BrowserModule,

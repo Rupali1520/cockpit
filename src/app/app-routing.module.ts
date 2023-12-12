@@ -39,7 +39,6 @@ const routes: Routes = [
           {
             path:'',
             component: CloudSelectionComponent,
-            data:{title:'deploy'}
           },
           {
             path: 'azure',
@@ -88,7 +87,6 @@ const routes: Routes = [
           {
             path:'',
             component: CloudSelectionComponent,
-            data:{title:'delete'}
           },
           {
             path: 'delete-aks',
