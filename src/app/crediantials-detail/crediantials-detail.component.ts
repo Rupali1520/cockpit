@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { RegisterService } from '../services/register.service';
 
 @Component({
   selector: 'app-crediantials-detail',
@@ -9,19 +11,48 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CrediantialsDetailComponent implements OnInit {
 
   constructor(private router: Router,
-    private route: ActivatedRoute) { }
+    private service: RegisterService,
+    private toast: ToastrService) { }
+    showProgressBar: boolean = false;
 
   ngOnInit(): void {
   }
   onClickAws(){
-    // this.router.navigate(["/home/delete-cloud-selection/delete-eks"]);
+    this.showProgressBar = true;
+      this.service.getAwsCrediantial().subscribe((res)=>{
+        this.showProgressBar = false;
+        console.log(res);
+        this.toast.success(res.message);
+        this.router.navigate(["/home"]);
+      }, (error)=>{
+        this.showProgressBar = false;
+        this.toast.error(error.error.error)
+      })
   }
   
   onClickAzure(){
-      // this.router.navigate(["/home/delete-cloud-selection/delete-aks"]);
+    this.showProgressBar = true;
+    this.service.getAzureCrediantial().subscribe((res)=>{
+      this.showProgressBar = false;
+      console.log(res);
+      this.toast.success(res.message);
+      this.router.navigate(["/home"]);
+    }, (error)=>{
+      this.showProgressBar = false;
+      this.toast.error(error.error.error)
+    })
     }
 
   onClickGcp(){
-      // this.router.navigate(["/home/delete-cloud-selection/delete-gke"]);
+    this.showProgressBar = true;
+    this.service.getGcpCrediantial().subscribe((res)=>{
+      this.showProgressBar = false;
+      console.log(res);
+      this.toast.success(res.message);
+      this.router.navigate(["/home"]);
+    }, (error)=>{
+      this.showProgressBar = false;
+      this.toast.error(error.error.error)
+    })
     }
   }

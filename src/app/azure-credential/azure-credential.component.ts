@@ -27,7 +27,7 @@ export class AzureCredentialComponent implements OnInit {
   }
 
   onCancel(){
-    this.router.navigate(["/home/cloud-selection"]);
+    this.router.navigate(["/home"]);
   }
 
   onNextAks(){

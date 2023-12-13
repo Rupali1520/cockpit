@@ -63,6 +63,10 @@
                         (click)="onNextEks()">Submit</button>
                 </div>
             </section>
+            <div *ngIf="showProgressBar" class="loading-overlay">
+                <div class="loader"></div>
+                <p class="loading-text">Just a moment! Checking Credentials...</p>
+              </div>
         </div>
     </div>
 </div>

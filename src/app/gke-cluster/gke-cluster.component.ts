@@ -28,7 +28,7 @@ export class GkeClusterComponent implements OnInit {
   }
 
   onCancel(){
-    this.router.navigate(["/home/cloud-selection/gcp"]);
+    this.router.navigate(["/home"]);
   }
 
   onSubmit(){
