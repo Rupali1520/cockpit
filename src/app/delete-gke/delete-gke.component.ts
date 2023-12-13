@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class DeleteGkeComponent implements OnInit {
   createForm= new FormGroup({
     project_id: new FormControl('',[Validators.required]),
-    Region: new FormControl('',[Validators.required]),
+    region: new FormControl('',[Validators.required]),
     gke_name: new FormControl('',[Validators.required]),
   });
   showProgressBar: boolean = false;
@@ -25,16 +25,16 @@ export class DeleteGkeComponent implements OnInit {
   }
 
   onCancel(){
-    this.router.navigate(["/home/delete-cloud-selection"]);
+    this.router.navigate(["/home"]);
   }
 
   onSubmit(){
     this.showProgressBar = true;
-    this.service.postGkeCluster(this.createForm.value).subscribe((res)=>{
+    this.service.postDeleteGkeCluster(this.createForm.value).subscribe((res)=>{
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/home/delete-cloud-selection"]);
+      this.router.navigate(["/home"]);
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)
@@ -46,7 +46,7 @@ export class DeleteGkeComponent implements OnInit {
   }
 
   get Region():FormControl{
-    return this.createForm.get("Region") as FormControl;
+    return this.createForm.get("region") as FormControl;
   }
 
   get GkeName():FormControl{

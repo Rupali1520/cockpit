@@ -38,7 +38,7 @@ export class EksClusterComponent implements OnInit {
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/home/cloud-selection"]);
+      this.router.navigate(["/home"]);
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)

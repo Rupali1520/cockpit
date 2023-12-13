@@ -58,7 +58,7 @@ export class GcpCredentialComponent implements OnInit {
   }
 
   onCancel(){
-    this.router.navigate(["/home/cloud-selection"]);
+    this.router.navigate(["/home"]);
   }
 
   onNextGke(): void {

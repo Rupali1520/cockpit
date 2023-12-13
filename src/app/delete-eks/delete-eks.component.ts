@@ -26,7 +26,7 @@ export class DeleteEksComponent implements OnInit {
   }
 
   onCancel(){
-    this.router.navigate(["/home/delete-cloud-selection"]);
+    this.router.navigate(["/home"]);
   }
 
   onNextEks(){
@@ -35,7 +35,7 @@ export class DeleteEksComponent implements OnInit {
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/home/delete-cloud-selection"]);
+      this.router.navigate(["/home"]);
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)

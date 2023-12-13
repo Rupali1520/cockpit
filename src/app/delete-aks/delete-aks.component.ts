@@ -22,15 +22,15 @@ export class DeleteAksComponent implements OnInit {
   }
 
   onCancel(){
-    this.router.navigate(["/home/delete-cloud-selection"]);
+    this.router.navigate(["/home"]);
   }
 
   onSubmit() { 
-    this.service.postAksCluster(this.createForm.value).subscribe(
+    this.service.postDeleteAksCluster(this.createForm.value).subscribe(
       (res) => {
         this.toast.success(res.message);
         this.createForm.reset();
-        this.router.navigate(['/home/cloud-selection']);
+        this.router.navigate(['/home']);
       },
       (error) => {
         this.toast.error(error.error.message);

@@ -31,7 +31,7 @@ export class AwsCredentialComponent implements OnInit {
   }
 
   onCancel(){
-    this.router.navigate(["/home/cloud-selection"]);
+    this.router.navigate(["/home"]);
   }
   
   onNextEks(){
