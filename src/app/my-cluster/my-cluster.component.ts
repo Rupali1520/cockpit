@@ -15,6 +15,11 @@ export class MyClusterComponent implements OnInit {
     region: new FormControl('',[Validators.required])
   });
   showProgressBar: boolean = false;
+  showCard:boolean = false;
+    username: string='';
+    awsBody={};
+    azureBody={};
+    sampleData = {};
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -22,6 +27,8 @@ export class MyClusterComponent implements OnInit {
     private toast: ToastrService) { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") ?? '';
+
   }
   onClickAws(){
     this.enterRegion = true;
@@ -29,11 +36,14 @@ export class MyClusterComponent implements OnInit {
   
   onClickAzure(){
     this.showProgressBar = true;
-      this.service.getAzureClusters().subscribe((res)=>{
+    this.azureBody={
+      username: this.username
+    }
+      this.service.getAzureClusters(this.azureBody).subscribe((res)=>{
         this.showProgressBar = false;
-        console.log(res);
-        this.toast.success(res.message);
-        this.router.navigate(["/home"]);
+        this.sampleData = res;
+        this.toast.success("Success");
+        this.showCard =true;
       }, (error)=>{
         this.showProgressBar = false;
         this.toast.error(error.error.error)
@@ -44,7 +54,6 @@ export class MyClusterComponent implements OnInit {
     this.showProgressBar = true;
       this.service.getGcpClusters().subscribe((res)=>{
         this.showProgressBar = false;
-        console.log(res);
         this.toast.success(res.message);
         this.router.navigate(["/home"]);
       }, (error)=>{
@@ -57,11 +66,14 @@ onCancel(){
 }
     onNextEks(){
       this.showProgressBar = true;
-      this.service.getAwsClusters().subscribe((res)=>{
+      this.awsBody={
+        username: this.username
+      }
+      this.service.getAwsClusters(this.awsBody).subscribe((res)=>{
         this.showProgressBar = false;
-        console.log(res);
-        this.toast.success(res.message);
-        this.router.navigate(["/home"]);
+        this.sampleData = res;
+        this.toast.success("Success");
+        this.showCard =true;
       }, (error)=>{
         this.showProgressBar = false;
         this.toast.error(error.error.error)

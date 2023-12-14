@@ -26,6 +26,7 @@ import { DeleteGkeComponent } from './delete-gke/delete-gke.component';
 import { DeleteCloudSelectionComponent } from './delete-cloud-selection/delete-cloud-selection.component';
 import { MyClusterComponent } from './my-cluster/my-cluster.component';
 import { CrediantialsDetailComponent } from './crediantials-detail/crediantials-detail.component';
+import { CardCredentialsComponent } from './card-credentials/card-credentials.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { CrediantialsDetailComponent } from './crediantials-detail/crediantials-
     DeleteCloudSelectionComponent,
     MyClusterComponent,
     CrediantialsDetailComponent,
+    CardCredentialsComponent,
   ],
   imports: [
     BrowserModule,

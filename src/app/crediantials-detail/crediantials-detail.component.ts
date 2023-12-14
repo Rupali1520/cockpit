@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RegisterService } from '../services/register.service';
 
@@ -14,16 +14,24 @@ export class CrediantialsDetailComponent implements OnInit {
     private service: RegisterService,
     private toast: ToastrService) { }
     showProgressBar: boolean = false;
+    showCard:boolean = false;
+    username: string='';
+    awsBody={}
+    sampleData = {};
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") ?? '';
   }
   onClickAws(){
     this.showProgressBar = true;
-      this.service.getAwsCrediantial().subscribe((res)=>{
-        this.showProgressBar = false;
-        console.log(res);
-        this.toast.success(res.message);
-        this.router.navigate(["/home"]);
+    this.awsBody={
+      username: this.username
+    }
+    this.service.getAwsCrediantial(this.awsBody).subscribe((res)=>{
+      this.showProgressBar = false;
+      this.sampleData = res;
+      this.toast.success("Success");
+      this.showCard =true;
       }, (error)=>{
         this.showProgressBar = false;
         this.toast.error(error.error.error)
@@ -34,7 +42,6 @@ export class CrediantialsDetailComponent implements OnInit {
     this.showProgressBar = true;
     this.service.getAzureCrediantial().subscribe((res)=>{
       this.showProgressBar = false;
-      console.log(res);
       this.toast.success(res.message);
       this.router.navigate(["/home"]);
     }, (error)=>{
@@ -47,7 +54,6 @@ export class CrediantialsDetailComponent implements OnInit {
     this.showProgressBar = true;
     this.service.getGcpCrediantial().subscribe((res)=>{
       this.showProgressBar = false;
-      console.log(res);
       this.toast.success(res.message);
       this.router.navigate(["/home"]);
     }, (error)=>{

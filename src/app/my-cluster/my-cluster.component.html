@@ -1,4 +1,4 @@
-<div *ngIf="!enterRegion" class="header-blue">
+<div *ngIf="!enterRegion && !showCard" class="header-blue">
     <div class="container hero">
         <div>
             <div class="row device">
@@ -34,7 +34,7 @@
 
     </div>
 </div>
-<div *ngIf="enterRegion" class="header-blue" style="width: 160%;">
+<div *ngIf="enterRegion && !showCard" class="header-blue" style="width: 160%;">
     <div class="container hero">
         <div>
             <header class="input-header">
@@ -69,4 +69,13 @@
               </div>
         </div>
     </div>
+</div>
+
+<div *ngIf="showProgressBar" class="loading-overlay">
+    <div class="loader"></div>
+    <p class="loading-text">Just a moment...</p>
+</div>
+
+<div *ngIf="showCard">
+    <app-card-credentials [sampleData]="sampleData"></app-card-credentials>
 </div>
