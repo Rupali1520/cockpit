@@ -76,12 +76,12 @@ private getGcpCluster = `${environment.api.baseUrl}${environment.api.routes.getG
       return this.httpClient.post(this.getAwsCrediantials, awsBody);
     }
 
-    getAzureCrediantial(): Observable<any>{
-      return this.httpClient.get(this.getAzureCrediantials);
+    getAzureCrediantial(azureBody:any): Observable<any>{
+      return this.httpClient.post(this.getAzureCrediantials,azureBody);
     }
 
-    getGcpCrediantial(): Observable<any>{
-      return this.httpClient.get(this.getGcpCrediantials);
+    getGcpCrediantial(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.getGcpCrediantials,gcpBody);
     }
 
     getAwsClusters(awsBody:any): Observable<any>{
@@ -92,8 +92,8 @@ private getGcpCluster = `${environment.api.baseUrl}${environment.api.routes.getG
       return this.httpClient.post(this.getAzureCluster,azureBody);
     }
 
-    getGcpClusters(): Observable<any>{
-      return this.httpClient.get(this.getGcpCluster);
+    getGcpClusters(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.getGcpCluster,gcpBody);
     }
 
   }

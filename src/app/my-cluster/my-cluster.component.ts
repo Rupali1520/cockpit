@@ -19,6 +19,7 @@ export class MyClusterComponent implements OnInit {
     username: string='';
     awsBody={};
     azureBody={};
+    gcpBody={};
     sampleData = {};
 
   constructor(private router: Router,
@@ -52,10 +53,14 @@ export class MyClusterComponent implements OnInit {
 
   onClickGcp(){
     this.showProgressBar = true;
-      this.service.getGcpClusters().subscribe((res)=>{
+    this.gcpBody={
+      username: this.username
+    }
+      this.service.getGcpClusters(this.gcpBody).subscribe((res)=>{
         this.showProgressBar = false;
-        this.toast.success(res.message);
-        this.router.navigate(["/home"]);
+        this.sampleData = res;
+        this.toast.success("Success");
+        this.showCard =true;
       }, (error)=>{
         this.showProgressBar = false;
         this.toast.error(error.error.error)

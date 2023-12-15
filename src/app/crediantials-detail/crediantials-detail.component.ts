@@ -17,6 +17,8 @@ export class CrediantialsDetailComponent implements OnInit {
     showCard:boolean = false;
     username: string='';
     awsBody={}
+    azureBody={};
+    gcpBody={};
     sampleData = {};
 
   ngOnInit(): void {
@@ -40,10 +42,14 @@ export class CrediantialsDetailComponent implements OnInit {
   
   onClickAzure(){
     this.showProgressBar = true;
-    this.service.getAzureCrediantial().subscribe((res)=>{
+    this.azureBody={
+      username: this.username
+    }
+    this.service.getAzureCrediantial(this.azureBody).subscribe((res)=>{
       this.showProgressBar = false;
-      this.toast.success(res.message);
-      this.router.navigate(["/home"]);
+      this.sampleData = res;
+      this.toast.success("Success");
+      this.showCard =true;
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.error)
@@ -52,10 +58,14 @@ export class CrediantialsDetailComponent implements OnInit {
 
   onClickGcp(){
     this.showProgressBar = true;
-    this.service.getGcpCrediantial().subscribe((res)=>{
+    this.gcpBody={
+      username: this.username
+    }
+    this.service.getGcpCrediantial(this.gcpBody).subscribe((res)=>{
       this.showProgressBar = false;
-      this.toast.success(res.message);
-      this.router.navigate(["/home"]);
+      this.sampleData = res;
+      this.toast.success("Success");
+      this.showCard =true;
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.error)

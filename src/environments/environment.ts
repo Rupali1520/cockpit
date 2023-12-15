@@ -20,11 +20,11 @@ export const environment = {
       postDeleteAksCluster: {endpoint:'json_delete_aks', method:'POST'},
       postDeleteGkeCluster: {endpoint:'json_delete_gke', method:'POST'},
       getAwsCredentials: {endpoint:'json-show-details-aws', method:'POST'},
-      getAzureCredentials: {endpoint:'json-show-details-azure', method:'GET'},
-      getGcpCredentials: {endpoint:'json-show-details-gcp', method:'GET'},
+      getAzureCredentials: {endpoint:'json-show-details-azure', method:'POST'},
+      getGcpCredentials: {endpoint:'json-show-details-gcp', method:'POST'},
       getAwsCluster: {endpoint:'json-my-cluster-details-aws', method:'POST'},
       getAzureCluster: {endpoint:'json-my-cluster-details-azure', method:'POST'},
-      getGcpCluster: {endpoint:'json-my-cluster-details-gcp', method:'GET'}
+      getGcpCluster: {endpoint:'json-my-cluster-details-gcp', method:'POST'}
     }
   }
 };
