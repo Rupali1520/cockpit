@@ -16,6 +16,7 @@ export class CrediantialsDetailComponent implements OnInit {
     showProgressBar: boolean = false;
     showCard:boolean = false;
     username: string='';
+    cardTitle: string= '';
     awsBody={}
     azureBody={};
     gcpBody={};
@@ -32,6 +33,7 @@ export class CrediantialsDetailComponent implements OnInit {
     this.service.getAwsCrediantial(this.awsBody).subscribe((res)=>{
       this.showProgressBar = false;
       this.sampleData = res;
+      this.cardTitle="AWS";
       this.toast.success("Success");
       this.showCard =true;
       }, (error)=>{
@@ -48,6 +50,7 @@ export class CrediantialsDetailComponent implements OnInit {
     this.service.getAzureCrediantial(this.azureBody).subscribe((res)=>{
       this.showProgressBar = false;
       this.sampleData = res;
+      this.cardTitle="Azure";
       this.toast.success("Success");
       this.showCard =true;
     }, (error)=>{
@@ -64,6 +67,7 @@ export class CrediantialsDetailComponent implements OnInit {
     this.service.getGcpCrediantial(this.gcpBody).subscribe((res)=>{
       this.showProgressBar = false;
       this.sampleData = res;
+      this.cardTitle="GCP";
       this.toast.success("Success");
       this.showCard =true;
     }, (error)=>{

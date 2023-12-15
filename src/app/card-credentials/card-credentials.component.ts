@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class CardCredentialsComponent implements OnInit {
   @Input() sampleData: { [key: string]: { [innerKey: string]: any } } = {};
-
+  @Input() cardTitle: string= "";
   constructor(private router: Router) { }
 
   ngOnInit(): void {

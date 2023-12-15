@@ -17,6 +17,7 @@ export class MyClusterComponent implements OnInit {
   showProgressBar: boolean = false;
   showCard:boolean = false;
     username: string='';
+    cardTitle:string='';
     awsBody={};
     azureBody={};
     gcpBody={};
@@ -43,6 +44,7 @@ export class MyClusterComponent implements OnInit {
       this.service.getAzureClusters(this.azureBody).subscribe((res)=>{
         this.showProgressBar = false;
         this.sampleData = res;
+        this.cardTitle="Azure";
         this.toast.success("Success");
         this.showCard =true;
       }, (error)=>{
@@ -59,6 +61,7 @@ export class MyClusterComponent implements OnInit {
       this.service.getGcpClusters(this.gcpBody).subscribe((res)=>{
         this.showProgressBar = false;
         this.sampleData = res;
+        this.cardTitle="GCP";
         this.toast.success("Success");
         this.showCard =true;
       }, (error)=>{
@@ -77,6 +80,7 @@ onCancel(){
       this.service.getAwsClusters(this.awsBody).subscribe((res)=>{
         this.showProgressBar = false;
         this.sampleData = res;
+        this.cardTitle="Aws";
         this.toast.success("Success");
         this.showCard =true;
       }, (error)=>{
