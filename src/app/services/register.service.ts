@@ -24,6 +24,12 @@ private getGcpCrediantials = `${environment.api.baseUrl}${environment.api.routes
 private getAwsCluster = `${environment.api.baseUrl}${environment.api.routes.getAwsCluster.endpoint}`;
 private getAzureCluster = `${environment.api.baseUrl}${environment.api.routes.getAzureCluster.endpoint}`;
 private getGcpCluster = `${environment.api.baseUrl}${environment.api.routes.getGcpCluster.endpoint}`;
+private postAwsStatus = `${environment.api.baseUrl}${environment.api.routes.postAwsCreationStatus.endpoint}`;
+private postAzureStatus = `${environment.api.baseUrl}${environment.api.routes.postAzureCreationStatus.endpoint}`;
+private postGcpStatus = `${environment.api.baseUrl}${environment.api.routes.postGcpCreationStatus.endpoint}`;
+private postAwsLog = `${environment.api.baseUrl}${environment.api.routes.postAwsLogs.endpoint}`;
+private postAzureLog = `${environment.api.baseUrl}${environment.api.routes.postAzureLogs.endpoint}`;
+private postGcpLog = `${environment.api.baseUrl}${environment.api.routes.postGcpLogs.endpoint}`;
 
 
   constructor(private httpClient: HttpClient) {}
@@ -96,4 +102,27 @@ private getGcpCluster = `${environment.api.baseUrl}${environment.api.routes.getG
       return this.httpClient.post(this.getGcpCluster,gcpBody);
     }
 
+    postAwsCreationStatus(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.postAwsStatus,gcpBody);
+    }
+
+    postAzureCreationStatus(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.postAzureStatus,gcpBody);
+    }
+
+    postGcpCreationStatus(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.postGcpStatus,gcpBody);
+    }
+
+    postAwsLogs(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.postAwsLog,gcpBody);
+    }
+
+    postAzureLogs(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.postAzureLog,gcpBody);
+    }
+
+    postGcpLogs(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.postGcpLog,gcpBody);
+    }
   }

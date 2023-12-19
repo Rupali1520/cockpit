@@ -27,6 +27,9 @@ import { DeleteCloudSelectionComponent } from './delete-cloud-selection/delete-c
 import { MyClusterComponent } from './my-cluster/my-cluster.component';
 import { CrediantialsDetailComponent } from './crediantials-detail/crediantials-detail.component';
 import { CardCredentialsComponent } from './card-credentials/card-credentials.component';
+import { ClusterStatusComponent } from './cluster-status/cluster-status.component';
+import { ClusterCreationCardComponent } from './cluster-creation-card/cluster-creation-card.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,8 @@ import { CardCredentialsComponent } from './card-credentials/card-credentials.co
     MyClusterComponent,
     CrediantialsDetailComponent,
     CardCredentialsComponent,
+    ClusterStatusComponent,
+    ClusterCreationCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,8 @@ import { CardCredentialsComponent } from './card-credentials/card-credentials.co
     BrowserAnimationsModule,
     HttpClientModule,
     FontAwesomeModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,    
+    FormsModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-top-center',

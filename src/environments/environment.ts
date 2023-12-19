@@ -24,7 +24,13 @@ export const environment = {
       getGcpCredentials: {endpoint:'json-show-details-gcp', method:'POST'},
       getAwsCluster: {endpoint:'json-my-cluster-details-aws', method:'POST'},
       getAzureCluster: {endpoint:'json-my-cluster-details-azure', method:'POST'},
-      getGcpCluster: {endpoint:'json-my-cluster-details-gcp', method:'POST'}
+      getGcpCluster: {endpoint:'json-my-cluster-details-gcp', method:'POST'},
+      postAwsCreationStatus: {endpoint:'json-creation-status-aws', method:'POST'},
+      postAzureCreationStatus: {endpoint:'json-creation-status-azure', method:'POST'},
+      postGcpCreationStatus: {endpoint:'json-creation-status-gcp', method:'POST'},
+      postAwsLogs: {endpoint:'json-logs-aws', method:'POST'},
+      postAzureLogs: {endpoint:'json-logs-azure', method:'POST'},
+      postGcpLogs: {endpoint:'json-logs-gcp', method:'POST'},
     }
   }
 };
