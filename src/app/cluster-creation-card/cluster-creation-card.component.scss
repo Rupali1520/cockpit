@@ -7,13 +7,15 @@
     padding: 10px;
     min-width: 300px;
     font-family: 'Arial', sans-serif;
-    max-height: 600px;
-    max-width: 600px;
+    max-height: 644px;
+    max-width: 1069px;
     overflow: scroll;
+    white-space: pre-line;
   }
   
   .card-item {
     margin-bottom: 10px;
+    width: fit-content;
   }
   
   .buttons{
