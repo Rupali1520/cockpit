@@ -30,6 +30,7 @@ import { CardCredentialsComponent } from './card-credentials/card-credentials.co
 import { ClusterStatusComponent } from './cluster-status/cluster-status.component';
 import { ClusterCreationCardComponent } from './cluster-creation-card/cluster-creation-card.component';
 import { FormsModule } from '@angular/forms';
+import { ClusterCardComponent } from './cluster-card/cluster-card.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { FormsModule } from '@angular/forms';
     CardCredentialsComponent,
     ClusterStatusComponent,
     ClusterCreationCardComponent,
+    ClusterCardComponent,
   ],
   imports: [
     BrowserModule,
