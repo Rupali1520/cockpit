@@ -25,6 +25,11 @@
               <app-my-cluster *ngSwitchCase="1"></app-my-cluster>
               <app-crediantials-detail *ngSwitchCase="2"></app-crediantials-detail>
               <app-cluster-status *ngSwitchCase="3"></app-cluster-status>
+              <ng-container *ngSwitchCase="4">
+                <div class="cost-optimization-message">
+                  <p>Available only in paid subscription.</p>
+                </div>
+              </ng-container>
               <app-delete-cloud-selection *ngSwitchCase="5"></app-delete-cloud-selection>
             </ng-container>
           </ng-container>

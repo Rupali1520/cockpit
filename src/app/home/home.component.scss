@@ -359,6 +359,15 @@
       }
     }
   }
+
+  .cost-optimization-message {
+    margin-top: 10px;
+    font-weight: bold;
+
+    p{
+      color: #000 !important;
+    }
+  }
   
   .table {
     flex: 2;
