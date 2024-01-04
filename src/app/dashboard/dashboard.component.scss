@@ -1,5 +1,5 @@
 .header-blue {
-    background: linear-gradient(135deg, #fe2929, #ffb3c5);
+    background: linear-gradient(316deg, #310e68 0%, #5f0f40 74%);
     background-color: #184e8e;
     padding-bottom: 80px;
     font-family: 'Source Sans Pro', sans-serif;
@@ -57,19 +57,21 @@
   }
   
   .header-blue .action-button, .header-blue .action-button:not(.disabled):active {
-    border: 1px solid rgb(255,255,255);
+    border: 1px solid #fff;
     border-radius: 40px;
-    color: #fff;
+    color: black;
     box-shadow: none;
     text-shadow: none;
     padding: .3rem .8rem;
-    background: transparent;
-    transition: background-color 0.25s;
+    transition: transform 0.3s;
     outline: none;
+    background: #fff;
   }
   
   .header-blue .action-button:hover {
-    color: #fff;
+    background: #fff;
+    transform: translateY(-5px);
+    color: black;
   }
   
   .header-blue .hero {
@@ -158,3 +160,5 @@
     animation-name: slideInFromBottom;
     animation-duration: 1s;
   }
+
+ 
