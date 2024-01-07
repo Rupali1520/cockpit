@@ -58,19 +58,22 @@
   }
   
   .header-blue .action-button, .header-blue .action-button:not(.disabled):active {
-    border: 1px solid rgb(255,255,255);
+    border: 1px solid #fff;
     border-radius: 40px;
-    color: #fff;
+    color: black;
     box-shadow: none;
     text-shadow: none;
     padding: .3rem .8rem;
     background: transparent;
-    transition: background-color 0.25s;
+    transition: transform 0.3s;
     outline: none;
+    background: #fff;
   }
   
   .header-blue .action-button:hover {
-    color: #fff;
+    background: #fff;
+    transform: translateY(-5px);
+    color: black;
   }
   
   .header-blue .hero {
@@ -363,9 +366,10 @@
   .cost-optimization-message {
     margin-top: 10px;
     font-weight: bold;
+    margin-left: 63px;
 
     p{
-      color: #000 !important;
+      background: transparent;
     }
   }
   

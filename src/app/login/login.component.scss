@@ -85,9 +85,9 @@ a {
 
 button {
   border-radius: 20px;
-  border: 1px solid #ff4b2b;
+  border: 1px solid #000;
   background: transparent;
-  color: #ff4b2b;
+  color: #000;
   font-size: 12px;
   font-weight: bold;
   padding: 12px 45px;
@@ -98,8 +98,8 @@ button {
 }
 
 button:hover {
-  background: #ff4b2b;
-  color: #fff;
+  background: #fff;
+  color: #000;
   transform: translateY(-5px);
 }
 
@@ -125,7 +125,7 @@ button.ghost {
 
 button.ghost:hover {
   background: #fff;
-  color: #ff4b2b;
+  color: #000;
   transform: translateY(-5px);
 }
 
@@ -169,7 +169,7 @@ button.ghost:disabled {
 
 .overlay {
   background: #ff416c;
-  background: linear-gradient(to right, #ff4b2b, #ff416c) no-repeat 0 0 / cover;
+  background: linear-gradient(316deg, #310e68 0%, #5f0f40 74%) no-repeat 0 0 / cover;
   color: #fff;
   position: relative;
   left: -100%;

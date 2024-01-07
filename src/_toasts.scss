@@ -20,13 +20,11 @@
 }
 
 .toast-container {
-  width: max-content;
-  max-width: 100%;
-  pointer-events: none;
-
-  > :not(:last-child) {
-    margin-bottom: $toast-spacing;
-  }
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  z-index: 1000;
 }
 
 .toast-header {
