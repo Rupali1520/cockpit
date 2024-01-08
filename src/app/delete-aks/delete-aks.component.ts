@@ -14,11 +14,23 @@ export class DeleteAksComponent implements OnInit {
     resource_group: new FormControl('',[Validators.required]),
     aks_name: new FormControl('',[Validators.required]),
   });
+  username: string='';
+  azureBody={};
+  sampleData:any;
   constructor(private router: Router,
     private service: RegisterService,
     private toast: ToastrService) { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") ?? '';
+    this.azureBody={
+      username: this.username
+    }
+    this.service.getAzureClusters(this.azureBody).subscribe((res)=>{
+      this.sampleData = res.aks_cluster;
+    }, (error)=>{
+      this.toast.error(error.error.error_message + `Can't Get AKS Name`)
+    })
   }
 
   onCancel(){

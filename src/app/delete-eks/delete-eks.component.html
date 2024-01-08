@@ -6,9 +6,14 @@
         <h2>Delete EKS Cluster<span>EKS</span></h2>
         <form class="form" [formGroup]="createForm" (ngSubmit)="onNextEks()">
             <label for="name">EKS Name</label>
-            <input class="form__inset" type="text" formControlName="eks_name" placeholder="EKS Name" name="EKS Name">
+            <select class="form__inset" formControlName="eks_name" name="eks_name" id="eks_name">
+                <option value="" disabled selected>Select EKS Name</option>
+                <ng-container *ngFor="let eks of sampleData">
+                    <option [value]="eks">{{eks}}</option>
+                </ng-container>
+            </select>
             <div class="form-text validation-message text-danger"
-                *ngIf=" EksName.errors?.['required'] && (EksName.touched || EksName.dirty)">
+                *ngIf="EksName.errors?.['required'] && (EksName.touched || EksName.dirty)">
                 Please enter EKS name
             </div>
 

@@ -34,7 +34,6 @@ export class CrediantialsDetailComponent implements OnInit {
       this.showProgressBar = false;
       this.sampleData = res;
       this.cardTitle="AWS";
-      this.toast.success("Success");
       this.showCard =true;
       }, (error)=>{
         this.showProgressBar = false;
@@ -51,7 +50,6 @@ export class CrediantialsDetailComponent implements OnInit {
       this.showProgressBar = false;
       this.sampleData = res;
       this.cardTitle="Azure";
-      this.toast.success("Success");
       this.showCard =true;
     }, (error)=>{
       this.showProgressBar = false;
@@ -68,7 +66,6 @@ export class CrediantialsDetailComponent implements OnInit {
       this.showProgressBar = false;
       this.sampleData = res;
       this.cardTitle="GCP";
-      this.toast.success("Success");
       this.showCard =true;
     }, (error)=>{
       this.showProgressBar = false;

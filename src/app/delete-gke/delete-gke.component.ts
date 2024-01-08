@@ -16,12 +16,24 @@ export class DeleteGkeComponent implements OnInit {
     gke_name: new FormControl('',[Validators.required]),
   });
   showProgressBar: boolean = false;
+  username: string='';
+  awsBody={};
+  sampleData:any;
 
   constructor(private router: Router,
     private service: RegisterService,
     private toast: ToastrService) { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") ?? '';
+    this.awsBody={
+      username: this.username
+    }
+    this.service.getGcpClusters(this.awsBody).subscribe((res)=>{
+      this.sampleData = res.aks_cluster;
+    }, (error)=>{
+      this.toast.error(error.error.error_message + `Can't Get GKE Name`)
+    })
   }
 
   onCancel(){

@@ -45,7 +45,6 @@ export class MyClusterComponent implements OnInit {
         this.showProgressBar = false;
         this.sampleData = res;
         this.cardTitle="Azure";
-        this.toast.success("Success");
         this.showCard =true;
       }, (error)=>{
         this.showProgressBar = false;
@@ -62,7 +61,6 @@ export class MyClusterComponent implements OnInit {
         this.showProgressBar = false;
         this.sampleData = res;
         this.cardTitle="GCP";
-        this.toast.success("Success");
         this.showCard =true;
       }, (error)=>{
         this.showProgressBar = false;
@@ -81,7 +79,6 @@ onCancel(){
         this.showProgressBar = false;
         this.sampleData = res;
         this.cardTitle="Aws";
-        this.toast.success("Success");
         this.showCard =true;
       }, (error)=>{
         this.showProgressBar = false;

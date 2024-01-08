@@ -6,9 +6,15 @@
         <h2>Delete GKE Cluster<span>GKE</span></h2>
         <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
             <label for="name">GKE Name</label>
-            <input class="form__inset" type="text" formControlName="gke_name" placeholder="GKE Name" name="GKE Name">
-            <div class="form-text validation-message text-danger" *ngIf=" GkeName.errors?.['required'] && (GkeName.touched || GkeName.dirty)">
-                Please enter GKE Name
+            <select class="form__inset" formControlName="gke_name" name="gke_name" id="gke_name">
+                <option value="" disabled selected>Select GKE Name</option>
+                <ng-container *ngFor="let gke of sampleData">
+                    <option [value]="gke">{{gke}}</option>
+                </ng-container>
+            </select>
+            <div class="form-text validation-message text-danger"
+                *ngIf="GkeName.errors?.['required'] && (GkeName.touched || GkeName.dirty)">
+                Please enter GKE name
             </div>
 
             <label for="name">Region</label>
