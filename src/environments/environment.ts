@@ -31,6 +31,9 @@ export const environment = {
       postAwsLogs: {endpoint:'json-logs-aws', method:'POST'},
       postAzureLogs: {endpoint:'json-logs-azure', method:'POST'},
       postGcpLogs: {endpoint:'json-logs-gcp', method:'POST'},
+      postAwsJobs: {endpoint:'json_jobs_aws', method:'POST'},
+      postAzureJobs: {endpoint:'json_jobs_azure', method:'POST'},
+      postGcpJobs: {endpoint:'json_jobs_gcp', method:'POST'},
     }
   }
 };

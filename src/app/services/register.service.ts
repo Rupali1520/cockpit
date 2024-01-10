@@ -30,6 +30,9 @@ private postGcpStatus = `${environment.api.baseUrl}${environment.api.routes.post
 private postAwsLog = `${environment.api.baseUrl}${environment.api.routes.postAwsLogs.endpoint}`;
 private postAzureLog = `${environment.api.baseUrl}${environment.api.routes.postAzureLogs.endpoint}`;
 private postGcpLog = `${environment.api.baseUrl}${environment.api.routes.postGcpLogs.endpoint}`;
+private postAwsJob = `${environment.api.baseUrl}${environment.api.routes.postAwsJobs.endpoint}`;
+private postAzureJob = `${environment.api.baseUrl}${environment.api.routes.postAzureJobs.endpoint}`;
+private postGcpJob = `${environment.api.baseUrl}${environment.api.routes.postGcpJobs.endpoint}`;
 
 
   constructor(private httpClient: HttpClient) {}
@@ -124,5 +127,17 @@ private postGcpLog = `${environment.api.baseUrl}${environment.api.routes.postGcp
 
     postGcpLogs(gcpBody:any): Observable<any>{
       return this.httpClient.post(this.postGcpLog,gcpBody);
+    }
+
+    postAwsJobs(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.postAwsJob,gcpBody);
+    }
+
+    postAzureJobs(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.postAzureJob,gcpBody);
+    }
+
+    postGcpJobs(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.postGcpJob,gcpBody);
     }
   }

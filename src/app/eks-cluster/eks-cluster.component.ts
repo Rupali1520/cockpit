@@ -20,12 +20,16 @@ export class EksClusterComponent implements OnInit {
     cluster_type: new FormControl('',[Validators.required]),
   });
   showProgressBar: boolean = false;
+  username: string='';
+  awsBody={}
+  apiData: any[]=[];
 
   constructor(private router: Router,
     private service: RegisterService,
     private toast: ToastrService) { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") ?? '';
   }
 
   onCancel(){
@@ -38,7 +42,7 @@ export class EksClusterComponent implements OnInit {
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/home"]);
+      this.router.navigate(["/aws-jobs"]);
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)

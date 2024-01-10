@@ -37,7 +37,7 @@ export class GkeClusterComponent implements OnInit {
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/home"]);
+      this.router.navigate(["/gcp-jobs"]);
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)

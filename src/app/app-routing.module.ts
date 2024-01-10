@@ -14,12 +14,13 @@ import { AuthGuard } from './services/auth.guard';
 import { DeleteEksComponent } from './delete-eks/delete-eks.component';
 import { DeleteAksComponent } from './delete-aks/delete-aks.component';
 import { DeleteGkeComponent } from './delete-gke/delete-gke.component';
+import { ClusterJobsComponent } from './cluster-jobs/cluster-jobs.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
-    path:'login',
-    component:LoginComponent
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'dashboard',
@@ -30,14 +31,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path:'',
+        path: '',
         component: HomeComponent
       },
       {
         path: 'cloud-selection',
         children: [
           {
-            path:'',
+            path: '',
             component: CloudSelectionComponent,
           },
           {
@@ -49,8 +50,16 @@ const routes: Routes = [
               },
               {
                 path: 'azure2',
-                component: AksClusterComponent
-              },
+                children:[{
+                  path: '',
+                  component: AksClusterComponent
+                },
+                {
+                  path: 'azure-jobs',
+                  component: ClusterJobsComponent
+                }
+              ]
+              }
             ]
           },
           {
@@ -62,7 +71,15 @@ const routes: Routes = [
               },
               {
                 path: 'gcp2',
-                component: GkeClusterComponent
+                children: [{
+                  path:'',
+                  component: GkeClusterComponent
+                },
+                {
+                  path: 'gcp-jobs',
+                  component: ClusterJobsComponent
+                },
+              ]
               }
             ]
           },
@@ -75,8 +92,16 @@ const routes: Routes = [
               },
               {
                 path: 'aws2',
-                component: EksClusterComponent
-              },
+                children:[{
+                  path:'',
+                  component: EksClusterComponent
+                },
+                {
+                  path: 'aws-jobs',
+                  component: ClusterJobsComponent
+                },
+              ]
+              }
             ]
           },
         ]
@@ -85,26 +110,55 @@ const routes: Routes = [
         path: 'delete-cloud-selection',
         children: [
           {
-            path:'',
+            path: '',
             component: CloudSelectionComponent,
           },
           {
             path: 'delete-aks',
-            component: DeleteAksComponent
+            children: [
+              {
+                path: '',
+                component: DeleteAksComponent
+              },
+              {
+                path: 'aks-jobs',
+                component: ClusterJobsComponent
+              },
+            ]
           },
           {
             path: 'delete-gke',
-            component: DeleteGkeComponent
+            children:
+              [
+                {
+                  path: '',
+                  component: DeleteGkeComponent
+                },
+                {
+                  path: 'gke-jobs',
+                  component: ClusterJobsComponent
+                },
+              ]
           },
           {
             path: 'delete-eks',
-            component: DeleteEksComponent
+            children:
+              [
+                {
+                  path: '',
+                  component: DeleteEksComponent
+                },
+                {
+                  path: 'eks-jobs',
+                  component: ClusterJobsComponent
+                },
+              ]
           },
         ]
       },
     ]
   },
-  { path:'**', redirectTo: '/login',pathMatch:'full'},
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ]
 
 @NgModule({
