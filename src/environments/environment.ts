@@ -34,6 +34,9 @@ export const environment = {
       postAwsJobs: {endpoint:'json_jobs_aws', method:'POST'},
       postAzureJobs: {endpoint:'json_jobs_azure', method:'POST'},
       postGcpJobs: {endpoint:'json_jobs_gcp', method:'POST'},
+      postAwsDeleteJobs:  {endpoint:'json_jobs_aws_delete', method:'POST'},
+      postAzureDeleteJobs:  {endpoint:'json_jobs_azure_delete', method:'POST'},
+      postGcpDeleteJobs:  {endpoint:'json_jobs_gcp_delete', method:'POST'},
     }
   }
 };

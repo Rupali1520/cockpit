@@ -36,6 +36,17 @@ export class ClusterJobsComponent implements OnInit {
     });
   }
 
+  fetchAwsDeleteData() {
+    this.showProgressBar = true;
+    this.awsBody = {
+      username: this.username
+    }
+    this.service.postAwsDeleteJobs(this.awsBody).subscribe((data: any[]) => {
+      this.showProgressBar = false;
+      this.apiData = data;
+    });
+  }
+
   fetchAzureData() {
     this.showProgressBar = true;
     this.awsBody = {
@@ -46,6 +57,18 @@ export class ClusterJobsComponent implements OnInit {
       this.apiData = data;
     });
   }
+
+  fetchAzureDeleteData() {
+    this.showProgressBar = true;
+    this.awsBody = {
+      username: this.username
+    }
+    this.service.postAzureDeleteJobs(this.awsBody).subscribe((data: any[]) => {
+      this.showProgressBar = false;
+      this.apiData = data;
+    });
+  }
+
 
   fetchGcpData() {
     this.showProgressBar = true;
@@ -58,42 +81,58 @@ export class ClusterJobsComponent implements OnInit {
     });
   }
 
+  fetchGcpDeleteData() {
+    this.showProgressBar = true;
+    this.awsBody = {
+      username: this.username
+    }
+    this.service.postGcpDeleteJobs(this.awsBody).subscribe((data: any[]) => {
+      this.showProgressBar = false;
+      this.apiData = data;
+    });
+  }
+
   fetchDataBasedOnRoute() {
     this.route.url.subscribe(segments => {
       if (segments.length > 0) {
         const routePath = segments[0].path;
-        if (routePath === 'aws-jobs' || routePath === 'eks-jobs') {
-          if (routePath === 'aws-jobs') {
-            this.title = 'Aws Jobs';
-          }
-          else {
-            this.title = 'Eks Jobs'
-          }
+        if (routePath === 'aws-jobs') {
+          this.title = 'Aws Jobs';
           this.StausName = 'EKS Staus';
           this.propertyName = 'eks_status';
           this.fetchAwsData();
         }
-        else if (routePath === 'azure-jobs' || routePath === 'aks-jobs') {
-          if (routePath === 'azure-jobs') {
-            this.title = 'Azure Jobs';
-          }
-          else {
-            this.title = 'Aks Jobs'
-          }
+
+        else if (routePath === 'eks-jobs') {
+          this.title = 'Eks Jobs'
+          this.StausName = 'EKS Staus';
+          this.propertyName = 'eks_status';
+          this.fetchAwsDeleteData();
+        }
+        else if (routePath === 'azure-jobs' ) {
+          this.title = 'Azure Jobs';
           this.StausName = 'AKS Staus';
           this.propertyName = 'aks_status';
           this.fetchAzureData();
         }
-        else if (routePath === 'gcp-jobs' || routePath === 'gke-jobs') {
-          if (routePath === 'gcp-jobs') {
-            this.title = 'Gcp Jobs';
-          }
-          else {
-            this.title = 'Gke Jobs'
-          }
+        else if (routePath === 'aks-jobs') {
+          this.title = 'Aks Jobs'
+          this.StausName = 'AKS Staus';
+          this.propertyName = 'aks_status';
+          this.fetchAzureDeleteData();
+        }
+        else if (routePath === 'gcp-jobs') {
+          this.title = 'Gcp Jobs';
           this.StausName = 'GKE Staus';
           this.propertyName = 'gke_status';
-          // this.fetchGcpData();
+          this.fetchGcpData();
+        }
+
+        else if (routePath === 'gke-jobs') {
+          this.title = 'Gke Jobs'
+          this.StausName = 'GKE Staus';
+          this.propertyName = 'gke_status';
+          this.fetchGcpDeleteData();
         }
       }
     });
