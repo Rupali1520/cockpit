@@ -47,7 +47,7 @@ export class DeleteEksComponent implements OnInit {
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/home"]);
+      this.router.navigate(["/home/delete-cloud-selection/delete-eks/aws-jobs"]);
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)

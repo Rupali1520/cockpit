@@ -45,7 +45,7 @@ export class AksClusterComponent implements OnInit {
       (res) => {
         this.toast.success(res.message);
         this.createForm.reset();
-        this.router.navigate(['/azure-jobs']);
+        this.router.navigate(['/home/cloud-selection/azure/azure2/azure-jobs']);
       },
       (error) => {
         this.toast.error(error.error.message);

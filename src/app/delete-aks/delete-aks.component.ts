@@ -42,7 +42,7 @@ export class DeleteAksComponent implements OnInit {
       (res) => {
         this.toast.success(res.message);
         this.createForm.reset();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home/delete-cloud-selection/delete-aks/azure-jobs']);
       },
       (error) => {
         this.toast.error(error.error.message);

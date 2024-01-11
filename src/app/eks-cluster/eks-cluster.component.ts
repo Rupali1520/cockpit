@@ -42,7 +42,7 @@ export class EksClusterComponent implements OnInit {
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/aws-jobs"]);
+      this.router.navigate(["/home/cloud-selection/aws/aws2/aws-jobs"]);
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)
