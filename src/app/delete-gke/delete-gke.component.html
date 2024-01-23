@@ -18,7 +18,7 @@
             </div>
 
             <label for="name">Region</label>
-            <select class="form__inset" name="Region" formControlName="region" placeholder="Region">
+            <select class="form__inset" name="Region" formControlName="region" placeholder="Region" [attr.disabled]="sampleData.length === 0">
                 <option value="us-central1">US Central</option>
                 <option value="us-east1">US East</option>
                 <option value="us-west1">US West</option>
@@ -30,7 +30,7 @@
             </div>
 
             <label for="name">Project Id</label>
-            <input class="form__inset" type="text" formControlName="project_id" placeholder="Project Id" name="Project Id">
+            <input class="form__inset" type="text" formControlName="project_id" placeholder="Project Id" name="Project Id" [attr.disabled]="sampleData.length === 0">
             <div class="form-text validation-message text-danger" *ngIf=" ProjectId.errors?.['required'] && (ProjectId.touched || ProjectId.dirty)">
                 Please enter Project Id
             </div>

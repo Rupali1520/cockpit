@@ -14,6 +14,7 @@ export class DeleteAksComponent implements OnInit {
     resource_group: new FormControl('',[Validators.required]),
     aks_name: new FormControl('',[Validators.required]),
   });
+  showProgressBar: boolean = false;
   username: string='';
   azureBody={};
   sampleData:any;
@@ -28,8 +29,6 @@ export class DeleteAksComponent implements OnInit {
     }
     this.service.getAzureClusters(this.azureBody).subscribe((res)=>{
       this.sampleData = res.aks_cluster;
-    }, (error)=>{
-      this.toast.error(error.error.error_message + `Can't Get AKS Name`)
     })
   }
 
@@ -38,13 +37,18 @@ export class DeleteAksComponent implements OnInit {
   }
 
   onSubmit() { 
+    this.showProgressBar = true;
     this.service.postDeleteAksCluster(this.createForm.value).subscribe(
       (res) => {
-        this.toast.success(res.message);
         this.createForm.reset();
-        this.router.navigate(['/home/delete-cloud-selection/delete-aks/azure-jobs']);
+        setTimeout(()=>{
+          this.toast.success(res.message);
+          this.showProgressBar = false;
+          this.router.navigate(['/home/delete-cloud-selection/delete-aks/aks-jobs']);
+        },120000)
       },
       (error) => {
+        this.showProgressBar = false;
         this.toast.error(error.error.message);
       }
     );

@@ -34,10 +34,12 @@ export class GkeClusterComponent implements OnInit {
   onSubmit(){
     this.showProgressBar = true;
     this.service.postGkeCluster(this.createForm.value).subscribe((res)=>{
-      this.showProgressBar = false;
-      this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/home/cloud-selection/gcp/gcp2/gcp-jobs"]);
+      setTimeout(()=>{
+        this.showProgressBar = false;
+        this.toast.success(res.message);
+        this.router.navigate(["/home/cloud-selection/gcp/gcp2/gcp-jobs"]);
+      },420000)
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)

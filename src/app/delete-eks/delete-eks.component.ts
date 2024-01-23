@@ -19,7 +19,7 @@ export class DeleteEksComponent implements OnInit {
   showProgressBar: boolean = false;
   username: string='';
   awsBody={};
-  sampleData:any;
+  sampleData:any= [];
 
   constructor(private router: Router,
     private service: RegisterService,
@@ -32,8 +32,6 @@ export class DeleteEksComponent implements OnInit {
     }
     this.service.getAwsClusters(this.awsBody).subscribe((res)=>{
       this.sampleData = res.aks_cluster;
-    }, (error)=>{
-      this.toast.error(error.error.error_message + ` Can't Get EKS Name`)
     })
   }
 
@@ -44,10 +42,12 @@ export class DeleteEksComponent implements OnInit {
   onNextEks(){
     this.showProgressBar = true;
     this.service.postDeleteEksCluster(this.createForm.value).subscribe((res)=>{
-      this.showProgressBar = false;
-      this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/home/delete-cloud-selection/delete-eks/aws-jobs"]);
+      setTimeout(()=>{
+        this.showProgressBar = false;
+        this.toast.success(res.message);
+        this.router.navigate(["/home/delete-cloud-selection/delete-eks/eks-jobs"]);
+      },120000)
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)

@@ -18,7 +18,7 @@ export class DeleteGkeComponent implements OnInit {
   showProgressBar: boolean = false;
   username: string='';
   awsBody={};
-  sampleData:any;
+  sampleData:any= [];
 
   constructor(private router: Router,
     private service: RegisterService,
@@ -31,8 +31,6 @@ export class DeleteGkeComponent implements OnInit {
     }
     this.service.getGcpClusters(this.awsBody).subscribe((res)=>{
       this.sampleData = res.aks_cluster;
-    }, (error)=>{
-      this.toast.error(error.error.error_message + `Can't Get GKE Name`)
     })
   }
 
@@ -43,10 +41,12 @@ export class DeleteGkeComponent implements OnInit {
   onSubmit(){
     this.showProgressBar = true;
     this.service.postDeleteGkeCluster(this.createForm.value).subscribe((res)=>{
-      this.showProgressBar = false;
-      this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/home/delete-cloud-selection/delete-gke/gcp-jobs"]);
+      setTimeout(()=>{
+        this.showProgressBar = false;
+        this.toast.success(res.message);
+        this.router.navigate(["/home/delete-cloud-selection/delete-gke/gke-jobs"]);
+      },120000)
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)

@@ -39,10 +39,12 @@ export class EksClusterComponent implements OnInit {
   onNextEks(){
     this.showProgressBar = true;
     this.service.postEksCluster(this.createForm.value).subscribe((res)=>{
-      this.showProgressBar = false;
-      this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/home/cloud-selection/aws/aws2/aws-jobs"]);
+      setTimeout(()=>{
+        this.showProgressBar = false;
+        this.toast.success(res.message);
+        this.router.navigate(["/home/cloud-selection/aws/aws2/aws-jobs"]);
+      },900000)
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)

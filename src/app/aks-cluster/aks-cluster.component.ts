@@ -10,6 +10,7 @@ import { RegisterService } from '../services/register.service';
   styleUrls: ['./aks-cluster.component.scss']
 })
 export class AksClusterComponent implements OnInit {
+  showProgressBar: boolean = false;
   createForm= new FormGroup({
     resource_group: new FormControl('',[Validators.required]),
     Region: new FormControl('',[Validators.required]),
@@ -41,13 +42,18 @@ export class AksClusterComponent implements OnInit {
       ...this.createForm.value,
       aks_version: aksVersion,
     };  
+    this.showProgressBar = true;
     this.service.postAksCluster(formData).subscribe(
       (res) => {
-        this.toast.success(res.message);
         this.createForm.reset();
-        this.router.navigate(['/home/cloud-selection/azure/azure2/azure-jobs']);
+        setTimeout(()=>{
+          this.showProgressBar = false;
+          this.toast.success(res.message);
+          this.router.navigate(['/home/cloud-selection/azure/azure2/azure-jobs']);
+        },420000)
       },
       (error) => {
+        this.showProgressBar = false;
         this.toast.error(error.error.message);
       }
     );
