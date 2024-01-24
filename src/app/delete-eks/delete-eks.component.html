@@ -18,7 +18,7 @@
             </div>
 
             <label for="name">Region</label>
-            <select class="form__inset" name="Region" formControlName="region" placeholder="Region"  [attr.disabled]="sampleData.length === 0">
+            <select class="form__inset" name="Region" formControlName="region" placeholder="Region"  [attr.disabled]="sampleData.length === 0 ? true : null">
                 <option value="us-east-1">US East-1</option>
                 <option value=" us-east-2"> US East-2</option>
                 <option value="us-west-1">US West-1</option>
@@ -31,7 +31,7 @@
 
             <label for="name">Node Group Name</label>
             <input class="form__inset" type="text" formControlName="node" placeholder="Node Group Name"
-                name="Node Group Name" [attr.disabled]="sampleData.length === 0">
+                name="Node Group Name" [attr.disabled]="sampleData.length === 0 ? true : null">
             <div class="form-text validation-message text-danger"
                 *ngIf=" NodeGroupName.errors?.['required'] && (NodeGroupName.touched || NodeGroupName.dirty)">
                 Please enter Node Group Name
