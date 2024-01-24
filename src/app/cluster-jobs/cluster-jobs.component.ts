@@ -16,6 +16,9 @@ export class ClusterJobsComponent implements OnInit {
   showProgressBar: boolean = false;
   propertyName: string = '';
   title: string = '';
+  jobService: string = '';
+  showCard: boolean = false;
+  sampleData: any
 
   constructor(private http: HttpClient,
     private service: RegisterService,
@@ -92,6 +95,97 @@ export class ClusterJobsComponent implements OnInit {
     });
   }
 
+  getJobDetails(jobId: string) {
+
+    this.route.url.subscribe(segments => {
+      if (segments.length > 0) {
+        const routePath = segments[0].path;
+        if (routePath === 'aws-jobs') {
+          this.awsBody = {
+            username: this.username,
+            job_id: jobId
+          }
+          this.service.postAwsLogJobs(this.awsBody).subscribe((data: any[]) => {
+            this.showProgressBar = false;
+            this.showCard = true;
+            this.sampleData = data;
+            this.title = 'Aws Jobs';
+          });
+        }
+
+        else if (routePath === 'eks-jobs') {
+          this.service.postAwsLogJobs(jobId).subscribe((data: any[]) => {
+            this.showProgressBar = false;
+            this.showCard = true;
+            this.sampleData = data;
+            this.title = 'Eks Jobs';
+          });
+
+        }
+        else if (routePath === 'azure-jobs') {
+          this.awsBody = {
+            username: this.username,
+            job_id: jobId
+          }
+          this.service.postAzureLogJobs(this.awsBody).subscribe((data: any[]) => {
+            this.showProgressBar = false;
+            this.showCard = true;
+            this.sampleData = data;
+            this.title = 'Azure Jobs';
+          });
+
+        }
+        else if (routePath === 'aks-jobs') {
+          this.awsBody = {
+            username: this.username,
+            job_id: jobId
+          }
+          this.service.postAzureLogJobs(this.awsBody).subscribe((data: any[]) => {
+            this.showProgressBar = false;
+            this.showCard = true;
+            this.sampleData = data;
+            this.title = 'Aks Jobs';
+          });
+
+        }
+        else if (routePath === 'gcp-jobs') {
+          this.awsBody = {
+            username: this.username,
+            job_id: jobId
+          }
+          this.service.postGcpLogJobs(this.awsBody).subscribe((data: any[]) => {
+            this.showProgressBar = false;
+            this.showCard = true;
+            this.sampleData = data;
+            this.title = 'Gcp Jobs';
+          });
+
+        }
+
+        else if (routePath === 'gke-jobs') {
+          this.awsBody = {
+            username: this.username,
+            job_id: jobId
+          }
+          this.service.postGcpLogJobs(this.awsBody).subscribe((data: any[]) => {
+            this.showProgressBar = false;
+            this.showCard = true;
+            this.sampleData = data;
+            this.title = 'Gke Jobs';
+          });
+
+        }
+      }
+    });
+  }
+  closeDialog(): void {
+    this.showCard = false;
+  }
+
+  preventClose(event: Event): void {
+    event.stopPropagation();
+  }
+
   fetchDataBasedOnRoute() {
     this.route.url.subscribe(segments => {
       if (segments.length > 0) {
@@ -109,7 +203,7 @@ export class ClusterJobsComponent implements OnInit {
           this.propertyName = 'eks_status';
           this.fetchAwsDeleteData();
         }
-        else if (routePath === 'azure-jobs' ) {
+        else if (routePath === 'azure-jobs') {
           this.title = 'Azure Jobs';
           this.StausName = 'AKS Staus';
           this.propertyName = 'aks_status';

@@ -21,7 +21,7 @@
                           <td>{{ element.created_at | date: 'dd MMMM yyyy, HH:mm:ss' }}</td>
                           <td>{{ element.created_by }}</td>
                           <td>{{ element[propertyName] }}</td>
-                          <td>{{ element.job_id }}</td>
+                          <td style="cursor: pointer;" (click)="getJobDetails(element.job_id)">{{ element.job_id }}</td>
                           <td>{{ element.job_name }}</td>
                       </tr>
                   </tbody>
@@ -35,6 +35,12 @@
           </div>
       </div>
   </div>
+</div>
+
+<div *ngIf="showCard" class="backdrop" (click)="closeDialog()">
+    <div class="dialog" (click)="preventClose($event)">
+    <app-job-logs-card [cardTitle]="title" [sampleData]="sampleData"></app-job-logs-card>
+</div>
 </div>
 
 <div *ngIf="showProgressBar" class="loading-overlay">

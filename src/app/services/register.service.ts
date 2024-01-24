@@ -36,6 +36,10 @@ private postGcpJob = `${environment.api.baseUrl}${environment.api.routes.postGcp
 private postAwsDeleteJob = `${environment.api.baseUrl}${environment.api.routes.postAwsDeleteJobs.endpoint}`;
 private postAzureDeleteJob = `${environment.api.baseUrl}${environment.api.routes.postAzureDeleteJobs.endpoint}`;
 private postGcpDeleteJob = `${environment.api.baseUrl}${environment.api.routes.postGcpDeleteJobs.endpoint}`;
+private postAwsLogJob = `${environment.api.baseUrl}${environment.api.routes.postAwsLogs.endpoint}`;
+private postAzureLogJob = `${environment.api.baseUrl}${environment.api.routes.postAzureLogs.endpoint}`;
+private postGcpLogJob = `${environment.api.baseUrl}${environment.api.routes.postGcpLogs.endpoint}`;
+
 
 
   constructor(private httpClient: HttpClient) {}
@@ -155,4 +159,17 @@ private postGcpDeleteJob = `${environment.api.baseUrl}${environment.api.routes.p
     postGcpDeleteJobs(gcpBody:any): Observable<any>{
       return this.httpClient.post(this.postGcpDeleteJob,gcpBody);
     }
+
+    postAwsLogJobs(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.postAwsLogJob,gcpBody);
+    }
+
+    postAzureLogJobs(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.postAzureLogJob,gcpBody);
+    }
+
+    postGcpLogJobs(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.postGcpLogJob,gcpBody);
+    }
+
   }

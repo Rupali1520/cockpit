@@ -32,6 +32,7 @@ import { ClusterCreationCardComponent } from './cluster-creation-card/cluster-cr
 import { FormsModule } from '@angular/forms';
 import { ClusterCardComponent } from './cluster-card/cluster-card.component';
 import { ClusterJobsComponent } from './cluster-jobs/cluster-jobs.component';
+import { JobLogsCardComponent } from './job-logs-card/job-logs-card.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ClusterJobsComponent } from './cluster-jobs/cluster-jobs.component';
     ClusterCreationCardComponent,
     ClusterCardComponent,
     ClusterJobsComponent,
+    JobLogsCardComponent,
   ],
   imports: [
     BrowserModule,
