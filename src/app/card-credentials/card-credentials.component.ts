@@ -14,6 +14,15 @@ export class CardCredentialsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  private navigateToRoute(action: string) {
+    if (this.cardTitle === 'AWS')
+      this.router.navigate(['home/cloud-selection/aws'], { queryParams: { action: action } });
+    else if (this.cardTitle === 'Azure')
+      this.router.navigate(['home/cloud-selection/azure'], { queryParams: { action: action } });
+    else if (this.cardTitle === "GCP")
+      this.router.navigate(['home/cloud-selection/gcp'], { queryParams: { action: action } });
+  }
+
   isObject(value: any): boolean {
     return typeof value === 'object' && !Array.isArray(value);
   }
@@ -23,6 +32,18 @@ export class CardCredentialsComponent implements OnInit {
   }
   isArray(value: any): boolean {
     return Array.isArray(value);
+  }
+
+  onAdd(){
+    this.navigateToRoute('Add');
+  }
+
+  onUpdate(){
+    this.navigateToRoute('Update');
+  }
+
+  onDelete(){
+    this.navigateToRoute('Delete');
   }
 
   onBack(){

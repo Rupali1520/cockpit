@@ -39,6 +39,12 @@ private postGcpDeleteJob = `${environment.api.baseUrl}${environment.api.routes.p
 private postAwsLogJob = `${environment.api.baseUrl}${environment.api.routes.postAwsLogs.endpoint}`;
 private postAzureLogJob = `${environment.api.baseUrl}${environment.api.routes.postAzureLogs.endpoint}`;
 private postGcpLogJob = `${environment.api.baseUrl}${environment.api.routes.postGcpLogs.endpoint}`;
+private updateAws = `${environment.api.baseUrl}${environment.api.routes.updateAws.endpoint}`;
+private updateAzure = `${environment.api.baseUrl}${environment.api.routes.updateAzure.endpoint}`;
+private updateGcp = `${environment.api.baseUrl}${environment.api.routes.updateGcp.endpoint}`;
+private deleteAws = `${environment.api.baseUrl}${environment.api.routes.deleteAws.endpoint}`;
+private deleteAzure = `${environment.api.baseUrl}${environment.api.routes.deleteAzure.endpoint}`;
+private deleteGcp = `${environment.api.baseUrl}${environment.api.routes.deleteGcp.endpoint}`;
 
 
 
@@ -172,4 +178,27 @@ private postGcpLogJob = `${environment.api.baseUrl}${environment.api.routes.post
       return this.httpClient.post(this.postGcpLogJob,gcpBody);
     }
 
+    updateAwsCred(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.updateAws,gcpBody);
+    }
+
+    updateAzureCred(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.updateAzure,gcpBody);
+    }
+
+    updateGcpCred(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.updateGcp,gcpBody);
+    }
+
+    deleteAwsCred(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.deleteAws,gcpBody);
+    }
+
+    deleteAzureCred(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.deleteAzure,gcpBody);
+    }
+
+    deleteGcpCred(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.deleteGcp,gcpBody);
+    }
   }

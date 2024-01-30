@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -10,10 +9,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./my-cluster.component.scss']
 })
 export class MyClusterComponent implements OnInit {
-  enterRegion:boolean =false;
-  createForm= new FormGroup({
-    region: new FormControl('',[Validators.required])
-  });
   showProgressBar: boolean = false;
   showCard:boolean = false;
     username: string='';
@@ -31,9 +26,6 @@ export class MyClusterComponent implements OnInit {
   ngOnInit(): void {
     this.username = localStorage.getItem("username") ?? '';
 
-  }
-  onClickAws(){
-    this.enterRegion = true;
   }
   
   onClickAzure(){
@@ -67,9 +59,6 @@ export class MyClusterComponent implements OnInit {
         this.toast.error(error.error.error)
       })
     }
-onCancel(){
-  this.enterRegion = false;
-}
     onNextEks(){
       this.showProgressBar = true;
       this.awsBody={
@@ -82,11 +71,7 @@ onCancel(){
         this.showCard =true;
       }, (error)=>{
         this.showProgressBar = false;
-        this.toast.error(error.error.error)
+        this.toast.error(error.error.error_message);
       })
-    }
-
-    get Region():FormControl{
-      return this.createForm.get("region") as FormControl;
     }
   }

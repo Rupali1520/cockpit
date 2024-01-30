@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 import { ToastrService } from 'ngx-toastr';
@@ -18,10 +18,19 @@ export class AzureCredentialComponent implements OnInit {
     tenant_id: new FormControl('',[Validators.required]),
   });
   showProgressBar: boolean = false;
+  action: string = '';
 
   constructor(private router: Router,
     private service: RegisterService,
-    private toast: ToastrService) { }
+    private toast: ToastrService,
+    private route: ActivatedRoute) {
+      this.route.queryParams.subscribe(params => {
+        this.action = params['action'];    
+        if(this.action === undefined){
+          this.action = "Next"
+        }
+      });
+     }
 
   ngOnInit(): void {
   }
@@ -32,16 +41,40 @@ export class AzureCredentialComponent implements OnInit {
 
   onNextAks(){
     this.showProgressBar = true;
+    if(this.action === "Next" || this.action === "Add"){
     this.service.postAzureCluster(this.createForm.value).subscribe((res)=>{
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
-      this.router.navigate(["/home/cloud-selection/azure/azure2"]);
+      this.action === "Next" ? this.router.navigate(["/home/cloud-selection/azure/azure2"]) : this.router.navigate(["/home"]);
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)
     })
   }
+  else if(this.action === "Update"){
+    this.service.updateAzureCred(this.createForm.value).subscribe((res)=>{
+      this.showProgressBar = false;
+      this.toast.success(res.message);
+      this.createForm.reset();
+      this.router.navigate(["/home"]);
+    }, (error)=>{
+      this.showProgressBar = false;
+      this.toast.error(error.error.message)
+    })
+  }
+  else if(this.action === "Delete"){
+    this.service.deleteAzureCred(this.createForm.value).subscribe((res)=>{
+      this.showProgressBar = false;
+      this.toast.success(res.message);
+      this.createForm.reset();
+      this.router.navigate(["/home"]);
+    }, (error)=>{
+      this.showProgressBar = false;
+      this.toast.error(error.error.message)
+    })
+  }
+}
 
   get Username():FormControl{
     return this.createForm.get("User_name") as FormControl;

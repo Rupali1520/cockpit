@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 import { ToastrService } from 'ngx-toastr';
@@ -15,10 +15,19 @@ export class GcpCredentialComponent implements OnInit {
     jsonFile: new FormControl('',[Validators.required]),
   });
   showProgressBar: boolean = false;
+  action: string = '';
 
   constructor(private router: Router,
     private service: RegisterService,
-    private toast: ToastrService) { }
+    private toast: ToastrService,
+    private route: ActivatedRoute) {
+      this.route.queryParams.subscribe(params => {
+        this.action = params['action'];    
+        if(this.action === undefined){
+          this.action = "Next"
+        }
+      });
+     }
 
     selectedFile: File | null = null;
 
@@ -63,6 +72,8 @@ export class GcpCredentialComponent implements OnInit {
 
   onNextGke(): void {
     this.showProgressBar = true;
+    if(this.action === "Next" || this.action === "Add"){
+
     const jsonFile = this.createForm.get('jsonFile')?.value;
 
     if (jsonFile) {
@@ -78,7 +89,7 @@ export class GcpCredentialComponent implements OnInit {
           this.showProgressBar = false;
           this.toast.success(res.message);
           this.createForm.reset();
-          this.router.navigate(['/home/cloud-selection/gcp/gcp2']);
+          this.action === "Next" ? this.router.navigate(['/home/cloud-selection/gcp/gcp2']) : this.router.navigate(["/home"]);
         },
         (error) => {
           this.showProgressBar = false;
@@ -86,6 +97,49 @@ export class GcpCredentialComponent implements OnInit {
         }
       );
     }
+  }
+  else if(this.action === "Update"){
+    const jsonFile = this.createForm.get('jsonFile')?.value;
+
+    if (jsonFile) {
+      const jsonContent = atob(jsonFile);
+      const textEncoder = new TextEncoder();
+      const jsonDataUint8Array = textEncoder.encode(jsonContent);
+      const formData = new FormData();
+      formData.append('jsonFile', new Blob([jsonDataUint8Array], { type: 'application/octet-stream' }), 'data.bin');
+      formData.append('User_name', this.Username.value);
+    this.service.updateGcpCred(this.createForm.value).subscribe((res)=>{
+      this.showProgressBar = false;
+      this.toast.success(res.message);
+      this.createForm.reset();
+      this.router.navigate(["/home"]);
+    }, (error)=>{
+      this.showProgressBar = false;
+      this.toast.error(error.error.message)
+    })
+  }
+  }
+  else if(this.action === "Delete"){
+    const jsonFile = this.createForm.get('jsonFile')?.value;
+
+    if (jsonFile) {
+      const jsonContent = atob(jsonFile);
+      const textEncoder = new TextEncoder();
+      const jsonDataUint8Array = textEncoder.encode(jsonContent);
+      const formData = new FormData();
+      formData.append('jsonFile', new Blob([jsonDataUint8Array], { type: 'application/octet-stream' }), 'data.bin');
+      formData.append('User_name', this.Username.value);
+    this.service.deleteGcpCred(this.createForm.value).subscribe((res)=>{
+      this.showProgressBar = false;
+      this.toast.success(res.message);
+      this.createForm.reset();
+      this.router.navigate(["/home"]);
+    }, (error)=>{
+      this.showProgressBar = false;
+      this.toast.error(error.error.message)
+    })
+  }
+  }
   }
 
 

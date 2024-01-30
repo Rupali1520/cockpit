@@ -37,6 +37,12 @@ export const environment = {
       postAwsDeleteJobs:  {endpoint:'json_jobs_aws_delete', method:'POST'},
       postAzureDeleteJobs:  {endpoint:'json_jobs_azure_delete', method:'POST'},
       postGcpDeleteJobs:  {endpoint:'json_jobs_gcp_delete', method:'POST'},
+      updateAws: {endpoint:'json_update_aws_credential', method:'POST'},
+      updateAzure: {endpoint:'json_update_azure_credential', method:'POST'},
+      updateGcp: {endpoint:'json_update_credential_gcp', method:'POST'},
+      deleteAws: {endpoint:'json_delete_aws_credential', method:'POST'},
+      deleteAzure: {endpoint:'json_delete_azure_credential', method:'POST'},
+      deleteGcp: {endpoint:'json_delete_credential_gcp', method:'POST'}
     }
   }
 };
