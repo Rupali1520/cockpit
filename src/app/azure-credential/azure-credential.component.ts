@@ -26,6 +26,7 @@ export class AzureCredentialComponent implements OnInit {
   accountNames: string[] = [];
   accountName: string = '';
   postData = {};
+  showDropDown :boolean = false;
 
   constructor(private router: Router,
     private service: RegisterService,
@@ -53,7 +54,7 @@ export class AzureCredentialComponent implements OnInit {
         this.accountNames = data.map((item: any) => item);
       },
       (error) => {
-        console.error('Error fetching data:', error);
+        this.toast.error(error.error.message)
       }
     );
   }
@@ -87,7 +88,10 @@ export class AzureCredentialComponent implements OnInit {
     })
   }
   else if(this.action === "Delete"){
-    this.service.deleteAzureCred(this.createForm.value).subscribe((res)=>{
+    this.postData = {
+      account_name: this.createForm.value.account_name
+    };
+    this.service.deleteAzureCred(this.postData).subscribe((res)=>{
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();

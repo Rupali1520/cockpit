@@ -19,6 +19,7 @@ export class AksClusterComponent implements OnInit {
     aks_version: new FormControl('',[Validators.required]),
     node_count: new FormControl('',[Validators.required]),
     cluster_type: new FormControl('',[Validators.required]),
+    account_name: new FormControl('',[Validators.required]),
   });
   constructor(private router: Router,
     private service: RegisterService,
@@ -28,7 +29,7 @@ export class AksClusterComponent implements OnInit {
   }
 
   onCancel(){
-    this.router.navigate(["/home/cloud-selection/azure"]);
+    this.router.navigate(["/home"]);
   }
 
   onSubmit() {
@@ -63,6 +64,10 @@ export class AksClusterComponent implements OnInit {
     return this.createForm.get("resource_group") as FormControl;
   }
 
+  get AccountName():FormControl{
+    return this.createForm.get("account_name") as FormControl;
+  }
+  
   get Region():FormControl{
     return this.createForm.get("Region") as FormControl;
   }

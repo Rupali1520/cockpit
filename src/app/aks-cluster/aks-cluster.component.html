@@ -11,6 +11,15 @@
                 Please enter Resource group name
             </div>
 
+            <label for="name">Account Name</label>            
+                <div class="tooltip-container">
+                    <input class="form__inset" type="text" formControlName="account_name" placeholder="Account Name" name="Account Name">
+                    <mat-icon matTooltip="You need to create an account first" class="info-icon">info</mat-icon>
+                </div>
+                <div class="form-text validation-message text-danger" *ngIf="AccountName.errors?.['required'] && (AccountName.touched || AccountName.dirty)">
+                  Please select Account Name
+                </div>
+
             <label for="name">Region</label>
             <select class="form__inset" name="Region" formControlName="Region" placeholder="Region">
                 <option selected value="EAST US">EAST US</option>

@@ -29,19 +29,20 @@ export class MyClusterComponent implements OnInit {
   }
   
   onClickAzure(){
-    this.showProgressBar = true;
+    // this.showProgressBar = true;
+    this.cardTitle="Azure";
+    this.showCard =true;
     this.azureBody={
-      username: this.username
+      account_name: this.username
     }
-      this.service.getAzureClusters(this.azureBody).subscribe((res)=>{
-        this.showProgressBar = false;
-        this.sampleData = res;
-        this.cardTitle="Azure";
-        this.showCard =true;
-      }, (error)=>{
-        this.showProgressBar = false;
-        this.toast.error(error.error.error)
-      })
+      // this.service.getAzureClusters(this.azureBody).subscribe((res)=>{
+      //   this.showProgressBar = false;
+      //   this.sampleData = res;
+       
+      // }, (error)=>{
+      //   this.showProgressBar = false;
+      //   this.toast.error(error.error.error)
+      // })
     }
 
   onClickGcp(){

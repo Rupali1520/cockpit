@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { RegisterService } from '../services/register.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cluster-card',
@@ -13,12 +15,60 @@ export class ClusterCardComponent implements OnInit {
   awsModal:boolean=false;
   azureModal: boolean = false;
   gcpModal:boolean=false;
+  selectedAccountData: any;
+  accountNames: string[] = [];
+  accountName: string = '';
+  username: string = '';
+  postUsername= {};
+  azureBody={};
+  showProgressBar: boolean = false;
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private service: RegisterService, private toast: ToastrService,) { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") ?? '';
+    this.onAccountChange()
   }
+
+  onAccountChange() {
+    this.showProgressBar = true;
+    this.postUsername={
+      username: this.username
+    }
+    this.service.getAzureCrediantial(this.postUsername).subscribe(
+      (data) => {
+        this.showProgressBar = false;
+        this.accountNames = data.map((item: any) => item);
+        this.onAccountSelected()
+      },
+      (error) => {
+        this.showProgressBar = false;
+        this.toast.error(error.error.message)
+      }
+    );
+  }
+
+  onAccountSelected() {
+    if (this.accountName) {
+      this.fetchSelectedAccountData();
+    }
+  }
+
+  fetchSelectedAccountData(){
+    this.showProgressBar = true;
+    this.azureBody={
+      account_name : this.accountName
+    }
+       this.service.getAzureClusters(this.azureBody).subscribe((res)=>{
+        this.showProgressBar = false;
+        this.sampleData = res;
+      }, (error)=>{
+        this.showProgressBar = false;
+        this.toast.error(error.error.message)
+      })
+    }
+  
 
   closeModal(): void {
     this.azureModal = false;

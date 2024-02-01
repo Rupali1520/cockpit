@@ -1,5 +1,14 @@
 <div class="card">
     <span class="tag">{{ cardTitle }}</span>
+
+    <div class="account-dropdown">
+      <label for="accountName">Account Name:</label>
+      <select id="accountName" [(ngModel)]="accountName" class="dropdown" (change)="onAccountChange()">
+        <option [value]="null" selected disabled>Select Account Name</option>
+        <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
+      </select>
+    </div>
+    
     <div *ngFor="let item of getObjectKeys(sampleData)" class="card-item">
       <strong>{{ item }}:</strong>
       <ng-container *ngIf="isObject(sampleData[item])">
@@ -28,6 +37,11 @@
     <div class="card-buttons">
     <button class="button-style" (click)="onConnect()">Connect to Cluster</button>
   <button class="button-style" (click)="onBack()">Back</button>
+</div>
+
+<div *ngIf="showProgressBar" class="loading-overlay">
+  <div class="loader"></div>
+  <p class="loading-text">Loading...</p>
 </div>
   
   <!--Aws modal -->

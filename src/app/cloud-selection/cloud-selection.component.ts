@@ -18,7 +18,7 @@ export class CloudSelectionComponent implements OnInit {
     }
 
   onClickAzure(){
-        this.router.navigate(["/home/cloud-selection/azure"]);}  
+        this.router.navigate(["/home/cloud-selection/azure/azure2"]);}  
 
   onClickGcp(){
   

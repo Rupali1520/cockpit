@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterService } from '../services/register.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-card-credentials',
@@ -16,7 +17,9 @@ export class CardCredentialsComponent implements OnInit {
   accountNames: string[] = [];
   accountName: string = '';
   postData = {};
-  constructor(private router: Router, private service: RegisterService) { }
+  showProgressBar: boolean = false;
+
+  constructor(private router: Router, private toast: ToastrService, private service: RegisterService) { }
 
   ngOnInit(): void {
     this.username = localStorage.getItem("username") ?? '';
@@ -33,16 +36,19 @@ export class CardCredentialsComponent implements OnInit {
   }
 
   onAccountChange() {
+    this.showProgressBar = true;
     this.postUsername={
       username: this.username
     }
     this.service.getAzureCrediantial(this.postUsername).subscribe(
       (data) => {
+        this.showProgressBar = false;
         this.accountNames = data.map((item: any) => item);
         this.onAccountSelected()
       },
       (error) => {
-        console.error('Error fetching data:', error);
+        this.showProgressBar = false;
+        this.toast.error(error.error.message)
       }
     );
   }
@@ -55,14 +61,17 @@ export class CardCredentialsComponent implements OnInit {
   
 
   fetchSelectedAccountData() {
+    this.showProgressBar = true;
     this.postData = {
       account_name: this.accountName 
     }
     this.service.getAzure(this.postData).subscribe((data)=>{
+      this.showProgressBar = false;
       this.selectedAccountData = data;
     },
     (error) => {
-      console.error('Error fetching selected account data:', error);
+      this.showProgressBar = false;
+      this.toast.error(error.error.message)
     }
   );
 }
