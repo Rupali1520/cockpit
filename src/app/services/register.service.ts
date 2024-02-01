@@ -45,7 +45,7 @@ private updateGcp = `${environment.api.baseUrl}${environment.api.routes.updateGc
 private deleteAws = `${environment.api.baseUrl}${environment.api.routes.deleteAws.endpoint}`;
 private deleteAzure = `${environment.api.baseUrl}${environment.api.routes.deleteAzure.endpoint}`;
 private deleteGcp = `${environment.api.baseUrl}${environment.api.routes.deleteGcp.endpoint}`;
-
+private getAzures = `${environment.api.baseUrl}${environment.api.routes.getAzure.endpoint}`;
 
 
   constructor(private httpClient: HttpClient) {}
@@ -200,5 +200,9 @@ private deleteGcp = `${environment.api.baseUrl}${environment.api.routes.deleteGc
 
     deleteGcpCred(gcpBody:any): Observable<any>{
       return this.httpClient.post(this.deleteGcp,gcpBody);
+    }
+
+    getAzure(gcpBody:any): Observable<any>{
+      return this.httpClient.post(this.getAzures,gcpBody);
     }
   }

@@ -33,6 +33,8 @@ import { FormsModule } from '@angular/forms';
 import { ClusterCardComponent } from './cluster-card/cluster-card.component';
 import { ClusterJobsComponent } from './cluster-jobs/cluster-jobs.component';
 import { JobLogsCardComponent } from './job-logs-card/job-logs-card.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { JobLogsCardComponent } from './job-logs-card/job-logs-card.component';
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
+    MatTooltipModule,
+    MatIconModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

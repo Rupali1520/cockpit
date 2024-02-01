@@ -16,9 +16,16 @@ export class AzureCredentialComponent implements OnInit {
     client_id: new FormControl('',[Validators.required]),
     client_secret: new FormControl('',[Validators.required]),
     tenant_id: new FormControl('',[Validators.required]),
+    account_name: new FormControl('',[Validators.required]),
   });
   showProgressBar: boolean = false;
   action: string = '';
+  username: string = '';
+  postUsername= {};
+  selectedAccountData: any;
+  accountNames: string[] = [];
+  accountName: string = '';
+  postData = {};
 
   constructor(private router: Router,
     private service: RegisterService,
@@ -33,6 +40,22 @@ export class AzureCredentialComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") ?? '';
+    this.onAccountChange();
+  }
+
+  onAccountChange() {
+    this.postUsername = {
+      username: this.username
+    };
+    this.service.getAzureCrediantial(this.postUsername).subscribe(
+      (data) => {
+        this.accountNames = data.map((item: any) => item);
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
   }
 
   onCancel(){
@@ -78,6 +101,10 @@ export class AzureCredentialComponent implements OnInit {
 
   get Username():FormControl{
     return this.createForm.get("User_name") as FormControl;
+  }
+
+  get AccountName():FormControl{
+    return this.createForm.get("account_name") as FormControl;
   }
 
   get subscriptionId():FormControl{
