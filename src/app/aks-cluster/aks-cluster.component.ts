@@ -73,7 +73,7 @@ export class AksClusterComponent implements OnInit {
           this.showProgressBar = false;
           this.toast.success(res.message);
           this.router.navigate(['/home/cloud-selection/azure/azure2/azure-jobs']);
-        },300000)
+        },180000)
       },
       (error) => {
         this.showProgressBar = false;
