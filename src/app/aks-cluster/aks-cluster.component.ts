@@ -21,12 +21,34 @@ export class AksClusterComponent implements OnInit {
     cluster_type: new FormControl('',[Validators.required]),
     account_name: new FormControl('',[Validators.required]),
   });
+  postUsername= {};
+  selectedAccountData: any;
+  accountNames: string[] = [];
+  accountName: string = '';
+  username : string = '';
   constructor(private router: Router,
     private service: RegisterService,
     private toast: ToastrService) { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") ?? '';
+    this.onAccountChange();
   }
+
+  onAccountChange() {
+    this.postUsername = {
+      username: this.username
+    };
+    this.service.getAzureCrediantial(this.postUsername).subscribe(
+      (data) => {
+        this.accountNames = data.map((item: any) => item);
+      },
+      (error) => {
+        this.toast.error(error.error.message)
+      }
+    );
+  }
+
 
   onCancel(){
     this.router.navigate(["/home"]);
@@ -51,7 +73,7 @@ export class AksClusterComponent implements OnInit {
           this.showProgressBar = false;
           this.toast.success(res.message);
           this.router.navigate(['/home/cloud-selection/azure/azure2/azure-jobs']);
-        },420000)
+        },300000)
       },
       (error) => {
         this.showProgressBar = false;
@@ -67,7 +89,7 @@ export class AksClusterComponent implements OnInit {
   get AccountName():FormControl{
     return this.createForm.get("account_name") as FormControl;
   }
-  
+
   get Region():FormControl{
     return this.createForm.get("Region") as FormControl;
   }
