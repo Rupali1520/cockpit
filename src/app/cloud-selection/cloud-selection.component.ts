@@ -14,7 +14,7 @@ export class CloudSelectionComponent implements OnInit {
   ngOnInit(): void {
   }
   onClickAws(){
-      this.router.navigate(["/home/cloud-selection/aws"]);
+      this.router.navigate(["/home/cloud-selection/aws/aws2"]);
     }
 
   onClickAzure(){

@@ -71,7 +71,7 @@ export class DeleteAksComponent implements OnInit {
           this.toast.success(res.message);
           this.showProgressBar = false;
           this.router.navigate(['/home/delete-cloud-selection/delete-aks/aks-jobs']);
-        },60000)
+        },30000)
       },
       (error) => {
         this.showProgressBar = false;

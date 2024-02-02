@@ -43,7 +43,8 @@ export const environment = {
       deleteAws: {endpoint:'json_delete_aws_credential', method:'POST'},
       deleteAzure: {endpoint:'json_delete_azure_credential', method:'POST'},
       deleteGcp: {endpoint:'json_delete_credential_gcp', method:'POST'},
-      getAzure: {endpoint:'json_get_credential', method:'POST'}
+      getAzure: {endpoint:'json_get_credential', method:'POST'},
+      getAws: {endpoint:'json_get_credential_aws', method:'POST'}
     }
   }
 };

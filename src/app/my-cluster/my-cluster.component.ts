@@ -61,18 +61,20 @@ export class MyClusterComponent implements OnInit {
       })
     }
     onNextEks(){
-      this.showProgressBar = true;
-      this.awsBody={
-        username: this.username
-      }
-      this.service.getAwsClusters(this.awsBody).subscribe((res)=>{
-        this.showProgressBar = false;
-        this.sampleData = res;
-        this.cardTitle="Aws";
-        this.showCard =true;
-      }, (error)=>{
-        this.showProgressBar = false;
-        this.toast.error(error.error.error_message);
-      })
+      this.cardTitle="Aws";
+      this.showCard =true;
+      // this.showProgressBar = true;
+      // this.awsBody={
+      //   username: this.username
+      // }
+      // this.service.getAwsClusters(this.awsBody).subscribe((res)=>{
+      //   this.showProgressBar = false;
+      //   this.sampleData = res;
+      //   this.cardTitle="Aws";
+      //   this.showCard =true;
+      // }, (error)=>{
+      //   this.showProgressBar = false;
+      //   this.toast.error(error.error.error_message);
+      // })
     }
   }

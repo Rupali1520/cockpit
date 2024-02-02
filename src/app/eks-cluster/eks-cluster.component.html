@@ -5,10 +5,22 @@
     <section class="input-content">
         <h2>Create EKS Cluster<span>EKS</span></h2>
         <form class="form" [formGroup]="createForm" (ngSubmit)="onNextEks()">
-            <label for="name">Cluster Name</label>
-            <input class="form__inset" type="text" formControlName="cluster_name" placeholder="Cluster Name" name="Cluster Name">
+            <label for="name">EKS Name</label>
+            <input class="form__inset" type="text" formControlName="eks_name" placeholder="EKS Name" name="EKS Name">
             <div class="form-text validation-message text-danger" *ngIf=" ClusterName.errors?.['required'] && (ClusterName.touched || ClusterName.dirty)">
                 Please enter Cluster name
+            </div>
+
+            <label for="name">Account Name</label>            
+            <div class="tooltip-container">
+                <select class="form__inset" formControlName="account_name" (change)="onAccountChange()">
+                    <option value="" disabled selected>Select Account Name</option>
+                    <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
+                </select>
+                <mat-icon matTooltip="You need to create an account first" class="info-icon">info</mat-icon>
+            </div>
+            <div class="form-text validation-message text-danger" *ngIf="AccountName.errors?.['required'] && (AccountName.touched || AccountName.dirty)">
+              Please select Account Name
             </div>
 
             <label for="name">Region</label>
@@ -72,14 +84,6 @@
             <div class="form-text validation-message text-danger" *ngIf=" ClusterType.errors?.['required'] && (ClusterType.touched || ClusterType.dirty)">
                 Please enter Cluster Type
             </div>
-
-            <div class="toggle-switch-container">
-                <label for="name" class="toggle-label">Need Cost Analysis & Optimization</label>
-                <label class="toggle-switch">
-                  <input type="checkbox" id="toggle" name="cost_analysis" class="toggle-switch-checkbox">
-                  <span class="slider"></span>
-                </label>
-              </div>
 
               <div *ngIf="showProgressBar" class="loading-overlay">
                 <div class="loader"></div>

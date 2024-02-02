@@ -15,11 +15,16 @@ export class DeleteEksComponent implements OnInit {
     eks_name: new FormControl('',[Validators.required]),
     region: new FormControl('',[Validators.required]),
     node: new FormControl('',[Validators.required]),
+    account_name: new FormControl('',[Validators.required])
   });
   showProgressBar: boolean = false;
   username: string='';
   awsBody={};
   sampleData:any= [];
+  selectedAccountData: any;
+  accountNames: string[] = [];
+  accountName: string = '';
+  postUsername= {};
 
   constructor(private router: Router,
     private service: RegisterService,
@@ -27,12 +32,31 @@ export class DeleteEksComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = localStorage.getItem("username") ?? '';
+    this.onAccountChange();
+  }
+
+  onEksNameChange(){
     this.awsBody={
       username: this.username
     }
     this.service.getAwsClusters(this.awsBody).subscribe((res)=>{
       this.sampleData = res.aks_cluster;
     })
+  }
+
+  onAccountChange() {
+    this.postUsername={
+      username: this.username
+    }
+    this.service.getAwsCrediantial(this.postUsername).subscribe(
+      (data) => {
+        this.accountNames = data.map((item: any) => item);
+        this.onEksNameChange()
+      },
+      (error) => {
+        this.toast.error(error.error.message)
+      }
+    );
   }
 
   onCancel(){
@@ -47,7 +71,7 @@ export class DeleteEksComponent implements OnInit {
         this.showProgressBar = false;
         this.toast.success(res.message);
         this.router.navigate(["/home/delete-cloud-selection/delete-eks/eks-jobs"]);
-      },120000)
+      },30000)
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)
@@ -56,6 +80,10 @@ export class DeleteEksComponent implements OnInit {
 
   get EksName():FormControl{
     return this.createForm.get("eks_name") as FormControl;
+  }
+
+  get AccountName():FormControl{
+    return this.createForm.get("account_name") as FormControl;
   }
 
   get Region():FormControl{

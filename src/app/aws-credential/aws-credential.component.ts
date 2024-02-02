@@ -14,9 +14,16 @@ export class AwsCredentialComponent implements OnInit {
     user_name: new FormControl('',[Validators.required]),
     access_key: new FormControl('',[Validators.required, this.accessKeyValidator.bind(this)]),
     secret_access_key: new FormControl('',[Validators.required]),
+    account_name: new FormControl('',[Validators.required]),
   });
   showProgressBar: boolean = false;
   action: string = '';
+  postUsername= {};
+  selectedAccountData: any;
+  accountNames: string[] = [];
+  accountName: string = '';
+  username : string = '';
+  postData = {}
 
   constructor(private router: Router,
     private service: RegisterService,
@@ -31,6 +38,22 @@ export class AwsCredentialComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") ?? '';
+    this.onAccountChange();
+  }
+
+  onAccountChange() {
+    this.postUsername = {
+      username: this.username
+    };
+    this.service.getAwsCrediantial(this.postUsername).subscribe(
+      (data) => {
+        this.accountNames = data.map((item: any) => item);
+      },
+      (error) => {
+        this.toast.error(error.error.message)
+      }
+    );
   }
 
   accessKeyValidator(control: FormControl): { [key: string]: boolean } | null {
@@ -68,7 +91,10 @@ export class AwsCredentialComponent implements OnInit {
     })
   }
   else if(this.action === "Delete"){
-    this.service.deleteAwsCred(this.createForm.value).subscribe((res)=>{
+    this.postData = {
+      account_name: this.createForm.value.account_name
+    };
+    this.service.deleteAwsCred(this.postData).subscribe((res)=>{
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
@@ -81,6 +107,10 @@ export class AwsCredentialComponent implements OnInit {
   }
   get Username():FormControl{
     return this.createForm.get("user_name") as FormControl;
+  }
+
+  get AccountName():FormControl{
+    return this.createForm.get("account_name") as FormControl;
   }
 
   get AccessKey():FormControl{

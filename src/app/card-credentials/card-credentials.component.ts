@@ -40,17 +40,34 @@ export class CardCredentialsComponent implements OnInit {
     this.postUsername={
       username: this.username
     }
-    this.service.getAzureCrediantial(this.postUsername).subscribe(
-      (data) => {
-        this.showProgressBar = false;
-        this.accountNames = data.map((item: any) => item);
-        this.onAccountSelected()
-      },
-      (error) => {
-        this.showProgressBar = false;
-        this.toast.error(error.error.message)
-      }
-    );
+    if(this.cardTitle === 'AWS'){
+      this.service.getAwsCrediantial(this.postUsername).subscribe(
+        (data) => {
+          this.showProgressBar = false;
+          this.accountNames = data.map((item: any) => item);
+          this.onAccountSelected()
+        },
+        (error) => {
+          this.showProgressBar = false;
+          this.toast.error(error.error.message)
+        }
+      );
+    }
+
+    else if(this.cardTitle === 'Azure'){
+      this.service.getAzureCrediantial(this.postUsername).subscribe(
+        (data) => {
+          this.showProgressBar = false;
+          this.accountNames = data.map((item: any) => item);
+          this.onAccountSelected()
+        },
+        (error) => {
+          this.showProgressBar = false;
+          this.toast.error(error.error.message)
+        }
+      );
+    }
+    
   }
 
   onAccountSelected() {
@@ -65,15 +82,29 @@ export class CardCredentialsComponent implements OnInit {
     this.postData = {
       account_name: this.accountName 
     }
-    this.service.getAzure(this.postData).subscribe((data)=>{
-      this.showProgressBar = false;
-      this.selectedAccountData = data;
-    },
-    (error) => {
-      this.showProgressBar = false;
-      this.toast.error(error.error.message)
+    if(this.cardTitle === 'AWS'){
+      this.service.getAws(this.postData).subscribe((data)=>{
+        this.showProgressBar = false;
+        this.selectedAccountData = data;
+      },
+      (error) => {
+        this.showProgressBar = false;
+        this.toast.error(error.error.message)
+      }
+    );
     }
-  );
+    else if(this.cardTitle === 'Azure'){
+      this.service.getAzure(this.postData).subscribe((data)=>{
+        this.showProgressBar = false;
+        this.selectedAccountData = data;
+      },
+      (error) => {
+        this.showProgressBar = false;
+        this.toast.error(error.error.message)
+      }
+    );
+    }
+   
 }
 
   isObject(value: any): boolean {

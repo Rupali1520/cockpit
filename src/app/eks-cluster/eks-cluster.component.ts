@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EksClusterComponent implements OnInit {
   createForm= new FormGroup({
-    cluster_name: new FormControl('',[Validators.required]),
+    eks_name: new FormControl('',[Validators.required]),
     region: new FormControl('',[Validators.required]),
     instance_type: new FormControl('',[Validators.required]),
     eks_version: new FormControl('',[Validators.required]),
@@ -18,11 +18,16 @@ export class EksClusterComponent implements OnInit {
     max_size: new FormControl('',[Validators.required]),
     min_size: new FormControl('',[Validators.required]),
     cluster_type: new FormControl('',[Validators.required]),
+    account_name: new FormControl('',[Validators.required]),
   });
   showProgressBar: boolean = false;
   username: string='';
   awsBody={}
   apiData: any[]=[];
+  postUsername= {};
+  selectedAccountData: any;
+  accountNames: string[] = [];
+  accountName: string = '';
 
   constructor(private router: Router,
     private service: RegisterService,
@@ -30,10 +35,25 @@ export class EksClusterComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = localStorage.getItem("username") ?? '';
+    this.onAccountChange();
   }
 
   onCancel(){
     this.router.navigate(["/home/cloud-selection/aws"]);
+  }
+
+  onAccountChange() {
+    this.postUsername = {
+      username: this.username
+    };
+    this.service.getAwsCrediantial(this.postUsername).subscribe(
+      (data) => {
+        this.accountNames = data.map((item: any) => item);
+      },
+      (error) => {
+        this.toast.error(error.error.message)
+      }
+    );
   }
 
   onNextEks(){
@@ -44,7 +64,7 @@ export class EksClusterComponent implements OnInit {
         this.showProgressBar = false;
         this.toast.success(res.message);
         this.router.navigate(["/home/cloud-selection/aws/aws2/aws-jobs"]);
-      },900000)
+      },300000)
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)
@@ -52,7 +72,11 @@ export class EksClusterComponent implements OnInit {
   }
 
   get ClusterName():FormControl{
-    return this.createForm.get("cluster_name") as FormControl;
+    return this.createForm.get("eks_name") as FormControl;
+  }
+
+  get AccountName():FormControl{
+    return this.createForm.get("account_name") as FormControl;
   }
 
   get Region():FormControl{
