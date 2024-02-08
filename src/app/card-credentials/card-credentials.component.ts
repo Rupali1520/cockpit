@@ -67,6 +67,20 @@ export class CardCredentialsComponent implements OnInit {
         }
       );
     }
+
+    else if(this.cardTitle === 'GCP'){
+      this.service.getGcpCrediantial(this.postUsername).subscribe(
+        (data) => {
+          this.showProgressBar = false;
+          this.accountNames = data.map((item: any) => item);
+          this.onAccountSelected()
+        },
+        (error) => {
+          this.showProgressBar = false;
+          this.toast.error(error.error.message)
+        }
+      );
+    }
     
   }
 
@@ -95,6 +109,18 @@ export class CardCredentialsComponent implements OnInit {
     }
     else if(this.cardTitle === 'Azure'){
       this.service.getAzure(this.postData).subscribe((data)=>{
+        this.showProgressBar = false;
+        this.selectedAccountData = data;
+      },
+      (error) => {
+        this.showProgressBar = false;
+        this.toast.error(error.error.message)
+      }
+    );
+    }
+
+    else if(this.cardTitle === 'GCP'){
+      this.service.getGcp(this.postData).subscribe((data)=>{
         this.showProgressBar = false;
         this.selectedAccountData = data;
       },

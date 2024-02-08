@@ -63,7 +63,19 @@ export class ClusterCardComponent implements OnInit {
       );
     }
 
-   
+    else if(this.cardTitle === 'GCP'){
+      this.service.getGcpCrediantial(this.postUsername).subscribe(
+        (data) => {
+          this.showProgressBar = false;
+          this.accountNames = data.map((item: any) => item);
+          this.onAccountSelected()
+        },
+        (error) => {
+          this.showProgressBar = false;
+          this.toast.error(error.error.message)
+        }
+      );
+    }
   }
 
   onAccountSelected() {
@@ -88,6 +100,16 @@ export class ClusterCardComponent implements OnInit {
     }
     else if(this.cardTitle === 'Azure'){
       this.service.getAzureClusters(this.azureBody).subscribe((res)=>{
+        this.showProgressBar = false;
+        this.sampleData = res;
+      }, (error)=>{
+        this.showProgressBar = false;
+        this.toast.error(error.error.message)
+      })
+    }
+
+    else if(this.cardTitle === 'GCP'){
+      this.service.getGcpClusters(this.azureBody).subscribe((res)=>{
         this.showProgressBar = false;
         this.sampleData = res;
       }, (error)=>{

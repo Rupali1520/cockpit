@@ -37,10 +37,10 @@ export class DeleteEksComponent implements OnInit {
 
   onEksNameChange(){
     this.awsBody={
-      username: this.username
+      account_name: this.createForm.value.account_name
     }
     this.service.getAwsClusters(this.awsBody).subscribe((res)=>{
-      this.sampleData = res.aks_cluster;
+      this.sampleData = res.eks_cluster;
     })
   }
 

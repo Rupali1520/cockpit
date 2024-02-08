@@ -13,9 +13,16 @@ export class GcpCredentialComponent implements OnInit {
   createForm= new FormGroup({
     User_name: new FormControl('',[Validators.required]),
     jsonFile: new FormControl('',[Validators.required]),
+    account_name: new FormControl('',[Validators.required]),
   });
   showProgressBar: boolean = false;
   action: string = '';
+  username: string = '';
+  postUsername= {};
+  selectedAccountData: any;
+  accountNames: string[] = [];
+  accountName: string = '';
+  postData = {};
 
   constructor(private router: Router,
     private service: RegisterService,
@@ -32,6 +39,22 @@ export class GcpCredentialComponent implements OnInit {
     selectedFile: File | null = null;
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") ?? '';
+    this.onAccountChange();
+  }
+
+  onAccountChange() {
+    this.postUsername = {
+      username: this.username
+    };
+    this.service.getGcpCrediantial(this.postUsername).subscribe(
+      (data) => {
+        this.accountNames = data.map((item: any) => item);
+      },
+      (error) => {
+        this.toast.error(error.error.message)
+      }
+    );
   }
   
   upload(event: any): void {
@@ -150,4 +173,9 @@ export class GcpCredentialComponent implements OnInit {
   get JsonFile():FormControl{
     return this.createForm.get("jsonFile") as FormControl;
   }
+
+  get AccountName():FormControl{
+    return this.createForm.get("account_name") as FormControl;
+  }
+
 }

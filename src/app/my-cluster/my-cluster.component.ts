@@ -35,46 +35,14 @@ export class MyClusterComponent implements OnInit {
     this.azureBody={
       account_name: this.username
     }
-      // this.service.getAzureClusters(this.azureBody).subscribe((res)=>{
-      //   this.showProgressBar = false;
-      //   this.sampleData = res;
-       
-      // }, (error)=>{
-      //   this.showProgressBar = false;
-      //   this.toast.error(error.error.error)
-      // })
     }
 
   onClickGcp(){
-    this.showProgressBar = true;
-    this.gcpBody={
-      username: this.username
-    }
-      this.service.getGcpClusters(this.gcpBody).subscribe((res)=>{
-        this.showProgressBar = false;
-        this.sampleData = res;
-        this.cardTitle="GCP";
-        this.showCard =true;
-      }, (error)=>{
-        this.showProgressBar = false;
-        this.toast.error(error.error.error)
-      })
+    this.cardTitle="GCP";
+    this.showCard =true;
     }
     onNextEks(){
       this.cardTitle="Aws";
       this.showCard =true;
-      // this.showProgressBar = true;
-      // this.awsBody={
-      //   username: this.username
-      // }
-      // this.service.getAwsClusters(this.awsBody).subscribe((res)=>{
-      //   this.showProgressBar = false;
-      //   this.sampleData = res;
-      //   this.cardTitle="Aws";
-      //   this.showCard =true;
-      // }, (error)=>{
-      //   this.showProgressBar = false;
-      //   this.toast.error(error.error.error_message);
-      // })
     }
   }
