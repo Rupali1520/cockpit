@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class GkeClusterComponent implements OnInit {
   createForm= new FormGroup({
     project: new FormControl('',[Validators.required]),
-    Region: new FormControl('',[Validators.required]),
+    region: new FormControl('',[Validators.required]),
     gke_name: new FormControl('',[Validators.required]),
     gke_version: new FormControl('',[Validators.required]),
     node_count: new FormControl('',[Validators.required]),
@@ -43,7 +43,7 @@ export class GkeClusterComponent implements OnInit {
     this.postUsername = {
       username: this.username
     };
-    this.service.getAzureCrediantial(this.postUsername).subscribe(
+    this.service.getGcpCrediantial(this.postUsername).subscribe(
       (data) => {
         this.accountNames = data.map((item: any) => item);
       },
@@ -78,7 +78,7 @@ export class GkeClusterComponent implements OnInit {
   }
 
   get Region():FormControl{
-    return this.createForm.get("Region") as FormControl;
+    return this.createForm.get("region") as FormControl;
   }
 
   get GkeName():FormControl{

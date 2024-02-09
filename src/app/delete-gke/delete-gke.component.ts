@@ -39,7 +39,7 @@ export class DeleteGkeComponent implements OnInit {
       account_name: this.createForm.value.account_name
     }
     this.service.getGcpClusters(this.awsBody).subscribe((res)=>{
-      this.sampleData = res.eks_cluster;
+      this.sampleData = res.gke_cluster;
     })
   }
 
