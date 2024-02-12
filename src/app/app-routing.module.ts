@@ -15,6 +15,7 @@ import { DeleteEksComponent } from './delete-eks/delete-eks.component';
 import { DeleteAksComponent } from './delete-aks/delete-aks.component';
 import { DeleteGkeComponent } from './delete-gke/delete-gke.component';
 import { ClusterJobsComponent } from './cluster-jobs/cluster-jobs.component';
+import { AksClusterredirectComponent } from './aks-clusterredirect/aks-clusterredirect.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -53,6 +54,10 @@ const routes: Routes = [
                 children:[{
                   path: '',
                   component: AksClusterComponent
+                },
+                {
+                  path: 'redirect',
+                  component: AksClusterredirectComponent 
                 },
                 {
                   path: 'azure-jobs',

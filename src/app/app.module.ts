@@ -35,6 +35,7 @@ import { ClusterJobsComponent } from './cluster-jobs/cluster-jobs.component';
 import { JobLogsCardComponent } from './job-logs-card/job-logs-card.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
+import { AksClusterredirectComponent } from './aks-clusterredirect/aks-clusterredirect.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { MatIconModule } from '@angular/material/icon';
     ClusterCardComponent,
     ClusterJobsComponent,
     JobLogsCardComponent,
+    AksClusterredirectComponent,
   ],
   imports: [
     BrowserModule,
