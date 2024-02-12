@@ -15,7 +15,7 @@ export const environment = {
       postAwsCluster: {endpoint:'json_submit_form_aws', method:'POST'},
       postEksCluster: {endpoint:'json_create_aws', method:'POST'},
       postDeleteEksCluster: {endpoint:'json_delete_eks', method:'POST'},
-      postGcpCluster: {endpoint:'json_submit_form_gke', method:'POST'},
+      postGcpCluster: {endpoint:'json_submit_form_gcp', method:'POST'},
       postGkeCluster: {endpoint:'json_create_gke', method:'POST'},
       postDeleteAksCluster: {endpoint:'json_delete_aks', method:'POST'},
       postDeleteGkeCluster: {endpoint:'json_delete_gke', method:'POST'},
