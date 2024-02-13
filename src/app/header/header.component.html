@@ -5,6 +5,13 @@
                     <a href="/home">
                 <img class="img-logo cursor-pointer" src="https://www.nashtechglobal.com/wp-content/uploads/2023/03/NashTech-logo-White.svg" alt="logo" />
             </a>
+            <ul class="header-list-navbar-menu">
+                <li><a href='/home'class="header-list-navbar-menu-item">HOME</a></li>
+                <li><a href='https://www.nashtechglobal.com/about-us'  class="header-list-navbar-menu-item" (click)="changeLinkColor($event)" >ABOUT</a></li>
+                <li><a href='https://www.nashtechglobal.com/#contact-us-form'  class="header-list-navbar-menu-item"(click)="changeLinkColor($event)">CONTACT</a></li>
+              </ul>
+              
+           
                     <ul class="header-list navbar-nav">
                         <!-- <li class="nav-item" role="presentation"><a class="nav-link" href="/home">Home</a></li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"

@@ -1,5 +1,5 @@
 .img-logo {
-  height: 67px;
+  height: 100px;
   width: auto;
 }
 .header{
@@ -240,3 +240,25 @@
 #navcol-1{
   justify-content: space-between;
 }
+.header-list-navbar-menu{
+  display: flex;
+  align-items:center ;
+  justify-content: center;
+  width: 100%;
+  gap: 40px;
+  margin-left:850px;
+  margin-top: 25px;
+  list-style: none;
+  
+}
+.header-list-navbar-menu-item{
+ font-size: 1rem;
+ color:white;
+ font-weight:bolder;
+ text-decoration: none;
+ }
+
+
+
+
+

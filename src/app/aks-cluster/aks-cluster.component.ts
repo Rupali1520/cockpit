@@ -60,6 +60,8 @@ export class AksClusterComponent implements OnInit {
     if (aksVersionControl && aksVersionControl.value !== null && aksVersionControl.value !== undefined) {
       aksVersion = parseFloat(aksVersionControl.value);
     }
+
+    
   
     const formData = {
       ...this.createForm.value,
