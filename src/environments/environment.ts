@@ -17,7 +17,7 @@ export const environment = {
       postAwsCluster: {endpoint:'json_submit_form_aws', method:'POST'},
       postEksCluster: {endpoint:'json_create_aws', method:'POST'},
       postDeleteEksCluster: {endpoint:'json_delete_eks', method:'POST'},
-      postGcpCluster: {endpoint:'json_submit_form_gke', method:'POST'},
+      postGcpCluster: {endpoint:'json_submit_form_gcp', method:'POST'},
       postGkeCluster: {endpoint:'json_create_gke', method:'POST'},
       postDeleteAksCluster: {endpoint:'json_delete_aks', method:'POST'},
       postDeleteGkeCluster: {endpoint:'json_delete_gke', method:'POST'},
@@ -46,7 +46,8 @@ export const environment = {
       deleteAzure: {endpoint:'json_delete_azure_credential', method:'POST'},
       deleteGcp: {endpoint:'json_delete_credential_gcp', method:'POST'},
       getAzure: {endpoint:'json_get_credential', method:'POST'},
-      getAws: {endpoint:'json_get_credential_aws', method:'POST'}
+      getAws: {endpoint:'json_get_credential_aws', method:'POST'},
+      getGcp: {endpoint:'json_get_credential_gcp', method:'POST'}
     }
   }
 };

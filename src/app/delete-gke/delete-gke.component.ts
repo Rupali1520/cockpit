@@ -14,11 +14,16 @@ export class DeleteGkeComponent implements OnInit {
     project_id: new FormControl('',[Validators.required]),
     region: new FormControl('',[Validators.required]),
     gke_name: new FormControl('',[Validators.required]),
+    account_name: new FormControl('',[Validators.required])
   });
   showProgressBar: boolean = false;
   username: string='';
   awsBody={};
   sampleData:any= [];
+  selectedAccountData: any;
+  accountNames: string[] = [];
+  accountName: string = '';
+  postUsername= {};
 
   constructor(private router: Router,
     private service: RegisterService,
@@ -26,13 +31,33 @@ export class DeleteGkeComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = localStorage.getItem("username") ?? '';
+    this.onAccountChange();
+  }
+
+  onEksNameChange(){
     this.awsBody={
-      username: this.username
+      account_name: this.createForm.value.account_name
     }
     this.service.getGcpClusters(this.awsBody).subscribe((res)=>{
-      this.sampleData = res.aks_cluster;
+      this.sampleData = res.gke_cluster;
     })
   }
+
+  onAccountChange() {
+    this.postUsername={
+      username: this.username
+    }
+    this.service.getGcpCrediantial(this.postUsername).subscribe(
+      (data) => {
+        this.accountNames = data.map((item: any) => item);
+        this.onEksNameChange()
+      },
+      (error) => {
+        this.toast.error(error.error.message)
+      }
+    );
+  }
+
 
   onCancel(){
     this.router.navigate(["/home"]);
@@ -55,6 +80,10 @@ export class DeleteGkeComponent implements OnInit {
 
   get ProjectId():FormControl{
     return this.createForm.get("project_id") as FormControl;
+  }
+
+  get AccountName():FormControl{
+    return this.createForm.get("account_name") as FormControl;
   }
 
   get Region():FormControl{

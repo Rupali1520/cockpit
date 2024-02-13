@@ -32,8 +32,7 @@ export class AksClusterComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = localStorage.getItem("username") ?? '';
-    this.onAccountChange();
-    
+    this.onAccountChange();    
   }
 
   onAccountChange() {
@@ -56,8 +55,7 @@ export class AksClusterComponent implements OnInit {
   }
   
   onSubmit(){
-    this.router.navigate(["/home/cloud-selection/azure/azure2/redirect"])
-  console.log("abcd"); 
+    this.router.navigate(["/home/cloud-selection/azure/azure2/redirect"]) 
     let aksVersion: number | null = null;
     const aksVersionControl = this.createForm.get('aks_version');
     if (aksVersionControl && aksVersionControl.value !== null && aksVersionControl.value !== undefined) {

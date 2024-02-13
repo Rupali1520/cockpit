@@ -48,6 +48,7 @@ export class RegisterService {
   private deleteGcp = `${environment.api.baseUrl}${environment.api.routes.deleteGcp.endpoint}`;
   private getAzures = `${environment.api.baseUrl}${environment.api.routes.getAzure.endpoint}`;
   private getAwsCred = `${environment.api.baseUrl}${environment.api.routes.getAws.endpoint}`;
+  private getGcpCred = `${environment.api.baseUrl}${environment.api.routes.getGcp.endpoint}`;
   private postRedirectAks = `${environment.api.baseUrl}${environment.api.routes.postRedirectAksCluster.endpoint}`;
   private postRedirectlogAks = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogAksCluster.endpoint}`;
 
@@ -213,14 +214,17 @@ export class RegisterService {
   getAws(gcpBody: any): Observable<any> {
     return this.httpClient.post(this.getAwsCred, gcpBody);
   }
+  getGcp(gcpBody: any): Observable<any> {
+    return this.httpClient.post(this.getGcpCred, gcpBody);
+  }
   postRedirectAksCluster(body: any): Observable<any> {
     return this.httpClient.post(this.postRedirectAks, body);
   }
 
   postRedirectlogAksCluster(jobId: any, body: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    // });
     return this.httpClient.post(`http://98.70.13.238:4000/json-recentjoblogs-azure?job_id=${jobId}`, body);
   }
 }

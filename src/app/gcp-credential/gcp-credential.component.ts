@@ -13,9 +13,17 @@ export class GcpCredentialComponent implements OnInit {
   createForm= new FormGroup({
     User_name: new FormControl('',[Validators.required]),
     jsonFile: new FormControl('',[Validators.required]),
+    account_name: new FormControl('',[Validators.required]),
   });
   showProgressBar: boolean = false;
   action: string = '';
+  username: string = '';
+  postUsername= {};
+  selectedAccountData: any;
+  accountNames: string[] = [];
+  accountName: string = '';
+  postData = {};
+  files :any
 
   constructor(private router: Router,
     private service: RegisterService,
@@ -32,38 +40,26 @@ export class GcpCredentialComponent implements OnInit {
     selectedFile: File | null = null;
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") ?? '';
+    this.onAccountChange();
+  }
+
+  onAccountChange() {
+    this.postUsername = {
+      username: this.username
+    };
+    this.service.getGcpCrediantial(this.postUsername).subscribe(
+      (data) => {
+        this.accountNames = data.map((item: any) => item);
+      },
+      (error) => {
+        this.toast.error(error.error.message)
+      }
+    );
   }
   
   upload(event: any): void {
-    const inputElement = event.target as HTMLInputElement;
-    const files = inputElement.files;
-
-    if (files && files.length > 0) {
-      this.readAndAppendFile(files[0]);
-    }
-  }
-
-  private arrayBufferToBase64(buffer: ArrayBuffer): string {
-    let binary = '';
-    const bytes = new Uint8Array(buffer);
-    const len = bytes.byteLength;
-
-    for (let i = 0; i < len; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-
-    return btoa(binary);
-  }
-
-  readAndAppendFile(file: File): void {
-    const reader = new FileReader();
-
-    reader.onload = (event) => {
-      const binaryData = this.arrayBufferToBase64(event.target?.result as ArrayBuffer);
-      this.createForm.get('jsonFile')?.setValue(binaryData);
-    };
-
-    reader.readAsArrayBuffer(file);
+    this.files = event.target.files[0];
   }
 
   onCancel(){
@@ -77,12 +73,10 @@ export class GcpCredentialComponent implements OnInit {
     const jsonFile = this.createForm.get('jsonFile')?.value;
 
     if (jsonFile) {
-      const jsonContent = atob(jsonFile);
-      const textEncoder = new TextEncoder();
-      const jsonDataUint8Array = textEncoder.encode(jsonContent);
       const formData = new FormData();
-      formData.append('jsonFile', new Blob([jsonDataUint8Array], { type: 'application/octet-stream' }), 'data.bin');
+      formData.append('jsonFile', this.files )
       formData.append('User_name', this.Username.value);
+      formData.append('account_name', this.AccountName.value);
 
       this.service.postGcpCluster(formData).subscribe(
         (res) => {
@@ -102,13 +96,11 @@ export class GcpCredentialComponent implements OnInit {
     const jsonFile = this.createForm.get('jsonFile')?.value;
 
     if (jsonFile) {
-      const jsonContent = atob(jsonFile);
-      const textEncoder = new TextEncoder();
-      const jsonDataUint8Array = textEncoder.encode(jsonContent);
       const formData = new FormData();
-      formData.append('jsonFile', new Blob([jsonDataUint8Array], { type: 'application/octet-stream' }), 'data.bin');
+      formData.append('jsonFile', this.files);
       formData.append('User_name', this.Username.value);
-    this.service.updateGcpCred(this.createForm.value).subscribe((res)=>{
+      formData.append('account_name', this.AccountName.value);
+    this.service.updateGcpCred(formData).subscribe((res)=>{
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
@@ -123,13 +115,11 @@ export class GcpCredentialComponent implements OnInit {
     const jsonFile = this.createForm.get('jsonFile')?.value;
 
     if (jsonFile) {
-      const jsonContent = atob(jsonFile);
-      const textEncoder = new TextEncoder();
-      const jsonDataUint8Array = textEncoder.encode(jsonContent);
       const formData = new FormData();
-      formData.append('jsonFile', new Blob([jsonDataUint8Array], { type: 'application/octet-stream' }), 'data.bin');
+      formData.append('jsonFile', this.files);
       formData.append('User_name', this.Username.value);
-    this.service.deleteGcpCred(this.createForm.value).subscribe((res)=>{
+      formData.append('account_name', this.AccountName.value);
+    this.service.deleteGcpCred(formData).subscribe((res)=>{
       this.showProgressBar = false;
       this.toast.success(res.message);
       this.createForm.reset();
@@ -150,4 +140,9 @@ export class GcpCredentialComponent implements OnInit {
   get JsonFile():FormControl{
     return this.createForm.get("jsonFile") as FormControl;
   }
+
+  get AccountName():FormControl{
+    return this.createForm.get("account_name") as FormControl;
+  }
+
 }

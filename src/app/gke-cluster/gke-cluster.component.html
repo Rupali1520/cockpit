@@ -11,8 +11,20 @@
                 Please enter Project
             </div>
 
+            <label for="name">Account Name</label>            
+            <div class="tooltip-container">
+                <select class="form__inset" formControlName="account_name" (change)="onAccountChange()">
+                    <option value="" disabled selected>Select Account Name</option>
+                    <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
+                </select>
+                <mat-icon matTooltip="You need to create an account first" class="info-icon">info</mat-icon>
+            </div>
+            <div class="form-text validation-message text-danger" *ngIf="AccountName.errors?.['required'] && (AccountName.touched || AccountName.dirty)">
+              Please select Account Name
+            </div>
+
             <label for="name">Region</label>
-            <select class="form__inset" name="Region" formControlName="Region" placeholder="Region">
+            <select class="form__inset" name="Region" formControlName="region" placeholder="Region">
                 <option value="us-central1">US Central</option>
                 <option value="us-east1">US East</option>
                 <option value="us-west1">US West</option>

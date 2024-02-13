@@ -100,7 +100,18 @@ export class ClusterCreationCardComponent implements OnInit {
 
         if(this.cardTitle==="GCP")
         {
-          
+          this.showProgressBar = true;
+          this.service.postGcpLogs(this.newObj).subscribe((res)=>{
+            this.showButton= false;
+            this.showProgressBar = false;
+            this.sampleData = res;
+            this.cardTitle="GCP";
+            this.toast.success("Success");
+            this.showCard =true;
+            }, (error)=>{
+              this.showProgressBar = false;
+              this.toast.error(error.error.error)
+            })
         }
 
       }

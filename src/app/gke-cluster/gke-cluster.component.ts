@@ -12,24 +12,47 @@ import { ToastrService } from 'ngx-toastr';
 export class GkeClusterComponent implements OnInit {
   createForm= new FormGroup({
     project: new FormControl('',[Validators.required]),
-    Region: new FormControl('',[Validators.required]),
+    region: new FormControl('',[Validators.required]),
     gke_name: new FormControl('',[Validators.required]),
     gke_version: new FormControl('',[Validators.required]),
     node_count: new FormControl('',[Validators.required]),
     cluster_type: new FormControl('',[Validators.required]),
+    account_name: new FormControl('',[Validators.required]),
   });
   showProgressBar: boolean = false;
+  selectedAccountData: any;
+  accountNames: string[] = [];
+  accountName: string = '';
+  username : string = '';
+  postUsername= {};
 
   constructor(private router: Router,
     private service: RegisterService,
     private toast: ToastrService) { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem("username") ?? '';
+    this.onAccountChange();
   }
 
   onCancel(){
     this.router.navigate(["/home"]);
   }
+
+  onAccountChange() {
+    this.postUsername = {
+      username: this.username
+    };
+    this.service.getGcpCrediantial(this.postUsername).subscribe(
+      (data) => {
+        this.accountNames = data.map((item: any) => item);
+      },
+      (error) => {
+        this.toast.error(error.error.message)
+      }
+    );
+  }
+
 
   onSubmit(){
     this.showProgressBar = true;
@@ -50,8 +73,12 @@ export class GkeClusterComponent implements OnInit {
     return this.createForm.get("project") as FormControl;
   }
 
+  get AccountName():FormControl{
+    return this.createForm.get("account_name") as FormControl;
+  }
+
   get Region():FormControl{
-    return this.createForm.get("Region") as FormControl;
+    return this.createForm.get("region") as FormControl;
   }
 
   get GkeName():FormControl{
