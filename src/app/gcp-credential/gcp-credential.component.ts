@@ -114,11 +114,9 @@ export class GcpCredentialComponent implements OnInit {
   else if(this.action === "Delete"){
     const jsonFile = this.createForm.get('jsonFile')?.value;
 
-    if (jsonFile) {
-      const formData = new FormData();
-      formData.append('jsonFile', this.files);
-      formData.append('User_name', this.Username.value);
-      formData.append('account_name', this.AccountName.value);
+      const formData = {
+        account_name: this.AccountName.value
+      }
     this.service.deleteGcpCred(formData).subscribe((res)=>{
       this.showProgressBar = false;
       this.toast.success(res.message);
@@ -128,7 +126,6 @@ export class GcpCredentialComponent implements OnInit {
       this.showProgressBar = false;
       this.toast.error(error.error.message)
     })
-  }
   }
   }
 
