@@ -51,6 +51,10 @@ export class RegisterService {
   private getGcpCred = `${environment.api.baseUrl}${environment.api.routes.getGcp.endpoint}`;
   private postRedirectAks = `${environment.api.baseUrl}${environment.api.routes.postRedirectAksCluster.endpoint}`;
   private postRedirectlogAks = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogAksCluster.endpoint}`;
+  private postRedirectEks = `${environment.api.baseUrl}${environment.api.routes.postRedirectEksCluster.endpoint}`;
+  private postRedirectlogEks = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogEksCluster.endpoint}`
+  private postRedirectGcp = `${environment.api.baseUrl}${environment.api.routes.postRedirectGcpCluster.endpoint}`;
+  private postRedirectlogGcp = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogGcpCluster.endpoint}`
 
 
   constructor(private httpClient: HttpClient) { }
@@ -222,9 +226,20 @@ export class RegisterService {
   }
 
   postRedirectlogAksCluster(jobId: any, body: any): Observable<any> {
-    // const headers = new HttpHeaders({
-    //   'Content-Type': 'application/json',
-    // });
     return this.httpClient.post(`http://98.70.13.238:4000/json-recentjoblogs-azure?job_id=${jobId}`, body);
   }
+
+  postRedirectEksCluster(body: any): Observable<any> {
+    return this.httpClient.post(this.postRedirectEks, body);
+  }
+  postRedirectlogEksCluster(jobId: any, body: any): Observable<any> {
+    return this.httpClient.post(`http://98.70.13.238:4000/json-recentjoblogs-aws?job_id=${jobId}`, body);
+  }
+  postRedirectGcpCluster(body: any): Observable<any> {
+    return this.httpClient.post(this.postRedirectGcp, body);
+  }
+  postRedirectlogGcpCluster(jobId: any, body: any): Observable<any> {
+    return this.httpClient.post(`http://98.70.13.238:4000/json-recentjoblogs-gcp?job_id=${jobId}`, body);
+  }
+
 }

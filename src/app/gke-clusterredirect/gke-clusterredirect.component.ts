@@ -1,29 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../services/register.service';
-import { ToastrService } from 'ngx-toastr';
-import { ClickService } from './../services/click.service'
-
+import { ToastrService} from 'ngx-toastr';
+import { ClickService } from '../services/click.service';
 
 @Component({
-  selector: 'app-aks-clusterredirect',
-  templateUrl: './aks-clusterredirect.component.html',
-  styleUrls: ['./aks-clusterredirect.component.scss']
+  selector: 'app-gke-clusterredirect',
+  templateUrl: './gke-clusterredirect.component.html',
+  styleUrls: ['./gke-clusterredirect.component.scss']
 })
-export class AksClusterredirectComponent implements OnInit {
+export class GkeClusterredirectComponent implements OnInit {
   responseString: any;
- 
   constructor(
     private clickService: ClickService,
     private service: RegisterService,
     private toast: ToastrService,
-  ) { }
-  job_id: any;
-  boolean: any;
-  required_job_id: any;
+    ){}
+    job_id: any;
+    required_job_id: any;
   ngOnInit(): void {
     this.onClick();
   }
-
 
   postData() {
     const data = { /* your data */ };
@@ -42,32 +38,27 @@ export class AksClusterredirectComponent implements OnInit {
     const cluster = {
       username: "cockpit-team"
     };
-    this.service.postRedirectAksCluster(cluster).subscribe(
+    this.service.postRedirectGcpCluster(cluster).subscribe(
       (res) => {
-        this.job_id = res.most_recent_job_id
-      }, (error) => {
+        this.job_id = res.most_recent_job_id  
+      },(error) => {
         this.toast.error(error.error.message);
       }
     );
   }
-
-
-
   onSave() {
-    this.boolean = true;
-    const jobid = {
-      username: "cockpit-team",
+    const jobid ={
+    username: "cockpit-team",
     }
-    this.service.postRedirectlogAksCluster(this.job_id, jobid).subscribe(
+    this.service.postRedirectlogGcpCluster(this.job_id, jobid).subscribe(
       (res) => {
         const _res = res.logs;
         this.responseString = _res;  
       },
-      (error) => {
-        this.toast.error(error.error.message);
-      }
-    );
-  
-  }
-
+    (error) => {
+      this.toast.error(error.error.message);
+    }
+    );    
+ 
+}
 }

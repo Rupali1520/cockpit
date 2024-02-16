@@ -55,13 +55,14 @@ export class GkeClusterComponent implements OnInit {
 
 
   onSubmit(){
+    this.router.navigate(["/home/cloud-selection/gcp/gcp2/redirect"])
     this.showProgressBar = true;
     this.service.postGkeCluster(this.createForm.value).subscribe((res)=>{
       this.createForm.reset();
       setTimeout(()=>{
         this.showProgressBar = false;
         this.toast.success(res.message);
-        this.router.navigate(["/home/cloud-selection/gcp/gcp2/gcp-jobs"]);
+        this.router.navigate(["/home/cloud-selection/gcp/gcp2/reddirect"]);
       },420000)
     }, (error)=>{
       this.showProgressBar = false;

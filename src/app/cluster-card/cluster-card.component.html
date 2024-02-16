@@ -1,91 +1,95 @@
 <div class="card">
-    <span class="tag">{{ cardTitle }}</span>
+  <span class="tag">{{ cardTitle }}</span>
 
-    <div class="account-dropdown">
-      <label for="accountName">Account Name:</label>
-      <select id="accountName" [(ngModel)]="accountName" class="dropdown" (change)="onAccountChange()">
-        <option [value]="null" selected disabled>Select Account Name</option>
-        <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
-      </select>
-    </div>
-    
-    <div *ngFor="let item of getObjectKeys(sampleData)" class="card-item">
-      <strong>{{ item }}:</strong>
-      <ng-container *ngIf="isObject(sampleData[item])">
-        <div *ngFor="let nestedItem of sampleData[item] | keyvalue" class="nested-item">
-          <strong>{{ nestedItem.key }}:</strong> {{ nestedItem.value }}
-        </div>
-      </ng-container>
-      <ng-container *ngIf="isArray(sampleData[item])">
-        <ul class="array-list">
-          <li *ngFor="let arrayItem of sampleData[item] | keyvalue" class="array-item">
-            <ng-container *ngIf="isObject(arrayItem.value)">
-              <div *ngFor="let innerItem of arrayItem.value | keyvalue" class="inner-item">
-                <strong>{{ innerItem.key }}:</strong> {{ innerItem.value }}
-              </div>
-            </ng-container>
-            <ng-container *ngIf="!isObject(arrayItem.value)">
-              {{ arrayItem.value }}
-            </ng-container>
-          </li>
-        </ul>
-      </ng-container>
-      <ng-container *ngIf="!isObject(sampleData[item]) && !isArray(sampleData[item])">
-        {{ sampleData[item] }}
-      </ng-container>
-    </div>
-    <div class="card-buttons">
+  <div class="account-dropdown">
+    <label for="accountName">Account Name:</label>
+    <select id="accountName" [(ngModel)]="accountName" class="dropdown" (change)="onAccountChange()">
+      <option [value]="null" selected disabled>Select Account Name</option>
+      <option *ngFor="let acc of accountNames" [value]="acc">{{ acc }}</option>
+    </select>
+  </div>
+
+  <div *ngFor="let item of getObjectKeys(sampleData)" class="card-item">
+    <strong>{{ item }}:</strong>
+    <ng-container *ngIf="isObject(sampleData[item])">
+      <div *ngFor="let nestedItem of sampleData[item] | keyvalue" class="nested-item">
+        <strong>{{ nestedItem.key }}:</strong> {{ nestedItem.value }}
+      </div>
+    </ng-container>
+    <ng-container *ngIf="isArray(sampleData[item])">
+      <ul class="array-list">
+        <li *ngFor="let arrayItem of sampleData[item] | keyvalue" class="array-item">
+          <ng-container *ngIf="isObject(arrayItem.value)">
+            <div *ngFor="let innerItem of arrayItem.value | keyvalue" class="inner-item">
+              <strong>{{ innerItem.key }}:</strong> {{ innerItem.value }}
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!isObject(arrayItem.value)">
+            {{ arrayItem.value }}
+          </ng-container>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-container *ngIf="!isObject(sampleData[item]) && !isArray(sampleData[item])">
+      {{ sampleData[item] }}
+    </ng-container>
+  </div>
+  <div class="card-buttons">
     <button class="button-style" (click)="onConnect()">Connect to Cluster</button>
-  <button class="button-style" (click)="onBack()">Back</button>
-</div>
+    <button class="button-style" (click)="onBack()">Back</button>
+  </div>
 
-<div *ngIf="showProgressBar" class="loading-overlay">
-  <div class="loader"></div>
-  <p class="loading-text">Loading...</p>
-</div>
-  
+  <div *ngIf="showProgressBar" class="loading-overlay">
+    <div class="loader"></div>
+    <p class="loading-text">Loading...</p>
+  </div>
+
   <!--Aws modal -->
   <div *ngIf="awsModal" class="custom-modal device" [ngClass]="{'show': awsModal}" (click)="closeModal()">
     <div class="modal-content" (click)="stopPropagation($event)">
       <span class="close-button" (click)="closeModal()">&times;</span>
-      <h2>Connect to Your EKS Cluster</h2>
-        <div class="modal-body">
-          <p>To connect to your Amazon Elastic Kubernetes Service (EKS) cluster using the AWS CLI, follow these steps:</p>
-          <ol>
-            <li>Open a terminal or command prompt on your local machine.</li>
-            <li>Ensure that you have the AWS CLI installed. If not, you can download and install it from the official AWS CLI website: <a href="https://aws.amazon.com/cli/" target="_blank">AWS CLI</a>.</li>
-            <li>Run the following command to configure your AWS credentials:</li>
-          </ol>
-          <pre>
-            <code>
-              aws configure
-            </code>
-          </pre>
-          <p>Enter your AWS Access Key ID, Secret Access Key, default region, and output format when prompted.</p>
-          <p>After configuring the AWS CLI, run the following command to update your kubeconfig and connect to your EKS cluster:</p>
-          <pre>
-            <code>
-              aws eks --region YOUR_REGION update-kubeconfig --name YOUR_CLUSTER_NAME
-            </code>
-          </pre>
-          <p>Replace YOUR_REGION with the AWS region where your EKS cluster is located and YOUR_CLUSTER_NAME with the name of your EKS cluster.</p>
-          <p>Now, you are connected to your EKS cluster, and you can use kubectl commands to interact with it.</p>
-        </div>
-        </div>
+      <h2>Using CLI</h2>
+      <div class="modal-body">
+        <p>To connect to your Amazon Elastic Kubernetes Service (EKS) cluster using the AWS CLI, follow these steps:</p>
+        <ol>
+          <li>Open a terminal or command prompt on your local machine.</li>
+          <li>Ensure that you have the AWS CLI installed. If not, you can download and install it from the official AWS
+            CLI website: <a href="https://aws.amazon.com/cli/" target="_blank">AWS CLI</a>.</li>
+          <li>Run the following command to configure your AWS credentials:</li>
+        </ol>
+        <pre>
+          <code>
+            aws configure
+          </code>
+        </pre>
+        <p>Enter your AWS Access Key ID, Secret Access Key, default region, and output format when prompted.</p>
+        <p>After configuring the AWS CLI, run the following command to update your kubeconfig and connect to your EKS
+          cluster:</p>
+        <pre>
+          <code>
+            aws eks --region YOUR_REGION update-kubeconfig --name YOUR_CLUSTER_NAME
+          </code>
+        </pre>
+        <p>Replace YOUR_REGION with the AWS region where your EKS cluster is located and YOUR_CLUSTER_NAME with the name
+          of your EKS cluster.</p>
+        <p>Now, you are connected to your EKS cluster, and you can use kubectl commands to interact with it.</p>
       </div>
+    </div>
+  </div>
 
 
-       <!--Azure modal -->
+  <!--Azure modal -->
   <div *ngIf="azureModal" class="custom-modal device" [ngClass]="{'show': azureModal}" (click)="closeModal()">
     <div class="modal-content" (click)="stopPropagation($event)">
       <span class="close-button" (click)="closeModal()">&times;</span>
-      <h2>Connect to Your AKS Cluster</h2>
+      <h2>Using CLI</h2>
       <div class="modal-body">
         <p>To connect to your Azure Kubernetes Service (AKS) cluster using the Azure CLI, follow these steps:</p>
         <ol>
           <li>Open a terminal or command prompt on your local machine.</li>
           <li>Ensure that you have the Azure CLI installed. If not, you can download and install it from the official
-            Azure CLI website: <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli">Azure CLI</a>.</li>
+            Azure CLI website: <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli">Azure CLI</a>.
+          </li>
           <li>Run the following command to log in to your Azure account:</li>
         </ol>
         <pre><code>az login</code></pre>
@@ -101,17 +105,18 @@
   </div>
 
 
-       <!--Gcp modal -->
+  <!--Gcp modal -->
   <div *ngIf="gcpModal" class="custom-modal device" [ngClass]="{'show': gcpModal}" (click)="closeModal()">
     <div class="modal-content" (click)="stopPropagation($event)">
       <span class="close-button" (click)="closeModal()">&times;</span>
-      <h2>Connect to Your GKE Cluster</h2>
+      <h2>Using CLI</h2>
       <div class="modal-body">
         <p>To connect to your Google Kubernetes Engine (GKE) cluster using the <code>gcloud</code> CLI, follow these
           steps:</p>
         <ol>
           <li>Open a terminal or command prompt on your local machine.</li>
-          <li>Ensure that you have the <code>gcloud</code> CLI installed. If not, you can download and install it from the
+          <li>Ensure that you have the <code>gcloud</code> CLI installed. If not, you can download and install it from
+            the
             official Google Cloud SDK website: <a href="https://cloud.google.com/sdk/docs/install">Google Cloud SDK</a>.
           </li>
           <li>Run the following command to authenticate <code>gcloud</code> with your Google Cloud account:</li>
@@ -122,9 +127,9 @@
         <pre><code>gcloud container clusters get-credentials YOUR_CLUSTER_NAME --region YOUR_REGION</code></pre>
         <p>Replace YOUR_CLUSTER_NAME with the name of your GKE cluster and YOUR_REGION with the GCP region where your
           cluster resides.</p>
-        <p>Now, you are connected to your GKE cluster, and you can use <code>kubectl</code> commands to interact with it.
+        <p>Now, you are connected to your GKE cluster, and you can use <code>kubectl</code> commands to interact with
+          it.
         </p>
       </div>
-    </div>
   </div>
-  </div>
+   </div> 
