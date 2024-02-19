@@ -32,6 +32,8 @@ export class EksClusterComponent implements OnInit {
   constructor(private router: Router,
     private service: RegisterService,
     private toast: ToastrService) { }
+    job_id: any;
+
 
   ngOnInit(): void {
     this.username = localStorage.getItem("username") ?? '';
@@ -56,14 +58,28 @@ export class EksClusterComponent implements OnInit {
     );
   }
 
+  onClick() {
+    const cluster = {
+      username: "cockpit-team"
+    };
+    this.service.postRedirectEksCluster(cluster).subscribe(
+      (res) => {
+        this.job_id = res.most_recent_job_id  
+      },(error) => {
+        this.toast.error(error.error.message);
+      }
+    );
+  }
+
   onNextEks(){
+    this.router.navigate(["/home/cloud-selection/aws/aws2/redirect"]) 
     this.showProgressBar = true;
     this.service.postEksCluster(this.createForm.value).subscribe((res)=>{
       this.createForm.reset();
       setTimeout(()=>{
         this.showProgressBar = false;
         this.toast.success(res.message);
-        this.router.navigate(["/home/cloud-selection/aws/aws2/aws-jobs"]);
+        this.router.navigate(["/home/cloud-selection/aws/aws2/redirect"]);
       },300000)
     }, (error)=>{
       this.showProgressBar = false;

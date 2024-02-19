@@ -32,7 +32,7 @@ export class AksClusterComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = localStorage.getItem("username") ?? '';
-    this.onAccountChange();
+    this.onAccountChange();    
   }
 
   onAccountChange() {
@@ -55,6 +55,7 @@ export class AksClusterComponent implements OnInit {
   }
 
   onSubmit() {
+    this.router.navigate(["/home/cloud-selection/azure/azure2/redirect"]);
     let aksVersion: number | null = null;
     const aksVersionControl = this.createForm.get('aks_version');
     if (aksVersionControl && aksVersionControl.value !== null && aksVersionControl.value !== undefined) {
@@ -72,7 +73,7 @@ export class AksClusterComponent implements OnInit {
         setTimeout(()=>{
           this.showProgressBar = false;
           this.toast.success(res.message);
-          this.router.navigate(['/home/cloud-selection/azure/azure2/azure-jobs']);
+          this.router.navigate(['/home/cloud-selection/azure/azure2/redirrect']);
         },180000)
       },
       (error) => {
@@ -81,7 +82,7 @@ export class AksClusterComponent implements OnInit {
       }
     );
   }
-
+  
   get ResourceName():FormControl{
     return this.createForm.get("resource_group") as FormControl;
   }
@@ -114,3 +115,5 @@ export class AksClusterComponent implements OnInit {
     return this.createForm.get("cluster_type") as FormControl;
   }
 }
+
+
