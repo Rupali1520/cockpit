@@ -10,7 +10,7 @@ import { RegisterService } from '../services/register.service';
 })
 export class ClusterCreationCardComponent implements OnInit {
 
-  @Input() sampleData: { [key: string]: { [innerKey: string]: any } } = {};
+  @Input() sampleData: any = {};
   @Input() cardTitle: string= "";
 
   constructor(private router: Router,
@@ -20,8 +20,8 @@ export class ClusterCreationCardComponent implements OnInit {
     showProgressBar: boolean = false;
     showCard:boolean = false;
     showButton:boolean = true;
-  selectedArrayValue: any;
-  newObj:{}={};
+    selectedArrayValue: any;
+    newObj:{}={};
 
 
   ngOnInit(): void {

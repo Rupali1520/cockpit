@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit{
+
   isLoggedIn:boolean = false;
 
   constructor(private router: Router) {
@@ -22,7 +23,7 @@ export class HeaderComponent implements OnInit{
       this.isLoggedIn = Boolean(event.newValue);
     }
   }
-
+  
 
   onLogin() {
     if (this.isLoggedIn) {
@@ -32,4 +33,21 @@ export class HeaderComponent implements OnInit{
       this.router.navigate(['/login']);
     }
   }
+  
+  
+   changeLinkColor(event: MouseEvent) {
+      const clickedLink = event.target as HTMLElement;
+  
+      document.querySelectorAll('.header-list-navbar-menu-item').forEach(link => {
+        link.classList.remove('.active');
+      });
+      clickedLink.classList.add('.active');
+      clickedLink.style.color = 'white'; 
+    }
+   
+    
 }
+
+  
+    
+
