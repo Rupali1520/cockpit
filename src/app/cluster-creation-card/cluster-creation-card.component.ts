@@ -20,8 +20,8 @@ export class ClusterCreationCardComponent implements OnInit {
     showProgressBar: boolean = false;
     showCard:boolean = false;
     showButton:boolean = true;
-  selectedArrayValue: any;
-  newObj:{}={};
+    selectedArrayValue: any;
+    newObj:{}={};
 
 
   ngOnInit(): void {

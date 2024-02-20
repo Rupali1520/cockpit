@@ -44,7 +44,8 @@ export class HeaderComponent implements OnInit{
       clickedLink.classList.add('.active');
       clickedLink.style.color = 'white'; 
     }
-
+   
+    
 }
 
   
