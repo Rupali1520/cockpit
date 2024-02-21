@@ -45,11 +45,15 @@
   </div>
 
   <!--Aws modal -->
-  <div *ngIf="awsModal" class="custom-modal device" [ngClass]="{'show': awsModal}" (click)="closeModal()">
+  <div *ngIf="awsModal1" class="custom-modal device" [ngClass]="{'show': awsModal1}">
     <div class="modal-content" (click)="stopPropagation($event)">
-      <span class="close-button" (click)="closeModal()">&times;</span>
-      <h2>Using CLI</h2>
-      <div class="modal-body">
+      <span class="close-button" (click)="awsModal1 = false">&times;</span>
+      <div class="container">
+        <button id="awscloudBtn" (click)="toggleModal('awscloud')">Using CLI</button>
+        <button id="kubectlBtn" (click)="toggleModal('kubectl')">Using kubectl</button>
+      </div>
+
+      <div class="modal-body" *ngIf="showAwscloudModal" id="awscloudModal">
         <p>To connect to your Amazon Elastic Kubernetes Service (EKS) cluster using the AWS CLI, follow these steps:</p>
         <ol>
           <li>Open a terminal or command prompt on your local machine.</li>
@@ -74,16 +78,33 @@
           of your EKS cluster.</p>
         <p>Now, you are connected to your EKS cluster, and you can use kubectl commands to interact with it.</p>
       </div>
+      <div class="modal-body" *ngIf="!showAwscloudModal" id="kubectlModal">
+        <p>To connect to your Kubernetes cluster using kubectl, follow these steps:</p>
+        <ol>
+          <li>Open a terminal or command prompt on your local machine..</li>
+          <li>If your kubeconfig file is located in a different directory or has a different name than the default
+            (~/.kube/config), set the KUBECONFIG environment variable: export
+            KUBECONFIG=/path/to/config/my-cluster-config.yaml</li>
+          <li>Verify the connection to your Kubernetes cluster by running: kubectl cluster-info</li>
+          <li>Use kubectl to interact with your Kubernetes cluster. For example, to list pods in the cluster, run:
+            kubectl get pods</li>
+        </ol>
+        <p>Adjust the path to your kubeconfig file as needed.</p>
+      </div>
+
     </div>
   </div>
 
 
   <!--Azure modal -->
-  <div *ngIf="azureModal" class="custom-modal device" [ngClass]="{'show': azureModal}" (click)="closeModal()">
+  <div *ngIf="azureModal1" class="custom-modal device" [ngClass]="{'show': azureModal1}">
     <div class="modal-content" (click)="stopPropagation($event)">
-      <span class="close-button" (click)="closeModal()">&times;</span>
-      <h2>Using CLI</h2>
-      <div class="modal-body">
+      <span class="close-button" (click)="azureModal1 = false">&times;</span>
+      <div class="container">
+        <button id="acloudBtn" (click)="toggleModal('acloud')">Using CLI</button>
+        <button id="kubectlBtn" (click)="toggleModal('kubectl')">Using kubectl</button>
+      </div>
+      <div class="modal-body" *ngIf="showAcloudModal" id="acloudModal">
         <p>To connect to your Azure Kubernetes Service (AKS) cluster using the Azure CLI, follow these steps:</p>
         <ol>
           <li>Open a terminal or command prompt on your local machine.</li>
@@ -101,24 +122,39 @@
           your AKS cluster.</p>
         <p>Now, you are connected to your AKS cluster, and you can use kubectl commands to interact with it.</p>
       </div>
+      <div class="modal-body" *ngIf="!showAcloudModal" id="kubectlModal">
+        <p>To connect to your Kubernetes cluster using <code>kubectl</code>, follow these steps:</p>
+        <ol>
+          <li>Open a terminal or command prompt on your local machine..</li>
+          <li>If your kubeconfig file is located in a different directory or has a different name than the default
+            (~/.kube/config), set the KUBECONFIG environment variable: export
+            KUBECONFIG=/path/to/config/my-cluster-config.yaml</li>
+          <li>Verify the connection to your Kubernetes cluster by running: kubectl cluster-info</li>
+          <li>Use kubectl to interact with your Kubernetes cluster. For example, to list pods in the cluster, run:
+            kubectl get pods</li>
+        </ol>
+        <p>Adjust the path to your kubeconfig file as needed.</p>
+      </div>
     </div>
   </div>
 
 
   <!--Gcp modal -->
-  <div *ngIf="gcpModal" class="custom-modal device" [ngClass]="{'show': gcpModal}" (click)="closeModal()">
-    <div class="modal-content" (click)="stopPropagation($event)">
-      <span class="close-button" (click)="closeModal()">&times;</span>
-      <h2>Using CLI</h2>
-      <div class="modal-body">
+  <div *ngIf="gcpModal1" id="myModal" class="modal custom-modal device" [ngClass]="{'show': gcpModal1}">
+    <div class="modal-content">
+      <span class="close-button" (click)="gcpModal1 = false">&times;</span>
+      <div class="container">
+        <button id="gcloudBtn" (click)="toggleModal('gcloud')">Using CLI</button>
+        <button id="kubectlBtn" (click)="toggleModal('kubectl')">Using kubectl</button>
+      </div>
+      <div class="modal-body" *ngIf="showGcloudModal" id="gcloudModal">
         <p>To connect to your Google Kubernetes Engine (GKE) cluster using the <code>gcloud</code> CLI, follow these
           steps:</p>
         <ol>
           <li>Open a terminal or command prompt on your local machine.</li>
           <li>Ensure that you have the <code>gcloud</code> CLI installed. If not, you can download and install it from
-            the
-            official Google Cloud SDK website: <a href="https://cloud.google.com/sdk/docs/install">Google Cloud SDK</a>.
-          </li>
+            the official Google Cloud SDK website: <a href="https://cloud.google.com/sdk/docs/install">Google Cloud
+              SDK</a>.</li>
           <li>Run the following command to authenticate <code>gcloud</code> with your Google Cloud account:</li>
         </ol>
         <pre><code>gcloud auth login</code></pre>
@@ -128,8 +164,25 @@
         <p>Replace YOUR_CLUSTER_NAME with the name of your GKE cluster and YOUR_REGION with the GCP region where your
           cluster resides.</p>
         <p>Now, you are connected to your GKE cluster, and you can use <code>kubectl</code> commands to interact with
-          it.
-        </p>
+          it.</p>
       </div>
+      <div class="modal-body" *ngIf="!showGcloudModal" id="kubectlModal">
+        <p>To connect to your Kubernetes cluster using <code>kubectl</code> , follow these steps:</p>
+        <ol>
+          <li>Open a terminal or command prompt on your local machine..</li>
+          <li>If your kubeconfig file is located in a different directory or has a different name than the default
+            (~/.kube/config), set the KUBECONFIG environment variable:<br>
+            <pre><code>export KUBECONFIG=/path/to/config/my-cluster-config.yaml</code></pre>
+          </li>
+          <li>Verify the connection to your Kubernetes cluster by running:
+            <pre><code>kubectl cluster-info</code></pre>
+          </li>
+          <li>Use <code>kubectl</code> to interact with your Kubernetes cluster. For example, to list pods in the
+            cluster, run:
+            <pre><code>kubectl get pods</code></pre>
+          </li>
+        </ol>
+        <p>Adjust the path to your kubeconfig file as needed.</p>
+      </div>
+    </div>
   </div>
-   </div> 

@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { GkeClusterredirectComponent } from './gke-clusterredirect.component';
+import { GkeClusterredirectComponent } from './gkeClusterredirect.component';
 
 describe('GkeClusterredirectComponent', () => {
   let component: GkeClusterredirectComponent;
