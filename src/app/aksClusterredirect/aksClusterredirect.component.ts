@@ -24,14 +24,14 @@ export class AksClusterredirectComponent implements OnInit {
  
   }
 
-  postDataaws() {
+  postData() {
     this.loading = true; 
     setTimeout(() => {
       this.loading = false; 
     }, 15000); 
 
     const data = { /* your data */ };
-    this.RegisterService.postDataaws(data).subscribe(
+    this.RegisterService.postData(data).subscribe(
       (response) => {
         this.responseString = JSON.stringify(response);
       },
