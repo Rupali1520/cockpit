@@ -4,6 +4,7 @@
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+
 @media (min-width:768px) {
   .header-blue {
     padding-bottom: 120px;
@@ -132,7 +133,6 @@
   border: 1px solid #444;
   background-color: #aaa;
   overflow: hidden;
-  /* background: url(../../assets/img/screen-content-iphone-6.jpg); */
   background-size: cover;
   background-position: center;
 }
@@ -245,6 +245,7 @@
   margin: 15vh 0 20vh 20vw;
 }
 
+
 .btns {
   padding: 20px;
   margin-left: 30vw;
@@ -268,3 +269,21 @@
   background-color: white;
   border: 1px solid  black;
 }
+
+.loader {
+  margin-left: 40%;
+  margin-top: 50px;
+  border: 16px solid #f3f3f3; 
+  border-top: 16px solid #3498db; 
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite; 
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+

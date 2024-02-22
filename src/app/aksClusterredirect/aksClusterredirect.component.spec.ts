@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AksClusterredirectComponent } from './aks-clusterredirect.component';
+import { AksClusterredirectComponent } from './aksClusterredirect.component';
 
 describe('AksClusterredirectComponent', () => {
   let component: AksClusterredirectComponent;

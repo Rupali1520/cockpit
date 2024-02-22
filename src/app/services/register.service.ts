@@ -56,7 +56,7 @@ export class RegisterService {
   private postRedirectGcp = `${environment.api.baseUrl}${environment.api.routes.postRedirectGcpCluster.endpoint}`;
   private postRedirectlogGcp = `${environment.api.baseUrl}${environment.api.routes.postRedirectlogGcpCluster.endpoint}`
 
-
+  jobId: any;
   constructor(private httpClient: HttpClient) { }
 
   postRegister(body: any): Observable<any> {
@@ -241,5 +241,14 @@ export class RegisterService {
   postRedirectlogGcpCluster(jobId: any, body: any): Observable<any> {
     return this.httpClient.post(`http://98.70.13.238:4000/json-recentjoblogs-gcp?job_id=${jobId}`, body);
   }
+  postData(data: any) {
+    return this.httpClient.post<any>(`http://98.70.13.238:4000/json-recentjoblogs-azure?job_id=${this.jobId}`, data);
+  }
+  postDatagcp(data: any) {
+    return this.httpClient.post<any>(`http://98.70.13.238:4000/json-recentjoblogs-gcp?job_id=${this.jobId}`, data);
+  }
 
+  postDataaws(data: any) {
+    return this.httpClient.post<any>(`http://98.70.13.238:4000/json-recentjoblogs-aws?job_id=${this.jobId}`, data);
+  }
 }

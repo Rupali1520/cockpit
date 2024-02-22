@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EksClusterredirectComponent } from './eks-clusterredirect.component';
+import { EksClusterredirectComponent } from './eksClusterredirect.component';
 
 describe('EksClusterredirectComponent', () => {
   let component: EksClusterredirectComponent;

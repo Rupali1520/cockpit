@@ -1,33 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../services/register.service';
 import { ToastrService } from 'ngx-toastr';
-import { ClickService } from './../services/click.service'
-
 
 @Component({
   selector: 'app-aks-clusterredirect',
-  templateUrl: './aks-clusterredirect.component.html',
-  styleUrls: ['./aks-clusterredirect.component.scss']
+  templateUrl: './aksClusterredirect.component.html',
+  styleUrls: ['./aksClusterredirect.component.scss']
 })
 export class AksClusterredirectComponent implements OnInit {
   responseString: any;
- 
+  loading: boolean = false; 
+
   constructor(
-    private clickService: ClickService,
+    private RegisterService: RegisterService,
     private service: RegisterService,
-    private toast: ToastrService,
+    private toast: ToastrService
   ) { }
+
   job_id: any;
-  boolean: any;
-  required_job_id: any;
+
   ngOnInit(): void {
     this.onClick();
+ 
   }
 
-
   postData() {
+    this.loading = true; 
+    setTimeout(() => {
+      this.loading = false; 
+    }, 15000); 
+
     const data = { /* your data */ };
-    this.clickService.postData(data).subscribe(
+    this.RegisterService.postData(data).subscribe(
       (response) => {
         this.responseString = JSON.stringify(response);
       },
@@ -44,30 +48,26 @@ export class AksClusterredirectComponent implements OnInit {
     };
     this.service.postRedirectAksCluster(cluster).subscribe(
       (res) => {
-        this.job_id = res.most_recent_job_id
-      }, (error) => {
+        this.job_id = res.most_recent_job_id;
+      },
+      (error) => {
         this.toast.error(error.error.message);
       }
     );
   }
 
-
-
   onSave() {
-    this.boolean = true;
     const jobid = {
       username: "cockpit-team",
     }
     this.service.postRedirectlogAksCluster(this.job_id, jobid).subscribe(
       (res) => {
         const _res = res.logs;
-        this.responseString = _res;  
+        this.responseString = _res;
       },
       (error) => {
         this.toast.error(error.error.message);
       }
     );
-  
   }
-
 }

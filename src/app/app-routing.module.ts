@@ -15,9 +15,9 @@ import { DeleteEksComponent } from './delete-eks/delete-eks.component';
 import { DeleteAksComponent } from './delete-aks/delete-aks.component';
 import { DeleteGkeComponent } from './delete-gke/delete-gke.component';
 import { ClusterJobsComponent } from './cluster-jobs/cluster-jobs.component';
-import { AksClusterredirectComponent } from './aks-clusterredirect/aks-clusterredirect.component';
-import { EksClusterredirectComponent } from './eks-clusterredirect/eks-clusterredirect.component';
-import { GkeClusterredirectComponent } from './gke-clusterredirect/gke-clusterredirect.component';
+import { AksClusterredirectComponent } from './aksClusterredirect/aksClusterredirect.component';
+import { EksClusterredirectComponent } from './eksClusterredirect/eksClusterredirect.component';
+import { GkeClusterredirectComponent } from './gkeClusterredirect/gkeClusterredirect.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

@@ -22,11 +22,18 @@ export class ClusterCardComponent implements OnInit {
   postUsername= {};
   azureBody={};
   showProgressBar: boolean = false;
+  azureModal1 = false;
+  gcpModal1 = false;
+  awsModal1 = false;
+  showGcloudModal = true;
+  showAcloudModal = true;
+  showAwscloudModal = true;
 
 
   constructor(private router: Router, private service: RegisterService, private toast: ToastrService,) { }
 
   ngOnInit(): void {
+    
     this.username = localStorage.getItem("username") ?? '';
     this.onAccountChange()
   }
@@ -146,20 +153,36 @@ export class ClusterCardComponent implements OnInit {
 
   onConnect() {
     if(this.cardTitle ==='Aws'){
-    this.awsModal = true;
+    this.awsModal1 = true;
     }
 
     if(this.cardTitle ==='Azure'){
-      this.azureModal = true;
+      this.azureModal1 = true;
       }
 
       if(this.cardTitle ==='GCP'){
-        this.gcpModal = true;
-        }
+        this.gcpModal1 = true;
+      }
 
   }
 
   stopPropagation(event: Event): void {
     event.stopPropagation();
   }
+  toggleModal(modal:string){
+    this.showGcloudModal = modal === 'gcloud';
+  }
+
+  toggleModall(modal: string): void {
+    this.showAcloudModal = modal === 'acloud';
+  }
+  toggleModalll(modal: string): void {
+    this.showAwscloudModal = modal === 'awscloud';
+  }
+
 }
+
+
+
+
+

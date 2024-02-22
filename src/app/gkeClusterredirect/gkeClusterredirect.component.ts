@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../services/register.service';
 import { ToastrService} from 'ngx-toastr';
-import { ClickService } from '../services/click.service';
 
 @Component({
   selector: 'app-gke-clusterredirect',
-  templateUrl: './gke-clusterredirect.component.html',
-  styleUrls: ['./gke-clusterredirect.component.scss']
+  templateUrl: './gkeClusterredirect.component.html',
+  styleUrls: ['./gkeClusterredirect.component.scss']
 })
 export class GkeClusterredirectComponent implements OnInit {
   responseString: any;
+  loading: boolean = false;
   constructor(
-    private clickService: ClickService,
+    private RegisterService: RegisterService,
     private service: RegisterService,
     private toast: ToastrService,
     ){}
@@ -21,9 +21,13 @@ export class GkeClusterredirectComponent implements OnInit {
     this.onClick();
   }
 
-  postData() {
+  postDatagcp() {
+    this.loading = true; 
+    setTimeout(() => {
+      this.loading = false; 
+    }, 15000); 
     const data = { /* your data */ };
-    this.clickService.postData(data).subscribe(
+    this.RegisterService.postDatagcp(data).subscribe(
       (response) => {
         this.responseString = JSON.stringify(response);
       },
