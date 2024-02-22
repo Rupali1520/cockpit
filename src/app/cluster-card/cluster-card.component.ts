@@ -22,7 +22,6 @@ export class ClusterCardComponent implements OnInit {
   postUsername= {};
   azureBody={};
   showProgressBar: boolean = false;
-  modal: any;
   azureModal1 = false;
   gcpModal1 = false;
   awsModal1 = false;
@@ -154,17 +153,16 @@ export class ClusterCardComponent implements OnInit {
 
   onConnect() {
     if(this.cardTitle ==='Aws'){
-    this.awsModal = true;
+    this.awsModal1 = true;
     }
 
     if(this.cardTitle ==='Azure'){
-      this.azureModal = true;
+      this.azureModal1 = true;
       }
 
       if(this.cardTitle ==='GCP'){
-        this.gcpModal = true;
+        this.gcpModal1 = true;
       }
-     (this.gcpModal1= true)
 
   }
 
@@ -175,8 +173,11 @@ export class ClusterCardComponent implements OnInit {
     this.showGcloudModal = modal === 'gcloud';
   }
 
-  toggleModall(modal:string){
+  toggleModall(modal: string): void {
     this.showAcloudModal = modal === 'acloud';
+  }
+  toggleModalll(modal: string): void {
+    this.showAwscloudModal = modal === 'awscloud';
   }
 
 }

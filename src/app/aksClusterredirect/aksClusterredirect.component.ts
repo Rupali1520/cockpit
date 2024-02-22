@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../services/register.service';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-aks-clusterredirect',
   templateUrl: './aksClusterredirect.component.html',
@@ -10,32 +9,34 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AksClusterredirectComponent implements OnInit {
   responseString: any;
-  loading: boolean = false; // Variable to control the visibility of the loader
+  loading: boolean = false; 
 
   constructor(
-
     private RegisterService: RegisterService,
     private service: RegisterService,
-    private toast: ToastrService,
+    private toast: ToastrService
   ) { }
 
   job_id: any;
 
   ngOnInit(): void {
     this.onClick();
+ 
   }
 
-  postData() {
-    this.loading = true; // Show loader when button is clicked
+  postDataaws() {
+    this.loading = true; 
+    setTimeout(() => {
+      this.loading = false; 
+    }, 15000); 
+
     const data = { /* your data */ };
-    this.RegisterService.postData(data).subscribe(
+    this.RegisterService.postDataaws(data).subscribe(
       (response) => {
         this.responseString = JSON.stringify(response);
-        this.loading = false; // Hide loader when response is received
       },
       (error) => {
         console.error('Error occurred:', error);
-        this.loading = false; // Hide loader on error
       }
     );
     this.onSave();
@@ -48,11 +49,9 @@ export class AksClusterredirectComponent implements OnInit {
     this.service.postRedirectAksCluster(cluster).subscribe(
       (res) => {
         this.job_id = res.most_recent_job_id;
-        this.loading = false; // Hide loader once job ID is received
       },
       (error) => {
         this.toast.error(error.error.message);
-        this.loading = false; // Hide loader on error
       }
     );
   }

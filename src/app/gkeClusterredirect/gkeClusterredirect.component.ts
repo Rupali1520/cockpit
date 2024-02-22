@@ -9,6 +9,7 @@ import { ToastrService} from 'ngx-toastr';
 })
 export class GkeClusterredirectComponent implements OnInit {
   responseString: any;
+  loading: boolean = false;
   constructor(
     private RegisterService: RegisterService,
     private service: RegisterService,
@@ -20,9 +21,13 @@ export class GkeClusterredirectComponent implements OnInit {
     this.onClick();
   }
 
-  postData() {
+  postDatagcp() {
+    this.loading = true; 
+    setTimeout(() => {
+      this.loading = false; 
+    }, 15000); 
     const data = { /* your data */ };
-    this.RegisterService.postData(data).subscribe(
+    this.RegisterService.postDatagcp(data).subscribe(
       (response) => {
         this.responseString = JSON.stringify(response);
       },

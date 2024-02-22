@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../services/register.service';
 import { ToastrService } from 'ngx-toastr';
-// import { ClickService } from '../services/click.service';
 
 @Component({
   selector: 'app-eks-clusterredirect',
@@ -10,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EksClusterredirectComponent implements OnInit {
   responseString: any;
+  loading: boolean = false
   constructor(
     private RegisterService: RegisterService,
     private service: RegisterService,
@@ -20,9 +20,13 @@ export class EksClusterredirectComponent implements OnInit {
   ngOnInit(): void {
     this.onClick();
   }
-  postData() {
+  postDataaws() {
+    this.loading = true; 
+    setTimeout(() => {
+      this.loading = false; 
+    }, 15000); 
     const data = { /* your data */ };
-    this.RegisterService.postData(data).subscribe(
+    this.RegisterService.postDataaws(data).subscribe(
       (response) => {
         this.responseString = JSON.stringify(response);
       },

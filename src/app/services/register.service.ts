@@ -244,5 +244,11 @@ export class RegisterService {
   postData(data: any) {
     return this.httpClient.post<any>(`http://98.70.13.238:4000/json-recentjoblogs-azure?job_id=${this.jobId}`, data);
   }
+  postDatagcp(data: any) {
+    return this.httpClient.post<any>(`http://98.70.13.238:4000/json-recentjoblogs-gcp?job_id=${this.jobId}`, data);
+  }
 
+  postDataaws(data: any) {
+    return this.httpClient.post<any>(`http://98.70.13.238:4000/json-recentjoblogs-aws?job_id=${this.jobId}`, data);
+  }
 }
