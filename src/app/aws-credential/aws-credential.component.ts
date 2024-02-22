@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AwsCredentialComponent implements OnInit {
   createForm= new FormGroup({
     user_name: new FormControl('',[Validators.required]),
-    access_key: new FormControl('',[Validators.required, this.accessKeyValidator.bind(this)]),
+    access_key: new FormControl('',[Validators.required]),
     secret_access_key: new FormControl('',[Validators.required]),
     account_name: new FormControl('',[Validators.required]),
   });
