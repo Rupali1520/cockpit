@@ -38,7 +38,7 @@ export class RegisterService {
   private postAzureDeleteJob = `${environment.api.baseUrl}${environment.api.routes.postAzureDeleteJobs.endpoint}`;
   private postGcpDeleteJob = `${environment.api.baseUrl}${environment.api.routes.postGcpDeleteJobs.endpoint}`;
   private postAwsLogJob = `${environment.api.baseUrl}${environment.api.routes.postAwsLogs.endpoint}`;
-  private postAzureLogJob = `${environment.api.baseUrl}${environment.api.routes.postAzureLogs.endpoint}`;
+  private postAzureLogJob = `${environment.api.baseUrl}${environment.api.routes.postAzureLogJob.endpoint}`;
   private postGcpLogJob = `${environment.api.baseUrl}${environment.api.routes.postGcpLogs.endpoint}`;
   private updateAws = `${environment.api.baseUrl}${environment.api.routes.updateAws.endpoint}`;
   private updateAzure = `${environment.api.baseUrl}${environment.api.routes.updateAzure.endpoint}`;
