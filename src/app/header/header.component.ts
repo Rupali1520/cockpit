@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,20 +14,13 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.isLoggedIn=Boolean(localStorage.getItem('loggedIn'))
+    this.isLoggedIn=localStorage.getItem('loggedIn') !== 'false';
   }
-
-  @HostListener('window:storage', ['$event'])
-  onStorageChange(event: StorageEvent) {
-    if (event.key === 'loggedIn') {
-      this.isLoggedIn = Boolean(event.newValue);
-    }
-  }
-  
 
   onLogin() {
     if (this.isLoggedIn) {
       this.isLoggedIn = false;
+      localStorage.setItem("loggedIn",String(this.isLoggedIn))
       this.router.navigate(['/dashboard']);
     } else {
       this.router.navigate(['/login']);

@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('loggedIn','true');
       localStorage.setItem('username',res.username);
       this.toast.success(res.message)
-      this.router.navigate(['/home']);
+      this.router.navigate(['/dashboard']);
     }, (error)=>{
       this.showProgressBar = false;
       this.toast.error(error.error.message)

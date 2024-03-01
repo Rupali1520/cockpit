@@ -7,15 +7,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  isLoggedIn: boolean = false;
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoggedIn=localStorage.getItem('loggedIn') !== 'false';
   }
 
 
   onLogin() {
+    if(this.isLoggedIn){
+      this.router.navigate(['/home']);
+    }
+    else{
       this.router.navigate(['/login']);
+    }
 }
 
 }
