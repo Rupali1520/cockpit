@@ -16,10 +16,10 @@ jobs:
     - name: Build Docker image
       run: |
 
-       # docker pull rupali1520/cockpit-frontend:1
-       # docker tag rupali1520/cockpit-backend:1 rupali1520/cockpit-backend-archived:latest
+       docker pull rupali1520/cockpit-frontend:1
+       docker tag rupali1520/cockpit-backend:1 rupali1520/cockpit-backend-archived:latest
 
-       docker build -t rupali1520/cockpit-frontend:1 .
+       docker build -t rupali1520/cockpit-frontend:prod .
 
     - name: Log in to Docker Hub
       uses: docker/login-action@v1
@@ -29,8 +29,8 @@ jobs:
 
     - name: Push Docker image to Docker Hub
       run: |
-       docker push rupali1520/cockpit-frontend:1
-       # docker push rupali1520/cockpit-backend-archived:latest
+       docker push rupali1520/cockpit-frontend:prod
+       docker push rupali1520/cockpit-backend-archived:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,7 +46,7 @@ jobs:
         username: ${{ secrets.VM_USERNAME }}
         password: ${{ secrets.VM_PASSWORD }}
         script: |
-          sudo docker pull rupali1520/cockpit-backend:1
-          # sudo docker stop cockpit-backend
-          # sudo docker rm -f cockpit-backend
-          sudo docker run -dp 4200:4200 --name cockpit-frontend rupali1520/cockpit-frontend:1
+          sudo docker pull rupali1520/cockpit-backend:prod
+          sudo docker stop cockpit-frontend
+          sudo docker rm -f cockpit-frontend
+          sudo docker run -dp 4200:4200 --name cockpit-frontend rupali1520/cockpit-frontend:prod
