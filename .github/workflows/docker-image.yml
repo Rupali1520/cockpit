@@ -17,7 +17,7 @@ jobs:
       run: |
 
        docker pull rupali1520/cockpit-frontend:1
-       docker tag rupali1520/cockpit-backend:1 rupali1520/cockpit-backend-archived:latest
+       docker tag rupali1520/cockpit-frontend:1 rupali1520/cockpit-frontend-archived:latest
 
        docker build -t rupali1520/cockpit-frontend:prod .
 
@@ -30,7 +30,7 @@ jobs:
     - name: Push Docker image to Docker Hub
       run: |
        docker push rupali1520/cockpit-frontend:prod
-       docker push rupali1520/cockpit-backend-archived:latest
+       docker push rupali1520/cockpit-frontend-archived:latest
 
   deploy:
     runs-on: ubuntu-latest
