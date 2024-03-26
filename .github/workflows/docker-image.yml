@@ -29,7 +29,7 @@ jobs:
 
     - name: Push Docker image to Docker Hub
       run: |
-       docker push rupali152/cockpit-frontend:1
+       docker push rupali1520/cockpit-frontend:1
        # docker push rupali1520/cockpit-backend-archived:latest
 
   deploy:
