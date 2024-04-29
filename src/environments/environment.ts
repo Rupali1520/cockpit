@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api:{
-    baseUrl:"http://98.70.13.238:4000/",
+    baseUrl:"http://cockpitbackend-svc:4000/",
     
     routes:{
       registerUser:{endpoint:'jsonRegister', method:'POST'},
