@@ -1,11 +1,18 @@
 # Use a newer version of Node.js
-FROM node:18-alpine as builder
+FROM node:18-alpine
 
 # Set the working directory
 WORKDIR /app
 
-# Copy the entire project directory into the Docker image
+COPY package.json package-lock.json ./
+
+RUN npm install
+
 COPY . .
+
+ARG BACKEND_SERVICE_NAME
+
+ENV BACKEND_SERVICE_NAME=$BACKEND_SERVICE_NAME
 
 # Install dependencies
 RUN npm install
