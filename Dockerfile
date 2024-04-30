@@ -1,15 +1,13 @@
-# frontend/Dockerfile
-# Build Angular
-FROM node:18-alpine as builder
+# Stage 1: Build Angular application
+FROM node:18 as build
 WORKDIR /app
-COPY package.json ./
+COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN ng build --prod
 
-# Serve Angular using Nginx
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Stage 2: Create the final image
+FROM nginx:1.21
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
