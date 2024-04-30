@@ -1,13 +1,20 @@
-# Stage 1: Build Angular application
-FROM node:18 as build
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN ng build --prod
+# Use a newer version of Node.js
+FROM node:18-alpine as builder
 
-# Stage 2: Create the final image
-FROM nginx:1.21
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Set the working directory
+WORKDIR /app
+
+# Copy the entire project directory into the Docker image
+COPY . .
+
+# Install dependencies
+RUN npm install
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
+# Expose the port
+EXPOSE 4200
+
+# Start the Angular development server
+CMD ["ng", "serve", "--host", "0.0.0.0"]
