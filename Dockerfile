@@ -1,7 +1,6 @@
-# Use a newer version of Node.js
-FROM node:18-alpine
+# Stage 1: Build the Angular application
+FROM node:18-alpine as build
 
-# Set the working directory
 WORKDIR /app
 
 COPY package.json package-lock.json ./
@@ -10,18 +9,18 @@ RUN npm install
 
 COPY . .
 
-ARG BACKEND_SERVICE_NAME
-
-ENV BACKEND_SERVICE_NAME=$BACKEND_SERVICE_NAME
-
-# Install dependencies
-RUN npm install
-
-# Install Angular CLI globally
 RUN npm install -g @angular/cli
 
-# Expose the port
-EXPOSE 4200
+RUN ng build
 
-# Start the Angular development server
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+# Stage 2: Serve the application from Nginx
+FROM nginx:1.21-alpine
+
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Copy the default nginx.conf provided by tiangolo/node-frontend
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
